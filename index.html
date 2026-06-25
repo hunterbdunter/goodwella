@@ -151,7 +151,9 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
 const MORNING=[
   {id:'m1',text:'GH 4IUs injection',note:'Fasted — very first thing before eating. Subcutaneous injection.',tag:'peptide'},
   {id:'m_sel',text:'Selank 250-500mcg',note:'Mon/Wed/Fri — intranasal or subcutaneous. Anxiolytic + cognitive support. Take it early so you feel the effect during your day.',tag:'peptide',showOnDays:[1,3,5]},
+  {id:'m_nail',text:'Nail care',note:'File · cuticle oil · matte top coat. Hands get noticed, especially wearing jewelry.',tag:'grooming',showOnDays:[0]},
   {id:'m6',text:'10 min bright light',note:'Right after GH while still fasted — step outside. Circadian anchor, most effective early.',tag:'sleep'},
+  {id:'m_mastic',text:'Mastic gum — 10-20 min',note:'Builds masseter definition over time. Chew consistently for jaw masculinization. Hard resin — start slow if jaw gets sore.',tag:'grooming'},
   {id:'m_water',text:'Drink full Hydro Flask #1',note:'32oz — start hydrating before breakfast. Critical for POTS.',tag:'supp'},
   {id:'m_breakfast',type:'group',text:'Breakfast',tag:'nutrition',
     groupNote:'See Meals tab for options',
@@ -218,14 +220,21 @@ const EVENING=[
   {id:'sp6',text:'LRP Double Repair moisturizer',note:'Toleriane Double Repair (no SPF). Full face including around eyes.',tag:'skin'},
   {id:'sp7',text:'Volufiline',note:'Under brow bone, under eyes, lips — targeted only.',tag:'skin'},
   {id:'sp8',text:'The Ordinary lash serum',note:'Lash line only. Last skincare step.',tag:'skin'},
+  {id:'bc0',type:'header',text:'Body Care PM'},
+  {id:'bc1',text:'LRP Lipikar AP+ Max — full body',note:'Apply right after shower while skin still slightly damp for best absorption. Replaces Lubriderm.',tag:'skin'},
+  {id:'bc2',text:'CeraVe SA lotion — arms',note:'Target keratosis pilaris areas specifically. The SA (salicylic acid) exfoliates the bumps over time.',tag:'skin'},
   {id:'op0',type:'header',text:'Oral Care PM'},
   {id:'op1',text:'Oral-B electric + Colgate Optic White',note:'2 min, light pressure.',tag:'oral'},
   {id:'op2',text:'Floss',note:'Daily — especially important with Invisalign.',tag:'oral'},
   {id:'op3',text:'TheraBreath PM formula',note:'Evening antibacterial rinse.',tag:'oral'},
   {id:'op4',text:'Tongue scraper',note:'10 seconds — daily.',tag:'oral'},
-  {id:'e6',text:'Invisalign whitening (30-60 min)',note:'Apply Opalescence 10% to inside front of each tray, put trays in, wear 30-60 min.',tag:'oral'},
+  {id:'e6',text:'Invisalign whitening — 30-60 min (every other day)',note:'Opalescence 35% CP. Apply to inside front of each tray, wear 30-60 min. Every other day max — 3-4x per week. Do not do daily at this strength.',tag:'oral'},
   {id:'e6b',text:'Rinse + clean trays, put back in',note:'Remove trays, rinse with water. Clean with cleaning tablets. Rinse again and put back in.',tag:'oral'},
   {id:'e7',text:'Wind-down',note:'Night Shift after 9pm · Cool room 65-68°F · Familiar content only. Same wake time every morning.',tag:'sleep'},
+  {id:'e_mastic',text:'Mastic gum — 10-20 min',note:'Second session. Do while watching something or winding down.',tag:'grooming'},
+  {id:'e_read',text:'20 min reading',note:'Physical book — screen break, genuine cognitive rest. Before bed is ideal.',tag:'sleep'},
+  {id:'e_mel',text:'Melatonin 2-2.5mg (optional)',note:'Only on late swim nights or when sleep onset is genuinely difficult. Not every night — reserve it so it stays effective.',tag:'sleep'},
+  {id:'e_linen',text:'Lavender linen spray on pillow',note:'A few spritzes right before getting into bed. Helps sleep onset.',tag:'sleep'},
   {id:'e_water',text:'Drink full Hydro Flask #3',note:'32oz — evening fill. Aim for 3 total per day.',tag:'supp'},
 ];
 
@@ -785,7 +794,7 @@ function updateProgress(){
 
 // ── RENDER TABS ───────────────────────────────────────────────────────────────
 
-const TABS=[['daily','Daily'],['meals','Meals'],['stack','Stack'],['metrics','Metrics']];
+const TABS=[['daily','Daily'],['meals','Meals'],['stack','Stack']];
 
 function renderTabs(){
   const bar=document.getElementById('tabs');
@@ -838,8 +847,8 @@ function renderContent(){
     // SMOOTHIE
     w.appendChild(mslbl('#5B9FC8','Midday Smoothie'));
     w.appendChild(mcard('Food ingredients','Skim milk · Greek yogurt · Frozen mango · Banana · PB2 (peanut butter powder) · Chia seeds · Spinach · Ice · Pinch of salt'));
-    w.appendChild(mcard('Supplement adds (blend in)','Protein powder · Creatine · Collagen+Probiotics · Beta Alanine · L-Citrulline'));
-    w.appendChild(mcard('Note','Amounts TBD next session — add to this when you refine the recipe'));
+    w.appendChild(mcard('Supplement adds (blend in)','Protein powder 1 scoop (30g) · Creatine 5g · Collagen + Probiotics 1 scoop · Beta Alanine 4g · L-Citrulline 6g'));
+    w.appendChild(mcard('Timing tip','On swim days, drink ~90 min before practice — citrulline works best as a pre-workout at that window.'));
 
     // SNACKS
     w.appendChild(mslbl('#D4A84A','Snacks'));
@@ -882,152 +891,6 @@ function renderContent(){
     });
     f.appendChild(w);
   }
-  else if(S.tab==='routines'){
-    const w=el('div');
-    w.style.paddingTop='14px';
-    const bar=el('div','rtab-bar');
-    Object.keys(ROUTINES).forEach(k=>{
-      const b=el('button','rtab',k);
-      const on=S.rtab===k;
-      b.style.background=on?ROUTINES[k].color:'#131318';
-      b.style.color=on?'#09090B':'#5A5A66';
-      b.onclick=()=>{S.rtab=k;save();renderContent();};
-      bar.appendChild(b);
-    });
-    w.appendChild(bar);
-    const r=ROUTINES[S.rtab];
-    r.steps.forEach(step=>{
-      const row=el('div','step-row');
-      const num=el('div','step-n',step.n);
-      const isStar=step.n==='★';
-      num.style.background=isStar?'rgba(200,150,60,0.15)':`${r.color}22`;
-      num.style.color=isStar?'#C8963C':r.color;
-      const body=el('div');
-      body.innerHTML=`<div class="step-t">${step.t}</div><div class="step-d">${step.d}</div>`;
-      row.appendChild(num);
-      row.appendChild(body);
-      w.appendChild(row);
-    });
-    f.appendChild(w);
-  }
-  else if(S.tab==='goals'){
-    const w=el('div','g-wrap');
-    function slbl(color,text){
-      const d=el('div','g-slbl');
-      d.innerHTML=`<div class="g-sdot" style="background:${color}"></div><span class="g-stxt" style="color:${color}">${text}</span>`;
-      return d;
-    }
-    w.appendChild(slbl('#C8963C','Physique Target'));
-    const grid=el('div','g-grid');
-    [['Current','160 lbs'],['Target','170-175 lbs'],['Height','6\'0"'],['Style','Lean only']].forEach(([l,v])=>{
-      const c=el('div','g-card');
-      c.innerHTML=`<div class="g-lbl">${l}</div><div class="g-val">${v}</div>`;
-      grid.appendChild(c);
-    });
-    w.appendChild(grid);
-    const focus=el('div','g-wide');
-    focus.innerHTML='<div class="g-lbl">Priority Areas</div><div style="font-size:12px;color:#767680;margin-top:4px">Vascular · Big pecs · Perky glutes · Defined abs · Athletic frame</div>';
-    w.appendChild(focus);
-
-    w.appendChild(slbl('#5B9FC8','Expected Timeline'));
-    [
-      ['2 wks','Sleep improving · Hair responding to technique · Skin adjusting'],
-      ['1 mo','Tongkat Ali libido/energy · Vitamin C brightening · Better energy'],
-      ['3 mo','Visible skin change from tretinoin · 2-4 lbs lean mass · Better hair'],
-      ['6 mo','4-6 lbs lean · Full tretinoin benefit · Vitamin D optimized'],
-      ['1 yr','8-12 lbs lean · Major skin transformation · Invisalign finishing'],
-      ['2+ yr','Approaching 170-175 target · Consider procedures if desired'],
-    ].forEach(([p,t])=>{
-      const r=el('div','tl-row');
-      r.innerHTML=`<div class="tl-per">${p}</div><div class="tl-body">${t}</div>`;
-      w.appendChild(r);
-    });
-
-    w.appendChild(slbl('#9B7FD4','Procedures — To Consider'));
-    [
-      ['Rhinoplasty','When ready','Dorsal hump reduction, masculine preservation. FaceTouchUp to preview. Find specialist in masculine / Middle Eastern rhinoplasty.'],
-      ['Sub-brow filler','Test first','Reversible hunter eye test before fat grafting. HA filler, 12-18 months.'],
-      ['Non-surgical rhinoplasty','Low commitment','Filler to preview profile change. Reversible.'],
-      ['Lateral canthoplasty','After filler','For negative canthal tilt. Evaluate after brow filler results.'],
-      ['Orthognathic surgery','Post-Invisalign','LeFort I + BSSO + genioplasty. OMFS consult + hEDS/TMJ eval required. Disclose EDS to all providers.'],
-    ].forEach(([name,tag,note])=>{
-      const c=el('div','pc-card');
-      c.innerHTML=`<div class="pc-hd"><span class="pc-name">${name}</span><span class="pc-tag">${tag}</span></div><div class="pc-note">${note}</div>`;
-      w.appendChild(c);
-    });
-
-    w.appendChild(slbl('#C8963C','Style — Shopping Queue'));
-    [
-      ['Clothing','Mr Porter · Orlebar Brown (shorts) · Ami Paris (statement) · Reiss (shirts/shoes)'],
-      ['Shoes','① Gucci Horsebit Loafer ② New Balance 550 ③ Leather Birkenstock ④ RM Williams Chelsea'],
-      ['Jewelry','Mejuri: white gold diamond bracelet + chain · Miansai: rings'],
-      ['Fragrance','Gucci Bloom ✓ ordered · Molecule 02 pending — layer under Bloom'],
-    ].forEach(([cat,items])=>{
-      const c=el('div','st-card');
-      c.innerHTML=`<div class="st-cat">${cat}</div><div class="st-items">${items}</div>`;
-      w.appendChild(c);
-    });
-
-    w.appendChild(slbl('#D4A84A','Nutrition Quick Reference'));
-    const nw=el('div','g-extra');
-    [
-      ['Protein target','175g+ daily'],
-      ['Calorie target','3,000-3,200 daily'],
-    ].forEach(([l,v])=>{
-      const r=el('div','nt-row');
-      r.innerHTML=`<span class="nt-lbl">${l}</span><span class="nt-val">${v}</span>`;
-      nw.appendChild(r);
-    });
-    w.appendChild(nw);
-
-    // Meal options by time
-    w.appendChild(slbl('#D4A84A','Breakfast Options'));
-    [
-      ['Option A (go-to)','Quaker protein oatmeal 2 servings + skim milk · 6 slices microwave bacon · Blackberries + blueberries — ~50g protein'],
-      ['Option B','3 scrambled eggs + microwave bacon + fruit — quick, high protein'],
-      ['Option C (rushed)','Smoothie only — move to lunch if time allows'],
-    ].forEach(([cat,items])=>{
-      const c=el('div','st-card');
-      c.innerHTML=`<div class="st-cat">${cat}</div><div class="st-items">${items}</div>`;
-      w.appendChild(c);
-    });
-
-    w.appendChild(slbl('#5B9FC8','Midday — Smoothie + Lunch'));
-    [
-      ['Smoothie (recipe TBD)','Protein powder · Creatine · Collagen+Probiotics · Beta Alanine · L-Citrulline · Banana · Peanut butter — take all midday supplements with this'],
-      ['Lunch Option A','Shrimp fried rice (rice cooker + air fryer shrimp) — best home option'],
-      ['Lunch Option B','Air fryer shrimp + plain rice cooker rice'],
-      ['Takeout A','Local Chinese: sweet & sour chicken + shrimp fried rice'],
-      ['Takeout B','Panda Express: double Orange Chicken plate + mixed veg + rice'],
-      ['Takeout C','MOD Pizza: pepperoni + sausage + bacon, light cheese'],
-    ].forEach(([cat,items])=>{
-      const c=el('div','st-card');
-      c.innerHTML=`<div class="st-cat">${cat}</div><div class="st-items">${items}</div>`;
-      w.appendChild(c);
-    });
-
-    w.appendChild(slbl('#9B7FD4','Pre-Swim Snack'));
-    const ps=el('div','st-card');
-    ps.innerHTML='<div class="st-cat">1.5-2 hrs before pool</div><div class="st-items">Blueberries + KIND Fruit & Nut bar — carbs only, not protein heavy</div>';
-    w.appendChild(ps);
-
-    w.appendChild(slbl('#C8963C','Dinner + Post-Swim'));
-    [
-      ['Home Option A','Air fryer shrimp + rice cooker rice — fast, high protein'],
-      ['Home Option B','Turkey hot dogs + fruit + Quest protein chips'],
-      ['Post-swim recovery','Greek yogurt + granola · OR protein shake + banana — 40-50g protein within 45 min. Don\'t skip.'],
-      ['Takeout A','Local Chinese: sweet & sour chicken + shrimp fried rice'],
-      ['Takeout B','Five Guys: bacon burgers (infrequent)'],
-    ].forEach(([cat,items])=>{
-      const c=el('div','st-card');
-      c.innerHTML=`<div class="st-cat">${cat}</div><div class="st-items">${items}</div>`;
-      w.appendChild(c);
-    });
-    const extra=el('div','g-extra');
-    w.appendChild(extra);
-    f.appendChild(w);
-  }
-
   c.appendChild(f);
   updateProgress();
 }
