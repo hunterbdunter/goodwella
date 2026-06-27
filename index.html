@@ -149,12 +149,12 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
 // ── DATA ─────────────────────────────────────────────────────────────────────
 
 const MORNING=[
-  {id:'m1',text:'GH 4IUs injection',note:'Fasted — very first thing before eating. Subcutaneous injection.',tag:'peptide'},
-  {id:'m_testE',text:'Testosterone Enanthate — current dose',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. Titrate: 50→75→100→125mg.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
-  {id:'m_hcg',text:'HCG — 500IU',note:'SubQ. Maintains testicular function and LH activity while on TRT.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
-  {id:'m_nad',text:'NAD+ — 50mg',note:'SubQ. Morning timing for cellular energy and metabolism. Increase to 100mg if well tolerated.',tag:'peptide'},
-  {id:'m_sel',text:'Selank 250-500mcg',note:'Mon/Wed/Fri — intranasal or subcutaneous. Anxiolytic + cognitive support. Take it early so you feel the effect during your day.',tag:'peptide',showOnDays:[1,3,5]},
-  {id:'m_mt2',text:'MT2 0.5mg',note:'Daily — take 2-3 hrs before sun exposure on tan days. Take with morning peptides regardless.',tag:'peptide'},
+  {id:'m1',text:'GH 4IUs injection',compoundKey:'gh',note:'Fasted — very first thing before eating. Subcutaneous injection.',tag:'peptide'},
+  {id:'m_testE',text:'Testosterone Enanthate — current dose',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. Titrate: 50→75→100→125mg.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
+  {id:'m_hcg',text:'HCG — 500IU',compoundKey:'hcg',note:'SubQ. Maintains testicular function and LH activity while on TRT.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
+  {id:'m_nad',text:'NAD+ — 50mg',compoundKey:'nad',note:'SubQ. Morning timing for cellular energy and metabolism. Increase to 100mg if well tolerated.',tag:'peptide'},
+  {id:'m_sel',text:'Selank 250-500mcg',compoundKey:'selank',note:'Mon/Wed/Fri — intranasal or subcutaneous. Anxiolytic + cognitive support. Take it early so you feel the effect during your day.',tag:'peptide',showOnDays:[1,3,5]},
+  {id:'m_mt2',text:'MT2 0.5mg',compoundKey:'mt2',note:'Daily — take 2-3 hrs before sun exposure on tan days. Take with morning peptides regardless.',tag:'peptide'},
   {id:'m_nail',text:'Nail care',note:'File · cuticle oil · matte top coat. Hands get noticed, especially wearing jewelry.',tag:'grooming',showOnDays:[0]},
   {id:'m_brow',text:'Eyebrow grooming',note:'Tweeze stray hairs, tidy the shape. Keep it clean — not over-plucked.',tag:'grooming',showOnDays:[1,4]},
   {id:'m_tint',text:'Eyebrow + lash tint check',note:'Check if color is fading. Redye if getting too light — maintaining contrast is the whole point.',tag:'grooming',showOnDays:[0]},
@@ -169,16 +169,31 @@ const MORNING=[
       {id:'m5',text:'Liquid IV',note:'Drink within first 1-2 hrs of waking.',tag:'supp'},
     ]
   },
+  {id:'am_shower',type:'group',text:'Shower',tag:'grooming',showIf:'sa_shower',
+    children:[
+      {id:'am_sh0',type:'header',text:'In Shower'},
+      {id:'am_sh1',text:'Shampoo',note:'ABBA Gentle on most days · clarifying shampoo 1-2x/week on swim days to remove chlorine.',tag:'hair'},
+      {id:'am_sh2',text:'Ouai Curl Conditioner Thick',note:'Ends and mid-lengths only — never roots. Leave some in.',tag:'hair'},
+      {id:'am_sh3',text:'Native citrus body wash',tag:'grooming'},
+      {id:'am_sh4',type:'header',text:'Out of Shower'},
+      {id:'am_sh5',text:'Scrunch hair with microfiber towel',note:'Mostly dry, not completely.',tag:'hair'},
+      {id:'am_sh6',text:'BB cream — scrunch in',note:'Small amount. Scrunch upward from ends.',tag:'hair'},
+      {id:'am_sh7',text:'LRP Lipikar AP+ Max — full body',note:'While skin still slightly damp.',tag:'skin'},
+      {id:'am_sh8',text:'CeraVe SA lotion — arms',note:'KP treatment.',tag:'skin'},
+      {id:'am_sh9',text:'Air dry completely — hands off',tag:'hair'},
+      {id:'am_sh10',text:'Scrunch out crunch',note:'Only when 100% dry.',tag:'hair'},
+    ]
+  },
   {id:'sa0',type:'header',text:'Skincare AM'},
-  {id:'sa_cleanse',type:'choice',text:'Cleanse',
+  {id:'sa_cleanse',type:'choice',text:'AM Cleanse',
     opts:[
-      {id:'sa_pad',label:'Cetaphil SA Pad',note:'Cleanses + exfoliates with salicylic acid in one step. Good default.'},
-      {id:'sa_water',label:'Micellar Water',note:'Gentler cleanse — follow with azelaic acid serum after Vitamin C for tone + brightness.'}
+      {id:'sa_pad',label:'Cetaphil SA Pad',note:'Cleanses + exfoliates with SA. Good default on non-shower mornings.'},
+      {id:'sa_water',label:'Micellar Water',note:'Gentler option on non-shower mornings.'},
+      {id:'sa_shower',label:'Showered',note:'Foam wash + CeraVe SA done in shower — nothing extra needed here.'}
     ]
   },
   {id:'sa2',text:'Timeless Vitamin C serum',note:'Apply to clean dry skin. Let absorb 1-2 min.',tag:'skin'},
-  {id:'sa3',text:'Azelaic acid serum',showIf:'sa_water',tag:'skin',note:'Tone, brightness, redness reduction — different from SA pad. Apply after Vitamin C.'},
-  {id:'sa4',text:'LRP matte moisturizer',note:'Both are LRP Toleriane Matte. Use the one with SPF when going outside · use the one without SPF on stay-in days so it won\'t transfer to pillows.',tag:'skin'},
+  {id:'sa4',text:'LRP matte moisturizer',note:'Both are LRP Toleriane Matte. SPF version when going outside · non-SPF on stay-in days.',tag:'skin'},
   {id:'sa5',text:'Aquaphor — lips',note:'Apply after skincare. Reapply throughout the day as needed.',tag:'skin'},
   {id:'om0',type:'header',text:'Oral Care AM'},
   {id:'om1',text:'Oral-B electric + Colgate Optic White',note:'2 min, light pressure.',tag:'oral'},
@@ -208,44 +223,49 @@ const EVENING=[
       {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg',tag:'supp'},
     ]
   },
-  {id:'e3',text:'PM injections (fasted, before sleep)',note:'TB-500 2mg (2x/week loading, then 1x/week) · CJC-1295 0.5mg · Ipamorelin 0.5mg · GHK-Cu 2mg — all fasted, 2+ hrs after last meal.',tag:'peptide'},
-  {id:'e_glut',text:'Glutathione — 200mg',note:'SubQ. Can add to evening injection rotation. Skin brightening + systemic antioxidant. Increase to 400mg to accelerate skin effects.',tag:'peptide',showEveryNDays:2,startKey:'glut'},
-  {id:'e_reta',text:'Retatrutide 2mg — weekly dose',note:'Every Wednesday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[3]},
-  {id:'e_kisp',text:'Kisspeptin 50-100mcg',note:'Mon/Wed/Fri — subcutaneous. LH + testosterone support.',tag:'peptide',showOnDays:[1,3,5]},
-  {id:'sp0',type:'header',text:'Skincare PM'},
-  {id:'sp_shower',type:'group',text:'Shower + PM Skincare (no training days)',tag:'grooming',
+  {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Wednesday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[3]},
+  {id:'sp_shower',type:'group',text:'Shower',tag:'grooming',showIf:'pms_shower',
     children:[
       {id:'sp_s0',type:'header',text:'In Shower'},
-      {id:'sp_s1',text:'ABBA Gentle Shampoo (wash days)',note:'Scalp focus. Rinse thoroughly.',tag:'hair'},
+      {id:'sp_s1',text:'Shampoo',note:'ABBA Gentle on most days · clarifying shampoo 1-2x/week on swim days to remove chlorine.',tag:'hair'},
       {id:'sp_s2',text:'Ouai Curl Conditioner Thick',note:'Ends and mid-lengths only. Leave some in.',tag:'hair'},
       {id:'sp_s3',text:'Native citrus body wash',tag:'grooming'},
-      {id:'sp_s4',text:'Cetaphil foam wash — face',tag:'skin'},
-      {id:'sp_s5',text:'CeraVe SA cleanser — nose down',tag:'skin'},
       {id:'sp_s6',type:'header',text:'Out of Shower'},
       {id:'sp_s7',text:'Scrunch hair with microfiber towel',note:'Mostly dry, not completely.',tag:'hair'},
       {id:'sp_s8',text:'BB cream — scrunch in',note:'Small amount. Scrunch upward from ends.',tag:'hair'},
       {id:'sp_s9',text:'LRP Lipikar AP+ Max — full body',note:'While skin still slightly damp.',tag:'skin'},
       {id:'sp_s10',text:'CeraVe SA lotion — arms',note:'KP treatment.',tag:'skin'},
-      {id:'sp_s11',text:'Wait 10 min — face fully dry',note:'Completely dry before tretinoin.',tag:'skin'},
-      {id:'sp_s12',text:'Tretinoin',note:'Pea-sized, full face, avoid eye area.',tag:'skin'},
-      {id:'sp_s13',text:'Wait 20 min',note:'Let tretinoin fully absorb.',tag:'skin'},
-      {id:'sp_s14',text:'LRP Double Repair moisturizer',note:'Full face including around eyes.',tag:'skin'},
-      {id:'sp_s15',text:'Volufiline',note:'Under brow, under eyes, lips.',tag:'skin'},
-      {id:'sp_s16',text:'The Ordinary lash serum',note:'Lash line only.',tag:'skin'},
-      {id:'sp_s19',text:'Laneige lip mask',note:'Overnight lip treatment — repairs and softens. Different from Aquaphor.',tag:'skin'},
-      {id:'sp_s20',text:'Aquaphor — lips',note:'Seal everything in. Final step.',tag:'skin'},
       {id:'sp_s17',text:'Air dry hair — hands off',tag:'hair'},
       {id:'sp_s18',text:'Scrunch out crunch',note:'Only when 100% dry.',tag:'hair'},
     ]
   },
+  {id:'pms_hd',type:'header',text:'Skincare PM'},
+  {id:'pms_cleanse',type:'choice',text:'Evening cleanse',
+    opts:[
+      {id:'pms_shower',label:'Showered',note:'Foam wash + CeraVe SA done in shower — skip extra cleanse.'},
+      {id:'pms_water',label:'Micellar water',note:'Gentle cleanse on no-shower days.'},
+      {id:'pms_pad',label:'Cetaphil SA pad',note:'SA cleanse on no-shower days.',hideIfChoiceActive:'sa_pad'},
+    ]
+  },
+  {id:'pms_az',text:'Azelaic acid cream — face and neck',note:'The Ordinary. PM only. Apply before moisturizer.',tag:'skin'},
+  {id:'pms_moist',text:'LRP Double Repair moisturizer',note:'Full face including around eyes.',tag:'skin'},
+  {id:'pms_vol',text:'Volufiline',note:'Under brow, under eyes, lips.',tag:'skin'},
+  {id:'pms_lash',text:'The Ordinary lash serum',note:'Lash line only.',tag:'skin'},
+  {id:'pms_laneige',text:'Laneige lip mask',note:'Overnight lip treatment — repairs and softens.',tag:'skin'},
+  {id:'pms_aqua',text:'Aquaphor — lips',note:'Seal everything in. Final step.',tag:'skin'},
   {id:'op0',type:'header',text:'Oral Care PM'},
   {id:'op1',text:'Oral-B electric + Colgate Optic White',note:'2 min, light pressure.',tag:'oral'},
   {id:'op2',text:'Floss',note:'Daily — especially important with Invisalign.',tag:'oral'},
   {id:'op3',text:'TheraBreath PM formula',note:'Evening antibacterial rinse.',tag:'oral'},
   {id:'op4',text:'Tongue scraper',note:'10 seconds — daily.',tag:'oral'},
   {id:'e6',text:'Invisalign whitening — 30-60 min (every other day)',note:'Opalescence 35% CP. Apply to inside front of each tray, wear 30-60 min. Every other day max — 3-4x per week. Do not do daily at this strength.',tag:'oral'},
-  {id:'e6b',text:'Rinse + clean trays, put back in',note:'Remove trays, rinse with water. Clean with cleaning tablets. Rinse again and put back in.',tag:'oral'},
-  {id:'e7',text:'Wind-down',note:'Night Shift after 9pm · Cool room 65-68°F · Familiar content only. Same wake time every morning.',tag:'sleep'},
+  {id:'e6b',text:'Remove trays → rinse mouth → brush gel off teeth',note:'Per Opalescence instructions: remove tray, rinse, then gently brush the gel off. Clean trays with cleaning tablets, rinse, put back in.',tag:'oral'},
+  {id:'e_pm0',type:'header',text:'PM Injections (fasted, 2+ hrs after last meal)'},
+  {id:'e_cjc',text:'CJC-1295 + Ipamorelin — 0.5mg each',compoundKey:'cjcipa',note:'Blended in same injection. SubQ pre-sleep. CJC amplifies nocturnal GH pulse · Ipamorelin adds selective GH release without cortisol spike.',tag:'peptide'},
+  {id:'e_ghkcu',text:'GHK-Cu — 2mg',compoundKey:'ghkcu',note:'SubQ pre-sleep. Skin regeneration · collagen remodeling · hair growth · anti-inflammatory.',tag:'peptide'},
+  {id:'e_tb500',text:'TB-500 — 2mg',compoundKey:'tb500',note:'Draw with 21g → inject with 27-29g subQ. Loading: every 3 days x4-6 weeks. Then once weekly maintenance.',tag:'peptide',showEveryNDays:3,startKey:'tb500'},
+  {id:'e_glut',text:'Glutathione — 200mg',compoundKey:'glut',note:'SubQ. Skin brightening + systemic antioxidant. Can increase to 400mg.',tag:'peptide',showEveryNDays:2,startKey:'glut'},
+  {id:'e_kisp',text:'Kisspeptin — 50-100mcg',compoundKey:'kisspeptin',note:'Mon/Wed/Fri — subcutaneous. LH + testosterone support.',tag:'peptide',showOnDays:[1,3,5]},
   {id:'e_bluelight',text:'Put on blue light glasses',note:'Prescription + blue light filter — wear for evening screen time. Easy to forget, makes a real difference for sleep onset.',tag:'sleep'},
   {id:'e_mastic',text:'Mastic gum — 10-20 min',note:'Second session. Do while watching something or winding down.',tag:'grooming'},
   {id:'e_thc',text:'THC — 20-40mg (optional)',note:'Tincture: take 30-45 min before target sleep time — hold under tongue. Edible: take 60-75 min before. Don\'t push past the peak window or sleep onset gets harder. Higher end (40mg) for pain/flare days only.',tag:'sleep'},
@@ -265,54 +285,12 @@ const LIFT=[
   {id:'l0',type:'header',text:'Lift Session'},
   {id:'l1',text:'Lift workout',note:'Upper / Lower / Core+Mobility — 1 hr. Home gym: dumbbells, kettlebell, medicine ball.',tag:'fitness'},
   {id:'l2',text:'Chin tucks + neck lifts + stomach vacuums',note:'End of every session — non-negotiable.',tag:'fitness'},
-  {id:'l_shower',type:'group',text:'Shower',tag:'grooming',showIfDayType:['lift'],
-    children:[
-      {id:'l_s0',type:'header',text:'In Shower'},
-      {id:'l_s1',text:'ABBA Gentle Shampoo',note:'Scalp focus. Rinse thoroughly.',tag:'hair'},
-      {id:'l_s2',text:'Ouai Curl Conditioner Thick',note:'Ends and mid-lengths only — never roots. Leave some in.',tag:'hair'},
-      {id:'l_s3',text:'Native citrus body wash',tag:'grooming'},
-      {id:'l_s4',text:'Cetaphil foam wash — face',tag:'skin'},
-      {id:'l_s5',text:'CeraVe SA cleanser — nose down',tag:'skin'},
-      {id:'l_s6',type:'header',text:'Out of Shower'},
-      {id:'l_s7',text:'Scrunch hair with microfiber towel',note:'Mostly dry, not completely.',tag:'hair'},
-      {id:'l_s8',text:'BB cream — scrunch in',note:'Small amount. Scrunch upward from ends.',tag:'hair'},
-      {id:'l_s9',text:'LRP Lipikar AP+ Max — full body',note:'While skin still slightly damp.',tag:'skin'},
-      {id:'l_s10',text:'CeraVe SA lotion — arms',note:'KP treatment.',tag:'skin'},
-      {id:'l_s11',text:'Air dry completely — hands off',tag:'hair'},
-      {id:'l_s12',text:'Scrunch out crunch',note:'Only when 100% dry.',tag:'hair'},
-    ]
-  },
 ];
 
 const SWIM=[
   {id:'sw0',type:'header',text:'Swim Session'},
   {id:'sw1',text:'Pre-swim snack',note:'Blueberries + KIND fruit/nut bar — 1.5-2 hrs before pool. Carbs only.',tag:'nutrition'},
   {id:'sw2',text:'King Aquatics practice',note:'2-2.5 hrs. Pre-pool: wet hair + light conditioner. Post-pool: rinse immediately.',tag:'fitness'},
-  {id:'sw_shower',type:'group',text:'Shower + PM Skincare',tag:'grooming',
-    children:[
-      {id:'sw_s0',type:'header',text:'In Shower'},
-      {id:'sw_s1',text:'Clarifying shampoo or ABBA shampoo',note:'Clarifying 1-2x/week for chlorine. ABBA on other swim days.',tag:'hair'},
-      {id:'sw_s2',text:'Ouai Curl Conditioner Thick',note:'Ends and mid-lengths only — never roots. Leave some in.',tag:'hair'},
-      {id:'sw_s3',text:'Native citrus body wash',tag:'grooming'},
-      {id:'sw_s4',text:'Cetaphil foam wash — face',tag:'skin'},
-      {id:'sw_s5',text:'CeraVe SA cleanser — nose down',tag:'skin'},
-      {id:'sw_s6',type:'header',text:'Out of Shower'},
-      {id:'sw_s7',text:'Scrunch hair with microfiber towel',note:'Mostly dry, not completely.',tag:'hair'},
-      {id:'sw_s8',text:'BB cream — scrunch in',note:'Small amount. Scrunch upward from ends.',tag:'hair'},
-      {id:'sw_s9',text:'LRP Lipikar AP+ Max — full body',note:'While skin still slightly damp.',tag:'skin'},
-      {id:'sw_s10',text:'CeraVe SA lotion — arms',note:'KP treatment.',tag:'skin'},
-      {id:'sw_s11',text:'Wait 10 min — face fully dry',note:'Completely dry before tretinoin.',tag:'skin'},
-      {id:'sw_s12',text:'Tretinoin',note:'Pea-sized, full face, avoid eye area.',tag:'skin'},
-      {id:'sw_s13',text:'Wait 20 min',note:'Let tretinoin fully absorb.',tag:'skin'},
-      {id:'sw_s14',text:'LRP Double Repair moisturizer',note:'Full face including around eyes.',tag:'skin'},
-      {id:'sw_s15',text:'Volufiline',note:'Under brow, under eyes, lips.',tag:'skin'},
-      {id:'sw_s16',text:'The Ordinary lash serum',note:'Lash line only.',tag:'skin'},
-      {id:'sw_s19',text:'Laneige lip mask',note:'Overnight lip treatment — repairs and softens. Different from Aquaphor (which is just occlusive). Use at night.',tag:'skin'},
-      {id:'sw_s20',text:'Aquaphor — lips',note:'Seal everything in. Final step.',tag:'skin'},
-      {id:'sw_s17',text:'Air dry hair — hands off',tag:'hair'},
-      {id:'sw_s18',text:'Scrunch out crunch',note:'Only when 100% dry.',tag:'hair'},
-    ]
-  },
 ];
 
 const METRICS_DEF=[
@@ -384,41 +362,6 @@ const STACK=[
   ]},
 ];
 
-const ROUTINES={
-  'Skin AM':{color:'#C490C4',steps:[
-    {n:'1',t:'Azelaic acid cleansing pad',d:'Default — use the pad. It cleanses and delivers azelaic acid. If you\'ve run out, use micellar water and add step 3.'},
-    {n:'2',t:'Timeless Vitamin C serum',d:'Apply to clean dry skin. Let absorb 1-2 min.'},
-    {n:'3',t:'Azelaic acid serum',d:'Only if you used micellar water in step 1 instead of the pad — otherwise skip.'},
-    {n:'4',t:'LRP SPF moisturizer',d:'Toleriane Double Repair UV SPF 30. Final step.'},
-  ]},
-  'Skin PM':{color:'#A98FE0',steps:[
-    {n:'1',t:'Cetaphil Oil Removing Foam Wash',d:'Full face cleanse.'},
-    {n:'2',t:'CeraVe SA Cleanser',d:'Nose down only — targets shave zone and folliculitis.'},
-    {n:'3',t:'Wait 10 min',d:'Completely dry skin before tretinoin. Damp = more irritation.'},
-    {n:'4',t:'Tretinoin',d:'Pea-sized. Full face, avoid eye area entirely.'},
-    {n:'5',t:'Wait 20 min',d:'Let tretinoin fully absorb before moisturizer.'},
-    {n:'6',t:'LRP Double Repair moisturizer',d:'Full face including around eyes.'},
-    {n:'7',t:'Volufiline',d:'Under brow bone, under eyes, lips — targeted only.'},
-    {n:'8',t:'The Ordinary lash serum',d:'Lash line only. Last step.'},
-  ]},
-  'Hair':{color:'#6ABCBC',steps:[
-    {n:'1',t:'ABBA Gentle Shampoo',d:'Scalp focus. Rinse thoroughly.'},
-    {n:'2',t:'Ouai Curl Conditioner Thick',d:'Ends and mid-lengths only — never roots. Leave a little in.'},
-    {n:'3',t:'Scrunch with microfiber towel',d:'Remove excess water by scrunching — mostly dry, not completely.'},
-    {n:'4',t:'Apply BB cream — scrunch in',d:'Small amount on mostly-dry hair. Scrunch upward from ends.'},
-    {n:'5',t:'Air dry completely — hands off',d:'Don\'t touch while drying.'},
-    {n:'6',t:'Scrunch out crunch',d:'Only when 100% dry — gently scrunch up to reveal curl.'},
-    {n:'★',t:'Swim days: clarifying shampoo (1-2x/wk)',d:'Wet hair before pool. Rinse immediately after.'},
-  ]},
-  'Oral':{color:'#D48888',steps:[
-    {n:'1',t:'Oral-B electric + Colgate Optic White',d:'2 min, light pressure.'},
-    {n:'2',t:'Floss',d:'Daily — especially important with Invisalign.'},
-    {n:'3',t:'TheraBreath mouthwash',d:'AM formula in morning, PM formula in evening.'},
-    {n:'4',t:'Tongue scraper',d:'10 seconds — daily.'},
-    {n:'★',t:'Invisalign whitening (3-4x/week)',d:'Opalescence 10% carbamide peroxide in trays — 30-60 min.'},
-  ]},
-};
-
 // ── TAGS ─────────────────────────────────────────────────────────────────────
 
 const TAGS={
@@ -444,7 +387,7 @@ function el(tag,cls,html){
 
 const TODAY_DOW = new Date(Date.now()-4*60*60*1000).getDay();
 
-let S={tab:'daily',checked:{},expanded:{},choices:{},sections:{},dayType:'none',metSubTab:'log',chartMetric:'hr',chartRange:'week',rtab:'Skin AM',injStart:{}};
+let S={tab:'daily',checked:{},expanded:{},choices:{},sections:{},dayType:'none',liftTime:'midday',swimTime:'evening',metSubTab:'log',chartMetric:'hr',chartRange:'week',rtab:'Skin AM',injStart:{},activeCompounds:{},trtLog:[]};
 
 function load(){
   try{
@@ -453,7 +396,7 @@ function load(){
     const d=JSON.parse(raw);
     const shiftedNow=new Date(Date.now()-4*60*60*1000);
     const today=shiftedNow.toDateString();
-    if(d.date===today){ S.checked=d.checked||{}; S.choices=d.choices||{}; S.dayType=d.dayType||'none'; }
+    if(d.date===today){ S.checked=d.checked||{}; S.choices=d.choices||{}; S.dayType=d.dayType||'none'; S.liftTime=d.liftTime||'midday'; S.swimTime=d.swimTime||'evening'; }
     if(d.expanded) S.expanded=d.expanded;
     if(d.sections) S.sections=d.sections;
     if(d.tab) S.tab=d.tab;
@@ -462,6 +405,8 @@ function load(){
     if(d.chartMetric) S.chartMetric=d.chartMetric;
     if(d.chartRange) S.chartRange=d.chartRange;
     if(d.injStart) S.injStart=d.injStart;
+    if(d.activeCompounds) S.activeCompounds=d.activeCompounds;
+    if(d.trtLog) S.trtLog=d.trtLog;
   }catch(e){}
 }
 
@@ -559,18 +504,148 @@ function renderInjectionSchedule(){
   return wrap;
 }
 
+const TOGGLEABLE_COMPOUNDS=[
+  {key:'gh',label:'Growth Hormone (GH)',defaultActive:true},
+  {key:'cjcipa',label:'CJC-1295 + Ipamorelin',defaultActive:true},
+  {key:'ghkcu',label:'GHK-Cu',defaultActive:true},
+  {key:'mt2',label:'MT-2 (Melanotan)',defaultActive:true},
+  {key:'reta',label:'Retatrutide',defaultActive:true},
+  {key:'selank',label:'Selank',defaultActive:true},
+  {key:'kisspeptin',label:'Kisspeptin',defaultActive:true,note:'Pause when TRT starts — HCG replaces this'},
+  {key:'testE',label:'Testosterone Enanthate',defaultActive:false},
+  {key:'hcg',label:'HCG',defaultActive:false},
+  {key:'tb500',label:'TB-500',defaultActive:false},
+  {key:'glut',label:'Glutathione',defaultActive:false},
+  {key:'nad',label:'NAD+',defaultActive:false},
+];
+
+function compoundActive(key){
+  const c=TOGGLEABLE_COMPOUNDS.find(x=>x.key===key);
+  return key in S.activeCompounds?S.activeCompounds[key]:(c?c.defaultActive:true);
+}
+
+function renderCompoundToggles(){
+  const wrap=el('div');
+  wrap.style.cssText='padding:14px 16px 4px';
+  const hd=el('div');
+  hd.style.cssText='font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#5A5A68;margin-bottom:10px';
+  hd.textContent='Protocol Status — toggles affect daily checklist';
+  wrap.appendChild(hd);
+  TOGGLEABLE_COMPOUNDS.forEach(c=>{
+    const isActive=compoundActive(c.key);
+    const row=el('div');
+    row.style.cssText='display:flex;align-items:center;padding:9px 0;border-bottom:1px solid #111118;gap:12px;cursor:pointer';
+    row.onclick=()=>{S.activeCompounds[c.key]=!isActive;save();renderContent();};
+    const tog=el('div');
+    tog.style.cssText=`width:38px;height:22px;border-radius:99px;background:${isActive?'#C8963C':'#1C1C24'};border:1px solid ${isActive?'#C8963C':'#282836'};position:relative;flex-shrink:0;transition:all .2s`;
+    const thumb=el('div');
+    thumb.style.cssText=`width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;${isActive?'right:2px':'left:2px'};transition:all .2s`;
+    tog.appendChild(thumb);
+    const info=el('div');info.style.flex='1';
+    info.innerHTML=`<div style="font-size:13px;color:${isActive?'#EFEFEF':'#3A3A48'}">${c.label}</div>${c.note?`<div style="font-size:10px;color:#3A3A48;margin-top:1px">${c.note}</div>`:''}`;
+    const badge=el('div');
+    badge.style.cssText=`font-size:10px;font-weight:600;color:${isActive?'#4A7A50':'#3A3A48'}`;
+    badge.textContent=isActive?'Active':'Inactive';
+    row.appendChild(tog);row.appendChild(info);row.appendChild(badge);
+    wrap.appendChild(row);
+  });
+  return wrap;
+}
+
+function renderTRTTracker(){
+  const LADDER=[{dose:50,vol:'0.20'},{dose:75,vol:'0.30'},{dose:100,vol:'0.40'},{dose:150,vol:'0.60'},{dose:200,vol:'0.80'}];
+  const log=S.trtLog||[];
+  const wrap=el('div');
+  wrap.style.cssText='margin:16px 16px 0;background:#0E0E14;border-radius:12px;overflow:hidden;border:1px solid #1C1C24';
+  const hd=el('div');
+  hd.style.cssText='padding:10px 14px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#C8963C;border-bottom:1px solid #1A1A20';
+  hd.textContent='TRT Titration Tracker';
+  wrap.appendChild(hd);
+  if(!log.length){
+    const ns=el('div');ns.style.cssText='padding:16px;text-align:center';
+    ns.innerHTML='<div style="font-size:12px;color:#3A3A48;margin-bottom:12px">Not started — tap when you begin your first injection</div>';
+    const btn=el('button');
+    btn.style.cssText='padding:9px 18px;background:#C8963C;border:none;border-radius:10px;color:#09090B;font-size:12px;font-weight:700;cursor:pointer';
+    btn.textContent='Start at 50mg';
+    btn.onclick=()=>{
+      const inp=document.createElement('input');inp.type='date';
+      inp.value=new Date().toISOString().split('T')[0];
+      inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:6px 10px;color:#EFEFEF;font-size:12px;display:block;margin:10px auto;width:160px';
+      inp.onchange=()=>{if(inp.value){S.trtLog=[{dose:50,vol:'0.20',date:inp.value}];save();renderContent();}};
+      ns.innerHTML='<div style="font-size:11px;color:#5A5A68;margin-bottom:8px">Select start date:</div>';
+      ns.appendChild(inp);inp.focus();
+    };
+    ns.appendChild(btn);wrap.appendChild(ns);return wrap;
+  }
+  const cur=log[log.length-1];
+  const today=new Date();today.setHours(0,0,0,0);
+  const startD=new Date(cur.date);startD.setHours(0,0,0,0);
+  const daysAt=Math.max(0,Math.round((today-startD)/86400000));
+  const pct=Math.min(100,Math.round(daysAt/28*100));
+  const ready=daysAt>=28;
+  const curIdx=LADDER.findIndex(l=>l.dose===cur.dose);
+  const next=curIdx<LADDER.length-1?LADDER[curIdx+1]:null;
+  const body=el('div');body.style.cssText='padding:14px';
+  const dRow=el('div');
+  dRow.style.cssText='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px';
+  dRow.innerHTML=`<div><div style="font-size:22px;font-weight:700;color:#C8963C">${cur.dose}mg</div><div style="font-size:10px;color:#3A3A48">${cur.vol}ml · every 3 days · ~${Math.round(cur.dose/3*7)}mg/week</div></div><div style="text-align:right"><div style="font-size:16px;color:#EFEFEF;font-weight:600">Day ${daysAt}</div><div style="font-size:10px;color:#3A3A48">of 28 minimum</div></div>`;
+  body.appendChild(dRow);
+  const pbWrap=el('div');pbWrap.style.cssText='background:#111118;border-radius:99px;height:7px;margin-bottom:6px;overflow:hidden';
+  const pb=el('div');pb.style.cssText=`height:100%;border-radius:99px;background:${ready?'#4A7A50':'#C8963C'};width:${pct}%;transition:width .3s`;
+  pbWrap.appendChild(pb);body.appendChild(pbWrap);
+  const pbLbl=el('div');
+  pbLbl.style.cssText=`font-size:10px;color:${ready?'#4A7A50':'#5A5A68'};margin-bottom:14px`;
+  pbLbl.textContent=ready?'✓ Minimum window reached — step up when ready':`${28-daysAt} days until minimum window`;
+  body.appendChild(pbLbl);
+  if(next){
+    const stepBtn=el('button');
+    stepBtn.style.cssText=`width:100%;padding:11px;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;background:${ready?'#C8963C':'#1C1C24'};color:${ready?'#09090B':'#5A5A68'}`;
+    stepBtn.textContent=`Step up to ${next.dose}mg (${next.vol}ml)`;
+    stepBtn.onclick=()=>{
+      if(!ready){const ok=confirm(`Only ${daysAt}/28 days at current dose. Step up early?`);if(!ok)return;}
+      const inp=document.createElement('input');inp.type='date';
+      inp.value=new Date().toISOString().split('T')[0];
+      inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:6px 10px;color:#EFEFEF;font-size:12px;width:100%;box-sizing:border-box;margin-top:8px';
+      inp.onchange=()=>{if(inp.value){S.trtLog=[...(S.trtLog||[]),{dose:next.dose,vol:next.vol,date:inp.value}];save();renderContent();}};
+      stepBtn.replaceWith(inp);inp.focus();
+    };
+    body.appendChild(stepBtn);
+  } else {
+    const mx=el('div');mx.style.cssText='text-align:center;font-size:12px;color:#4A7A50;padding:8px 0;font-weight:600';
+    mx.textContent='✓ At maximum dose (200mg)';body.appendChild(mx);
+  }
+  wrap.appendChild(body);
+  if(log.length>1){
+    const hh=el('div');hh.style.cssText='padding:8px 14px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#3A3A48;border-top:1px solid #111118';
+    hh.textContent='History';wrap.appendChild(hh);
+    [...log].reverse().slice(1).forEach(e=>{
+      const r=el('div');r.style.cssText='padding:7px 14px;font-size:11px;color:#3A3A48;border-top:1px solid #0A0A10;display:flex;justify-content:space-between';
+      const d=new Date(e.date);
+      r.innerHTML=`<span>${e.dose}mg (${e.vol}ml)</span><span>${d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</span>`;
+      wrap.appendChild(r);
+    });
+  }
+  return wrap;
+}
+
 function itemVisible(item){
   if(item.showOnDays&&!item.showOnDays.includes(TODAY_DOW)) return false;
   if(item.showIf&&!Object.values(S.choices).includes(item.showIf)) return false;
   if(item.showIfDayType&&!item.showIfDayType.includes(S.dayType)) return false;
   if(item.showEveryNDays&&item.startKey) return isNthDay(S.injStart[item.startKey],item.showEveryNDays);
+  if(item.compoundKey&&!compoundActive(item.compoundKey)) return false;
   return true;
 }
 
 function allCheckable(arr){
   const out=[];
   arr.forEach(i=>{
-    if(i.type==='group') i.children.forEach(c=>{ if(!c.type) out.push(c); });
+    if(i.type==='group'){
+      if(!itemVisible(i)) return;
+      i.children.forEach(c=>{
+        if(!c.type&&itemVisible(c)) out.push(c);
+      });
+    }
     else if(i.type==='choice') out.push(i);
     else if(!i.type&&itemVisible(i)) out.push(i);
   });
@@ -579,14 +654,70 @@ function allCheckable(arr){
 
 // ── DAY SELECTOR ──────────────────────────────────────────────────────────────
 
+function applyAutoShower(){
+  const hasSwim=S.dayType==='swim'||S.dayType==='both';
+  // Clear any previous auto-shower selections
+  if(S.choices['sa_cleanse']==='sa_shower') delete S.choices['sa_cleanse'];
+  if(S.choices['pms_cleanse']==='pms_shower') delete S.choices['pms_cleanse'];
+  if(hasSwim){
+    if(S.swimTime==='morning') S.choices['sa_cleanse']='sa_shower';
+    else S.choices['pms_cleanse']='pms_shower';
+  }
+}
+
 function renderDaySelector(){
+  const wrap=el('div');
   const opts=[['none','No Training'],['lift','Lift'],['swim','Swim'],['both','Lift + Swim']];
-  const wrap=el('div','day-sel');
+  const row=el('div','day-sel');
   opts.forEach(([v,lbl])=>{
     const b=el('button','day-btn'+(S.dayType===v?' on':''),lbl);
-    b.onclick=()=>{S.dayType=v;save();renderContent();};
-    wrap.appendChild(b);
+    b.onclick=()=>{
+      S.dayType=v;
+      if(v==='none'){S.liftTime='midday';S.swimTime='evening';}
+      applyAutoShower();
+      save();renderContent();
+    };
+    row.appendChild(b);
   });
+  wrap.appendChild(row);
+  // Time sub-selectors
+  const hasLift=S.dayType==='lift'||S.dayType==='both';
+  const hasSwim=S.dayType==='swim'||S.dayType==='both';
+  if(hasLift||hasSwim){
+    const sub=el('div');
+    sub.style.cssText='padding:4px 16px 8px;display:flex;gap:12px;flex-wrap:wrap';
+    if(hasLift){
+      const lg=el('div');
+      lg.style.cssText='display:flex;align-items:center;gap:6px';
+      const ll=el('span');
+      ll.style.cssText='font-size:10px;color:#88C870;font-weight:700';
+      ll.textContent='Lift:';
+      lg.appendChild(ll);
+      ['morning','midday','evening'].forEach(t=>{
+        const b=el('button','day-btn'+(S.liftTime===t?' on':''),t.charAt(0).toUpperCase()+t.slice(1));
+        b.style.cssText+=(S.liftTime===t?';background:#88C870;border-color:#88C870':';border-color:#282836')+';font-size:10px;padding:4px 10px';
+        b.onclick=()=>{S.liftTime=t;save();renderContent();};
+        lg.appendChild(b);
+      });
+      sub.appendChild(lg);
+    }
+    if(hasSwim){
+      const sg=el('div');
+      sg.style.cssText='display:flex;align-items:center;gap:6px';
+      const sl=el('span');
+      sl.style.cssText='font-size:10px;color:#6ABCBC;font-weight:700';
+      sl.textContent='Swim:';
+      sg.appendChild(sl);
+      ['morning','midday','evening'].forEach(t=>{
+        const b=el('button','day-btn'+(S.swimTime===t?' on':''),t.charAt(0).toUpperCase()+t.slice(1));
+        b.style.cssText+=(S.swimTime===t?';background:#6ABCBC;border-color:#6ABCBC':';border-color:#282836')+';font-size:10px;padding:4px 10px';
+        b.onclick=()=>{S.swimTime=t;applyAutoShower();save();renderContent();};
+        sg.appendChild(b);
+      });
+      sub.appendChild(sg);
+    }
+    wrap.appendChild(sub);
+  }
   return wrap;
 }
 
@@ -595,7 +726,10 @@ function renderDaySelector(){
 function makeCollapsSection(secId,title,color,items){
   const isOpen=S.sections[secId]!==false;
   const ck=allCheckable(items);
-  const done=ck.filter(i=>S.checked[i.id]).length;
+  const done=ck.filter(i=>{
+    if(i.type==='choice') return !!S.choices[i.id];
+    return !!S.checked[i.id];
+  }).length;
   const wrap=el('div');
   const hd=el('div','csec-hd');
   hd.innerHTML=`<div class="sec-left"><div class="sec-dot" style="background:${color}"></div><span class="sec-lbl" style="color:${color}">${title}</span></div><div style="display:flex;align-items:center;gap:8px"><span class="sec-ct">${done}/${ck.length}</span><span style="color:#2E2E38">${chevSVG(!isOpen)}</span></div>`;
@@ -603,9 +737,8 @@ function makeCollapsSection(secId,title,color,items){
   wrap.appendChild(hd);
   if(isOpen){
     items.forEach(item=>{
-      if(!item.type&&!itemVisible(item)) return;
-      if(item.showIf&&!Object.values(S.choices).includes(item.showIf)) return;
       if(item.type==='header') wrap.appendChild(makeGrpHd(item.text));
+      else if(!itemVisible(item)) return;
       else if(item.type==='group') wrap.appendChild(makeGroup(item));
       else if(item.type==='choice') wrap.appendChild(makeChoice(item));
       else wrap.appendChild(makeCheckRow(item));
@@ -816,8 +949,9 @@ function makeCheckRow(item){
 
 function makeGroup(item){
   const children=item.children||[];
-  const done=children.filter(c=>S.checked[c.id]).length;
-  const full=done===children.length&&children.length>0;
+  const checkable=children.filter(c=>!c.type);
+  const done=checkable.filter(c=>S.checked[c.id]).length;
+  const full=done===checkable.length&&checkable.length>0;
   const isExp=!!S.expanded[item.id];
   const wrap=el('div');
 
@@ -830,7 +964,7 @@ function makeGroup(item){
   tx.style.fontWeight='600';
   tr.appendChild(tx);
   if(item.tag) tr.appendChild(tagEl(item.tag));
-  const badge=el('span','grp-badge'+(full?' full':''),`${done}/${children.length}`);
+  const badge=el('span','grp-badge'+(full?' full':''),`${done}/${checkable.length}`);
   tr.appendChild(badge);
   body.appendChild(tr);
   const ch=el('button','chev',chevSVG(isExp));
@@ -867,14 +1001,16 @@ function makeChoice(item){
   const lbl=el('div','choice-lbl',item.text);
   inner.appendChild(lbl);
   const opts=el('div','choice-opts');
-  item.opts.forEach(opt=>{
+  const visibleOpts = item.opts.filter(o => {
+    if(o.hideIfChoiceActive && Object.values(S.choices).includes(o.hideIfChoiceActive)) return false;
+    return true;
+  });
+  visibleOpts.forEach(opt=>{
     const btn=el('button','choice-btn'+(sel===opt.id?' sel':''),opt.label);
     btn.onclick=()=>{
       const newSel=sel===opt.id?null:opt.id;
       S.choices[item.id]=newSel;
       S.checked[item.id]=!!newSel;
-      // clear sa3 checked state if switching away from micellar water
-      if(item.id==='sa_cleanse' && newSel!=='sa_water') delete S.checked['sa3'];
       save();
       renderContent();
     };
@@ -891,24 +1027,6 @@ function makeChoice(item){
   }
   wrap.appendChild(inner);
   return wrap;
-}
-
-function makeSection(title,color,items){
-  const ck=allCheckable(items);
-  const done=ck.filter(i=>S.checked[i.id]).length;
-  const f=document.createDocumentFragment();
-  const hd=el('div','sec-hd');
-  hd.innerHTML=`<div class="sec-left"><div class="sec-dot" style="background:${color}"></div><span class="sec-lbl" style="color:${color}">${title}</span></div><span class="sec-ct">${done}/${ck.length}</span>`;
-  f.appendChild(hd);
-  items.forEach(item=>{
-    if(!item.type && !itemVisible(item)) return;
-    if(item.showIf && !Object.values(S.choices).includes(item.showIf)) return;
-    if(item.type==='header') f.appendChild(makeGrpHd(item.text));
-    else if(item.type==='group') f.appendChild(makeGroup(item));
-    else if(item.type==='choice') f.appendChild(makeChoice(item));
-    else f.appendChild(makeCheckRow(item));
-  });
-  return f;
 }
 
 // ── ACTIONS ───────────────────────────────────────────────────────────────────
@@ -932,7 +1050,10 @@ function updateProgress(){
   if(S.dayType==='lift'||S.dayType==='both') base.push(...LIFT);
   if(S.dayType==='swim'||S.dayType==='both') base.push(...SWIM);
   const all=allCheckable(base);
-  const done=all.filter(i=>S.checked[i.id]).length;
+  const done=all.filter(i=>{
+    if(i.type==='choice') return !!S.choices[i.id];
+    return !!S.checked[i.id];
+  }).length;
   const pct=all.length>0?Math.round(done/all.length*100):0;
   const color=pct===100?'#5B9F6A':'#C8963C';
   document.getElementById('pct').textContent=pct+'%';
@@ -967,11 +1088,39 @@ function renderContent(){
   if(S.tab==='daily'){
     f.appendChild(renderDaySelector());
     f.appendChild(renderInjectionSchedule());
-    f.appendChild(makeCollapsSection('morning','Morning','#C8963C',MORNING));
-    if(S.dayType==='lift'||S.dayType==='both') f.appendChild(makeCollapsSection('lift','Lift Session','#88C870',LIFT));
-    f.appendChild(makeCollapsSection('midday','Midday','#5B9FC8',MIDDAY));
-    if(S.dayType==='swim'||S.dayType==='both') f.appendChild(makeCollapsSection('swim','Swim Session','#6ABCBC',SWIM));
-    f.appendChild(makeCollapsSection('evening','Evening','#9B7FD4',EVENING));
+
+    const liftMorning=(S.dayType==='lift'||S.dayType==='both')&&(S.liftTime||'midday')==='morning';
+    const swimMorning=(S.dayType==='swim'||S.dayType==='both')&&(S.swimTime||'evening')==='morning';
+    const workoutInMorning=liftMorning||swimMorning;
+
+    const sections=[];
+
+    if(workoutInMorning){
+      const splitIdx=MORNING.findIndex(i=>i.id==='am_shower');
+      const mPre=splitIdx>-1?MORNING.slice(0,splitIdx):MORNING;
+      const mPost=splitIdx>-1?MORNING.slice(splitIdx):[];
+      sections.push({id:'morning',label:'Morning',color:'#C8963C',items:mPre,priority:0});
+      if(mPost.length) sections.push({id:'morning_post',label:'Skincare & Oral',color:'#C8963C',items:mPost,priority:8});
+    } else {
+      sections.push({id:'morning',label:'Morning',color:'#C8963C',items:MORNING,priority:0});
+    }
+
+    sections.push({id:'midday',label:'Midday',color:'#5B9FC8',items:MIDDAY,priority:20});
+    sections.push({id:'evening',label:'Evening',color:'#9B7FD4',items:EVENING,priority:30});
+
+    if(S.dayType==='lift'||S.dayType==='both'){
+      const lt=S.liftTime||'midday';
+      sections.push({id:'lift',label:'Lift Session',color:'#88C870',items:LIFT,
+        priority:lt==='morning'?5:lt==='midday'?25:28});
+    }
+    if(S.dayType==='swim'||S.dayType==='both'){
+      const st=S.swimTime||'evening';
+      sections.push({id:'swim',label:'Swim Session',color:'#6ABCBC',items:SWIM,
+        priority:st==='morning'?6:st==='midday'?26:28});
+    }
+
+    sections.sort((a,b)=>a.priority-b.priority);
+    sections.forEach(s=>f.appendChild(makeCollapsSection(s.id,s.label,s.color,s.items)));
   }
   else if(S.tab==='metrics'){
     f.appendChild(renderMetrics());
@@ -1025,6 +1174,9 @@ function renderContent(){
   }
   else if(S.tab==='stack'){
     const w=el('div','stk-wrap');
+    f.appendChild(renderCompoundToggles());
+    f.appendChild(renderTRTTracker());
+    const pad=el('div');pad.style.height='12px';f.appendChild(pad);
     STACK.forEach(sec=>{
       const s=el('div','stk-sec');
       const hd=el('div','sec-hd');
