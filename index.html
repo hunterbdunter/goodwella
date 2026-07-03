@@ -107,11 +107,38 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
 .proc-status{display:flex;gap:6px;padding:10px 14px;border-top:1px solid #111118}
 .proc-sbtn{flex:1;padding:6px 4px;border-radius:8px;border:1px solid #1C1C24;background:none;font-size:10px;font-weight:600;color:#3A3A48;cursor:pointer;transition:all .2s}
 .proc-sbtn.on{color:#09090B}
+.data-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:#1C1C24;border:1px solid #282836;color:#5A5A68;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10}
+.data-modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
+.data-box{background:#111118;border-radius:16px;padding:20px;width:100%;max-width:400px;border:1px solid #282836}
+.data-title{font-size:14px;font-weight:700;color:#EFEFEF;margin-bottom:4px}
+.data-sub{font-size:11px;color:#5A5A68;margin-bottom:12px;line-height:1.5}
+.data-ta{width:100%;height:90px;background:#0A0A10;border:1px solid #282836;border-radius:8px;color:#EFEFEF;font-size:10px;padding:8px;font-family:monospace;resize:none;box-sizing:border-box;margin-top:6px}
+.data-row{display:flex;gap:8px;margin-top:8px}
+.data-act{flex:1;padding:9px;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer}
+.data-close{width:100%;margin-top:8px;padding:9px;background:none;border:1px solid #282836;border-radius:10px;color:#5A5A68;font-size:12px;cursor:pointer}
+.mx-form{padding:14px 16px 0}
+.mx-date{font-size:10px;color:#3A3A48;text-align:right;margin-bottom:10px}
+.mx-row{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #131318;gap:8px}
+.mx-lbl{flex:1}
+.mx-name{font-size:13px;color:#EFEFEF}
+.mx-hint{font-size:10px;color:#3A3A48;margin-top:1px}
+.mx-inp{width:72px;background:#111116;border:1px solid #282836;border-radius:8px;padding:6px 8px;color:#EFEFEF;font-size:13px;text-align:right;outline:none;-webkit-appearance:none}
+.mx-inp:focus{border-color:#C8963C}
+.mx-bp{display:flex;align-items:center;gap:4px}
+.mx-bp .mx-inp{width:50px}
+.mx-sep{font-size:12px;color:#3A3A48}
+.mx-save{width:100%;margin-top:18px;padding:13px;background:#C8963C;border:none;border-radius:12px;color:#09090B;font-size:14px;font-weight:700;cursor:pointer;transition:background .3s}
+.mx-hist{padding:12px 16px 24px}
+.mx-hist-hd{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#5A5A68;margin-bottom:12px;margin-top:4px}
+.mx-spark{margin-bottom:14px}
+.mx-spark-lbl{font-size:11px;color:#8A8A98;margin-bottom:3px;display:flex;justify-content:space-between;align-items:baseline}
+.mx-spark-val{font-size:12px;color:#C8963C;font-weight:600}
 </style>
 </head>
 <body>
 <div id="app">
-  <div class="hdr">
+  <div class="hdr" style="position:relative">
+    <button class="data-btn" onclick="openDataModal()" title="Export/Import data">⚙</button>
     <div class="hdr-top">
       <div>
         <div class="hdr-eyebrow">Looksmax Mission Control</div>
@@ -124,6 +151,23 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
     </div>
     <div class="prog-bar"><div class="prog-fill" id="fill" style="width:0%;background:#C8963C"></div></div>
   </div>
+  <div id="data-modal" style="display:none" class="data-modal" onclick="if(event.target===this)closeDataModal()">
+    <div class="data-box">
+      <div class="data-title">⚙ Data Backup</div>
+      <div class="data-sub">Before downloading a new version: tap Export, copy the text. In the new file: paste it into Import and tap Restore. All start dates, TRT log, toggles, and settings transfer instantly.</div>
+      <div class="data-title" style="margin-top:12px">Export</div>
+      <textarea class="data-ta" id="export-ta" readonly placeholder="Your data will appear here..."></textarea>
+      <div class="data-row">
+        <button class="data-act" style="background:#C8963C;color:#09090B" onclick="doExport()">Copy to Clipboard</button>
+      </div>
+      <div class="data-title" style="margin-top:16px">Import</div>
+      <textarea class="data-ta" id="import-ta" placeholder="Paste exported data here..."></textarea>
+      <div class="data-row">
+        <button class="data-act" style="background:#4A7A50;color:#fff" onclick="doImport()">Restore Data</button>
+      </div>
+      <button class="data-close" onclick="closeDataModal()">Close</button>
+    </div>
+  </div>
   <div class="tabs" id="tabs"></div>
   <div class="scroll" id="content"></div>
 </div>
@@ -132,7 +176,7 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
 
 const MORNING=[
   {id:'m1',text:'GH 4IUs injection',compoundKey:'gh',note:'Fasted — very first thing before eating. Subcutaneous injection.',tag:'peptide'},
-  {id:'m_testE',text:'Testosterone Enanthate — current dose',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. Titrate: 50→75→100→125mg.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
+  {id:'m_testE',text:'Testosterone Enanthate — current dose',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. Start 75mg (0.3ml). Step up whenever ready — no rush.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
   {id:'m_hcg',text:'HCG — 500IU',compoundKey:'hcg',note:'SubQ. Maintains testicular function and LH activity while on TRT.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
   {id:'m_lcar',text:'L-Carnitine — 1g',note:'SubQ morning with other peptides. Pre-workout timing ideal on training days. Improves fat oxidation and androgen receptor sensitivity.',tag:'peptide',compoundKey:'lcarnitine'},
   {id:'m_nad',text:'NAD+ — 50mg',compoundKey:'nad',note:'SubQ. Morning timing for cellular energy and metabolism. Increase to 100mg if well tolerated.',tag:'peptide'},
@@ -207,7 +251,7 @@ const EVENING=[
       {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg',tag:'supp'},
     ]
   },
-  {id:'e_tadalafil',text:'Tadalafil (Cialis) — 5mg',note:'Evening with dinner. 36-hr half-life so timing flexible. Monitor blood pressure given POTS + Clonidine + L-citrulline combination.',tag:'med',compoundKey:'tadalafil'},
+  {id:'e_tadalafil',text:'Tadalafil (Cialis) — 10mg',note:'Evening with dinner. Half a 20mg tablet. 36hr half-life — levels stay consistent all day after 2-3 days. Monitor BP given POTS + Clonidine + L-citrulline.',tag:'med',compoundKey:'tadalafil'},
   {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Friday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[5]},
   {id:'sp_shower',type:'group',text:'Shower',tag:'grooming',showIf:'pms_shower',
     children:[
@@ -272,11 +316,11 @@ const SWIM=[
   {id:'sw2',text:'King Aquatics practice',note:'2-2.5 hrs. Pre-pool: wet hair + light conditioner. Post-pool: rinse immediately.',tag:'fitness'},
 ];
 
-const TABS=[['daily','Daily'],['meals','Meals'],['stack','Stack'],['hardmax','Hardmax']];
+const TABS=[['daily','Daily'],['meals','Meals'],['stack','Stack'],['hardmax','Hardmax'],['metrics','Metrics']];
 
 const STACK=[
   {label:'Morning',color:'#C8963C',rows:[
-    ['Testosterone Enanthate','50mg → 75 → 100 → 125mg','Every 3 days — subQ','Hormone','Primary anabolic driver · body composition · libido · musk · confidence · facial masculinization · fat redistribution'],
+    ['Testosterone Enanthate','75mg → 100 → 125 → 150 → 200mg','Every 3 days — subQ','Hormone','Primary anabolic driver · body composition · libido · musk · confidence · facial masculinization · fat redistribution'],
     ['HCG','500IU','Every 3 days — subQ','Hormone','Maintains testicular function + LH activity during TRT · prevents atrophy · preserves fertility'],
     ['Cardarine (GW501516)','10mg','Midday daily · 8 wks on / 8 wks off','Compound','Fat oxidation · endurance (PPARδ agonist) · muscle preservation · raises HDL (offsets TRT lipid impact) · anti-inflammatory. Do NOT run continuously.'],
     ['L-Carnitine','1g','Morning — subQ daily','Peptide','Fatty acid transport into mitochondria · fat oxidation · androgen receptor upregulation (synergistic with TRT) · endurance · recovery'],
@@ -317,7 +361,7 @@ const STACK=[
     ['Fish Oil','3 softgels','Fattiest meal','Supplement','Omega-3 anti-inflammatory · cardiovascular · skin health · 2g+ EPA/DHA'],
     ['Magnesium Glycinate','240mg','With dinner','Supplement','Sleep quality · muscle relaxation · calm nervous system'],
     ['Ashwagandha','600mg','With dinner','Supplement','Cortisol ↓ · testosterone support · stress adaptation · sleep'],
-    ['Tadalafil (Cialis)','5mg','Evening with dinner','Medication','PDE5 inhibitor · vasodilation · cardiovascular benefit at low dose · monitor BP carefully given POTS + Clonidine + L-citrulline'],
+    ['Tadalafil (Cialis)','10mg daily','Evening with dinner','Medication','PDE5 inhibitor · consistent baseline vasodilation · cardiovascular endothelial benefit · stable plasma levels within 2-3 days · monitor BP given POTS + Clonidine + L-citrulline'],
     ['Glutathione','200mg','Every 2 days — subQ evening','Peptide','Skin brightening + evenness · systemic antioxidant · liver support given supplement load'],
     ['TB-500','2mg (loading) → 2mg maintenance','Fasted, pre-sleep — 2x/week loading x4-6 wks, then 1x/week','Peptide','Systemic connective tissue remodeling · joint resilience · whole-body repair — especially important with hEDS and increasing training load'],
     ['CJC-1295','0.5mg','Fasted, pre-sleep','Peptide','GHRH analog — stimulates + amplifies natural nocturnal GH pulse'],
@@ -358,7 +402,7 @@ function el(tag,cls,html){
 
 const TODAY_DOW = new Date(Date.now()-4*60*60*1000).getDay();
 
-let S={tab:'daily',checked:{},expanded:{},choices:{},sections:{},dayType:'none',liftTime:'midday',swimTime:'evening',injStart:{},activeCompounds:{},trtLog:[],procStatus:{}};
+let S={tab:'daily',checked:{},expanded:{},choices:{},sections:{},dayType:'none',liftTime:'midday',swimTime:'evening',injStart:{},activeCompounds:{},trtLog:[],procStatus:{},metrics:{}};
 
 function load(){
   try{
@@ -375,6 +419,7 @@ function load(){
     if(d.activeCompounds) S.activeCompounds=d.activeCompounds;
     if(d.trtLog) S.trtLog=d.trtLog;
     if(d.procStatus) S.procStatus=d.procStatus;
+    if(d.metrics) S.metrics=d.metrics;
   }catch(e){}
 }
 
@@ -414,7 +459,7 @@ function daysUntilNext(startDateStr,n){
 }
 
 const INJ_COMPOUNDS=[
-  {key:'testE',label:'Testosterone E',every:3,dose:'50mg → 75 → 100 → 125mg',color:'#C8963C'},
+  {key:'testE',label:'Testosterone E',every:3,dose:'75mg → 100 → 125 → 150mg',color:'#C8963C'},
   {key:'hcg',label:'HCG',every:3,dose:'500IU',color:'#5B9FC8'},
   {key:'glut',label:'Glutathione',every:2,dose:'200mg',color:'#9B7FD4'},
   {key:'tb500',label:'TB-500',every:3,dose:'2mg loading → 2mg maintenance',color:'#6ABCBC'},
@@ -487,7 +532,7 @@ const TOGGLEABLE_COMPOUNDS=[
   {key:'glut',label:'Glutathione',defaultActive:false},
   {key:'lcarnitine',label:'L-Carnitine',defaultActive:false},
   {key:'card',label:'Cardarine (GW501516)',defaultActive:false,note:'8 weeks on / 8 weeks off — do not run continuously'},
-  {key:'tadalafil',label:'Tadalafil (Cialis)',defaultActive:false},
+  {key:'tadalafil',label:'Tadalafil (Cialis) 10mg',defaultActive:false},
   {key:'nad',label:'NAD+',defaultActive:false},
 ];
 
@@ -525,7 +570,7 @@ function renderCompoundToggles(){
 }
 
 function renderTRTTracker(){
-  const LADDER=[{dose:50,vol:'0.20'},{dose:75,vol:'0.30'},{dose:100,vol:'0.40'},{dose:150,vol:'0.60'},{dose:200,vol:'0.80'}];
+  const LADDER=[{dose:75,vol:'0.30'},{dose:100,vol:'0.40'},{dose:125,vol:'0.50'},{dose:150,vol:'0.60'},{dose:200,vol:'0.80'}];
   const log=S.trtLog||[];
   const wrap=el('div');
   wrap.style.cssText='margin:16px 16px 0;background:#0E0E14;border-radius:12px;overflow:hidden;border:1px solid #1C1C24';
@@ -538,12 +583,12 @@ function renderTRTTracker(){
     ns.innerHTML='<div style="font-size:12px;color:#3A3A48;margin-bottom:12px">Not started — tap when you begin your first injection</div>';
     const btn=el('button');
     btn.style.cssText='padding:9px 18px;background:#C8963C;border:none;border-radius:10px;color:#09090B;font-size:12px;font-weight:700;cursor:pointer';
-    btn.textContent='Start at 50mg';
+    btn.textContent='Start at 75mg';
     btn.onclick=()=>{
       const inp=document.createElement('input');inp.type='date';
       inp.value=new Date().toISOString().split('T')[0];
       inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:6px 10px;color:#EFEFEF;font-size:12px;display:block;margin:10px auto;width:160px';
-      inp.onchange=()=>{if(inp.value){S.trtLog=[{dose:50,vol:'0.20',date:inp.value}];save();renderContent();}};
+      inp.onchange=()=>{if(inp.value){S.trtLog=[{dose:75,vol:'0.30',date:inp.value}];save();renderContent();}};
       ns.innerHTML='<div style="font-size:11px;color:#5A5A68;margin-bottom:8px">Select start date:</div>';
       ns.appendChild(inp);inp.focus();
     };
@@ -937,6 +982,132 @@ function renderHardmax(){
   return f;
 }
 
+const MX_FIELDS=[
+  {id:'hr',name:'Resting HR',hint:'From Oura — morning reading',unit:'bpm',type:'num'},
+  {id:'recovery',name:'Recovery Score',hint:'From Oura — morning reading',unit:'/100',type:'num'},
+  {id:'bp',name:'Blood Pressure',hint:'Morning before meds — sit quietly 5 min first',unit:'mmHg',type:'bp'},
+  {id:'weight',name:'Weight',hint:'Before bed, same time daily',unit:'lbs',type:'num',step:'0.1'},
+];
+
+function renderMetrics(){
+  const f=document.createDocumentFragment();
+  const todayKey=new Date(Date.now()-4*60*60*1000).toISOString().split('T')[0];
+  const saved=(S.metrics&&S.metrics[todayKey])||{};
+  const inputs={};
+
+  // Log form
+  const form=el('div','mx-form');
+  const dateEl=el('div','mx-date',new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}));
+  form.appendChild(dateEl);
+
+  MX_FIELDS.forEach(m=>{
+    const row=el('div','mx-row');
+    const lbl=el('div','mx-lbl');
+    lbl.innerHTML=`<div class="mx-name">${m.name}</div><div class="mx-hint">${m.hint} · ${m.unit}</div>`;
+    row.appendChild(lbl);
+    if(m.type==='bp'){
+      const bpW=el('div','mx-bp');
+      const sys=el('input','mx-inp');sys.type='number';sys.placeholder='120';if(saved.bpSys)sys.value=saved.bpSys;
+      const sep=el('span','mx-sep','/');
+      const dia=el('input','mx-inp');dia.type='number';dia.placeholder='80';if(saved.bpDia)dia.value=saved.bpDia;
+      bpW.appendChild(sys);bpW.appendChild(sep);bpW.appendChild(dia);
+      row.appendChild(bpW);inputs.bpSys=sys;inputs.bpDia=dia;
+    } else {
+      const inp=el('input','mx-inp');
+      inp.type='number';if(m.step)inp.step=m.step;
+      if(saved[m.id]!==undefined)inp.value=saved[m.id];
+      row.appendChild(inp);inputs[m.id]=inp;
+    }
+    form.appendChild(row);
+  });
+
+  const btn=el('button','mx-save','Save Today\'s Log');
+  btn.onclick=()=>{
+    const data={};
+    MX_FIELDS.forEach(m=>{
+      if(m.type==='bp'){
+        const sv=inputs.bpSys?.value,dv=inputs.bpDia?.value;
+        if(sv)data.bpSys=parseFloat(sv);if(dv)data.bpDia=parseFloat(dv);
+      } else {
+        const v=inputs[m.id]?.value;
+        if(v!==''&&v!==undefined)data[m.id]=parseFloat(v);
+      }
+    });
+    if(!S.metrics)S.metrics={};
+    S.metrics[todayKey]=data;
+    save();
+    btn.textContent='Saved ✓';btn.style.background='#4A7A50';
+    setTimeout(()=>{btn.textContent='Save Today\'s Log';btn.style.background='';},2000);
+  };
+  form.appendChild(btn);
+  f.appendChild(form);
+
+  // Sparkline history
+  const hist=el('div','mx-hist');
+  const histHd=el('div','mx-hist-hd','Recent Trends — 30 days');
+  hist.appendChild(histHd);
+
+  MX_FIELDS.filter(m=>m.type!=='bp').forEach(m=>{
+    const days=30;
+    const data=[];
+    for(let i=days-1;i>=0;i--){
+      const d=new Date(Date.now()-4*60*60*1000);d.setDate(d.getDate()-i);
+      const k=d.toISOString().split('T')[0];
+      const stored=(S.metrics&&S.metrics[k])||{};
+      data.push(stored[m.id]??null);
+    }
+    const vals=data.filter(v=>v!==null);
+    if(!vals.length) return;
+    const latest=vals[vals.length-1];
+    const minV=Math.min(...vals),maxV=Math.max(...vals),rng=maxV-minV||1;
+    const W=280,H=36;
+    const n=data.length;
+    const tx=i=>i/(n-1)*W;
+    const ty=v=>H-(v-minV)/rng*H*0.8-H*0.1;
+    let pathD='';let prev=null;
+    data.forEach((v,i)=>{
+      if(v===null){prev=null;return;}
+      if(prev===null)pathD+=`M${tx(i)} ${ty(v)}`;
+      else pathD+=` L${tx(i)} ${ty(v)}`;
+      prev=v;
+    });
+    const spark=el('div','mx-spark');
+    spark.innerHTML=`<div class="mx-spark-lbl"><span>${m.name}</span><span class="mx-spark-val">${latest}${m.unit}</span></div><svg viewBox="0 0 ${W} ${H}" style="width:100%;height:36px;display:block"><path d="${pathD}" stroke="#5B9FC8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    hist.appendChild(spark);
+  });
+
+  // BP separately
+  const bpData=[];
+  for(let i=29;i>=0;i--){
+    const d=new Date(Date.now()-4*60*60*1000);d.setDate(d.getDate()-i);
+    const k=d.toISOString().split('T')[0];
+    const stored=(S.metrics&&S.metrics[k])||{};
+    bpData.push({sys:stored.bpSys??null,dia:stored.bpDia??null});
+  }
+  const hasBP=bpData.some(d=>d.sys!==null);
+  if(hasBP){
+    const latestBP=bpData.filter(d=>d.sys!==null).pop();
+    const spark=el('div','mx-spark');
+    const W=280,H=36,n=bpData.length;
+    const sysVals=bpData.map(d=>d.sys).filter(v=>v!==null);
+    const minV=Math.min(...sysVals)-5,maxV=Math.max(...sysVals)+5,rng=maxV-minV||1;
+    const tx=i=>i/(n-1)*W;
+    const ty=v=>H-(v-minV)/rng*H*0.8-H*0.1;
+    let pathD='';let prev=null;
+    bpData.forEach((d,i)=>{
+      if(d.sys===null){prev=null;return;}
+      if(prev===null)pathD+=`M${tx(i)} ${ty(d.sys)}`;
+      else pathD+=` L${tx(i)} ${ty(d.sys)}`;
+      prev=d.sys;
+    });
+    spark.innerHTML=`<div class="mx-spark-lbl"><span>Blood Pressure</span><span class="mx-spark-val">${latestBP.sys}/${latestBP.dia} mmHg</span></div><svg viewBox="0 0 ${W} ${H}" style="width:100%;height:36px;display:block"><path d="${pathD}" stroke="#D46464" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    hist.appendChild(spark);
+  }
+
+  f.appendChild(hist);
+  return f;
+}
+
 function renderTabs(){
   const bar=document.getElementById('tabs');
   bar.innerHTML='';
@@ -993,6 +1164,9 @@ function renderContent(){
   }
   else if(S.tab==='hardmax'){
     f.appendChild(renderHardmax());
+  }
+  else if(S.tab==='metrics'){
+    f.appendChild(renderMetrics());
   }
   else if(S.tab==='meals'){
     const w=el('div','g-wrap');
@@ -1069,6 +1243,42 @@ function renderContent(){
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
+
+function openDataModal(){
+  const raw=localStorage.getItem('lmx3')||'{}';
+  document.getElementById('export-ta').value=raw;
+  document.getElementById('import-ta').value='';
+  document.getElementById('data-modal').style.display='flex';
+}
+function closeDataModal(){
+  document.getElementById('data-modal').style.display='none';
+}
+function doExport(){
+  const ta=document.getElementById('export-ta');
+  ta.select();
+  try{
+    navigator.clipboard.writeText(ta.value).then(()=>{
+      ta.value='✓ Copied! Paste this into the new file\'s Import box.';
+      setTimeout(()=>{ta.value=localStorage.getItem('lmx3')||'{}';},2500);
+    });
+  }catch(e){
+    document.execCommand('copy');
+  }
+}
+function doImport(){
+  const val=document.getElementById('import-ta').value.trim();
+  if(!val){alert('Paste your exported data first.');return;}
+  try{
+    JSON.parse(val); // validate
+    localStorage.setItem('lmx3',val);
+    load();
+    renderTabs();
+    renderContent();
+    closeDataModal();
+  }catch(e){
+    alert('Invalid data — make sure you copied the full export string.');
+  }
+}
 
 load();
 try {
