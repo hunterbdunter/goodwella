@@ -55,12 +55,6 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
 .stk-r{text-align:right}
 .stk-dose{font-size:11px;font-weight:600}
 .stk-timing{font-size:9px;color:#343442}
-.rtab-bar{display:flex;gap:7px;padding:0 16px 14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.rtab{flex-shrink:0;padding:6px 13px;border-radius:99px;font-size:11px;font-weight:600;border:none;cursor:pointer;transition:all .2s}
-.step-row{display:flex;gap:11px;margin:0 16px 14px}
-.step-n{width:24px;height:24px;min-width:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
-.step-t{font-size:13.5px;font-weight:500;color:#EFEFEF;margin-bottom:2px;line-height:1.3}
-.step-d{font-size:11.5px;color:#565664;line-height:1.5}
 .g-wrap{padding:14px 16px 0}
 .g-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
 .g-card{background:#111116;border:1px solid #1C1C24;border-radius:12px;padding:11px}
@@ -101,30 +95,18 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
 .day-btn{flex-shrink:0;padding:7px 14px;border-radius:99px;border:1px solid #282836;background:none;font-size:11px;font-weight:600;color:#5A5A68;cursor:pointer;transition:all .2s}
 .day-btn.on{background:#C8963C;border-color:#C8963C;color:#09090B}
 .csec-hd{display:flex;justify-content:space-between;align-items:center;padding:16px 16px 7px;cursor:pointer;user-select:none}
-.met-sub{display:flex;padding:0 16px;border-bottom:1px solid #1A1A20;flex-shrink:0}
-.met-stab{flex:1;padding:10px 0;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:#3A3A48;cursor:pointer;transition:all .15s}
-.met-stab.on{color:#C8963C;border-bottom-color:#C8963C}
-.met-form{padding:0 16px 24px}
-.met-date{font-size:10px;color:#3A3A48;padding:12px 0 4px;text-align:right}
-.met-row{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #131318;gap:8px}
-.met-name{font-size:13px;color:#EFEFEF;flex:1}
-.met-unit{font-size:10px;color:#3A3A48;margin-top:1px}
-.met-inp{width:68px;background:#111116;border:1px solid #282836;border-radius:8px;padding:6px 8px;color:#EFEFEF;font-size:13px;text-align:right;outline:none;-webkit-appearance:none}
-.met-inp:focus{border-color:#C8963C}
-.met-bp{display:flex;align-items:center;gap:4px}
-.met-bp .met-inp{width:48px}
-.met-sep{font-size:12px;color:#3A3A48}
-.met-save{width:100%;margin-top:20px;padding:13px;background:#C8963C;border:none;border-radius:12px;color:#09090B;font-size:14px;font-weight:700;cursor:pointer;transition:background .3s}
-.chart-sel{display:flex;gap:6px;padding:14px 16px 8px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.chart-pill{flex-shrink:0;padding:5px 11px;border-radius:99px;border:1px solid #282836;background:none;font-size:10.5px;font-weight:600;color:#5A5A68;cursor:pointer;white-space:nowrap;transition:all .2s}
-.chart-pill.on{background:#5B9FC8;border-color:#5B9FC8;color:#09090B}
-.chart-range{display:flex;padding:0 16px 12px;gap:8px}
-.chart-rbtn{flex:1;padding:6px;border-radius:8px;border:1px solid #282836;background:none;font-size:11px;font-weight:600;color:#5A5A68;cursor:pointer;transition:all .2s}
-.chart-rbtn.on{background:#1C1C26;color:#EFEFEF;border-color:#3A3A46}
-.chart-wrap{padding:0 16px 32px}
-.chart-ttl{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#5A5A68;margin-bottom:10px}
-.chart-empty{font-size:12px;color:#333340;text-align:center;padding:40px 0;font-style:italic}
-.chart-svg{width:100%;display:block}
+.proc-card{margin:12px 16px 0;background:#0E0E14;border-radius:14px;overflow:hidden;border:1px solid #1C1C24}
+.proc-hd{padding:12px 14px 10px;border-bottom:1px solid #1A1A20}
+.proc-name{font-size:15px;font-weight:700;color:#EFEFEF}
+.proc-sub{font-size:10px;font-weight:600;letter-spacing:.08em;margin-top:2px}
+.proc-body{padding:12px 14px}
+.proc-lbl{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#3A3A48;margin-bottom:5px;margin-top:10px}
+.proc-lbl:first-child{margin-top:0}
+.proc-txt{font-size:12px;color:#8A8A98;line-height:1.55}
+.proc-timing{font-size:11px;color:#5A5A68;font-style:italic;line-height:1.5}
+.proc-status{display:flex;gap:6px;padding:10px 14px;border-top:1px solid #111118}
+.proc-sbtn{flex:1;padding:6px 4px;border-radius:8px;border:1px solid #1C1C24;background:none;font-size:10px;font-weight:600;color:#3A3A48;cursor:pointer;transition:all .2s}
+.proc-sbtn.on{color:#09090B}
 </style>
 </head>
 <body>
@@ -152,6 +134,7 @@ const MORNING=[
   {id:'m1',text:'GH 4IUs injection',compoundKey:'gh',note:'Fasted — very first thing before eating. Subcutaneous injection.',tag:'peptide'},
   {id:'m_testE',text:'Testosterone Enanthate — current dose',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. Titrate: 50→75→100→125mg.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
   {id:'m_hcg',text:'HCG — 500IU',compoundKey:'hcg',note:'SubQ. Maintains testicular function and LH activity while on TRT.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
+  {id:'m_lcar',text:'L-Carnitine — 1g',note:'SubQ morning with other peptides. Pre-workout timing ideal on training days. Improves fat oxidation and androgen receptor sensitivity.',tag:'peptide',compoundKey:'lcarnitine'},
   {id:'m_nad',text:'NAD+ — 50mg',compoundKey:'nad',note:'SubQ. Morning timing for cellular energy and metabolism. Increase to 100mg if well tolerated.',tag:'peptide'},
   {id:'m_sel',text:'Selank 250-500mcg',compoundKey:'selank',note:'Mon/Wed/Fri — intranasal or subcutaneous. Anxiolytic + cognitive support. Take it early so you feel the effect during your day.',tag:'peptide',showOnDays:[1,3,5]},
   {id:'m_mt2',text:'MT2 0.5mg',compoundKey:'mt2',note:'Daily — take 2-3 hrs before sun exposure on tan days. Take with morning peptides regardless.',tag:'peptide'},
@@ -160,7 +143,7 @@ const MORNING=[
   {id:'m_tint',text:'Eyebrow + lash tint check',note:'Check if color is fading. Redye if getting too light — maintaining contrast is the whole point.',tag:'grooming',showOnDays:[0]},
   {id:'m6',text:'10 min bright light',note:'Step outside OR use the 10,000 lux lamp — both work equally well. Lamp may be better on overcast Washington mornings. First thing while still fasted.',tag:'sleep'},
   {id:'m_mastic',text:'Mastic gum — 10-20 min',note:'Builds masseter definition over time. Chew consistently for jaw masculinization. Hard resin — start slow if jaw gets sore.',tag:'grooming'},
-  {id:'m_water',text:'Drink full Hydro Flask #1',note:'32oz — start hydrating before breakfast. Critical for POTS.',tag:'supp'},
+  {id:'m_water',text:'Drink full Hydro Flask #1 + ¼ tsp salt',note:'32oz — add ¼ tsp salt for sodium, plasma volume, and POTS management. Critical for vascularity.',tag:'supp'},
   {id:'m_breakfast',type:'group',text:'Breakfast',tag:'nutrition',
     groupNote:'See Meals tab for options',
     children:[
@@ -203,13 +186,14 @@ const MORNING=[
 ];
 
 const MIDDAY=[
-  {id:'midday_grp',type:'group',text:'Smoothie',tag:'nutrition',
+  {id:'midday_grp',type:'group',text:'Smoothie',tag:'nutrition',showOnDays:[1,2,3,4,5,6],
     children:[
-      {id:'d0',text:'Make smoothie',note:'Protein powder · Creatine · Collagen+Probiotics · Beta Alanine · L-Citrulline · Banana · Peanut butter — recipe TBD',tag:'nutrition'},
+      {id:'d0',text:'Make smoothie',note:'See Meals tab for full recipe.',tag:'nutrition'},
       {id:'d_supps',text:'Supplements',note:'Zinc 30mg · Daily Multi · Montelukast 10mg · Vitamin C 1,000mg · NAC 600mg · Astaxanthin 12mg · Lycopene 20mg · Quercetin Phytosome 2 caps · Lutein+Zeaxanthin 20mg/4mg · Boron 10mg',tag:'supp'},
     ]
   },
-  {id:'d3',text:'Additional snack',note:'See Meals tab for options.',tag:'nutrition'},
+  {id:'d_sun',text:'Sunday — supplements with food instead',note:'Skip smoothie today. Take midday supplements with lunch or snacks. Hit protein another way — extra bacon, Premier Protein, eggs.',tag:'nutrition',showOnDays:[0]},
+  {id:'d_card',text:'Cardarine — 10mg',note:'8 weeks on / 8 weeks off — do not run continuously. With midday supplements.',tag:'supp',compoundKey:'card'},
   {id:'d_tan',text:'Tanning lotion (tan days only)',note:'Australian Gold or equivalent — apply before sun exposure. Optional but maximizes MT2 tanning effect.',tag:'grooming'},
   {id:'d_water',text:'Drink full Hydro Flask #2',note:'32oz — midday fill.',tag:'supp'},
 ];
@@ -223,7 +207,8 @@ const EVENING=[
       {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg',tag:'supp'},
     ]
   },
-  {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Wednesday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[3]},
+  {id:'e_tadalafil',text:'Tadalafil (Cialis) — 5mg',note:'Evening with dinner. 36-hr half-life so timing flexible. Monitor blood pressure given POTS + Clonidine + L-citrulline combination.',tag:'med',compoundKey:'tadalafil'},
+  {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Friday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[5]},
   {id:'sp_shower',type:'group',text:'Shower',tag:'grooming',showIf:'pms_shower',
     children:[
       {id:'sp_s0',type:'header',text:'In Shower'},
@@ -272,13 +257,7 @@ const EVENING=[
   {id:'e_read',text:'20 min reading or wind-down gaming',note:'Physical book or low-stimulation gaming — occupies ADHD brain enough to slow thought spiral without ramping up.',tag:'sleep'},
   {id:'e_mel',text:'Melatonin 2-2.5mg (optional)',note:'Only on late swim nights or when sleep onset is genuinely difficult. Not every night — reserve it so it stays effective.',tag:'sleep'},
   {id:'e_linen',text:'Lavender linen spray on pillow',note:'A few spritzes right before getting into bed. Helps sleep onset.',tag:'sleep'},
-  {id:'e_water',text:'Drink full Hydro Flask #3',note:'32oz — evening fill. Aim for 3 total per day.',tag:'supp'},
-];
-
-const WEEKLY=[
-  {id:'w2',text:'Swim 4x — King Aquatics',note:'2-2.5 hrs · Pre-pool: wet hair + light conditioner barrier · Post-pool: rinse immediately',tag:'fitness'},
-  {id:'w3',text:'Lift 3-4x (home gym)',note:'Upper / Lower / Core+Mobility · 1 hr · End every session: chin tucks + neck lifts + stomach vacuums',tag:'fitness'},
-  {id:'w4',text:'Clarifying shampoo on swim days',note:'1-2x per week — removes chlorine buildup.',tag:'hair'},
+  {id:'e_water',text:'Drink full Hydro Flask #3',note:'32oz — aim for 3 fills daily.',tag:'supp'},
 ];
 
 const LIFT=[
@@ -293,23 +272,14 @@ const SWIM=[
   {id:'sw2',text:'King Aquatics practice',note:'2-2.5 hrs. Pre-pool: wet hair + light conditioner. Post-pool: rinse immediately.',tag:'fitness'},
 ];
 
-const METRICS_DEF=[
-  {id:'hr',label:'Resting HR (overnight, Oura)',unit:'bpm',type:'num'},
-  {id:'hrv',label:'HRV',unit:'ms',type:'num'},
-  {id:'recovery',label:'Recovery Score',unit:'/100',type:'num'},
-  {id:'sleep',label:'Sleep Duration',unit:'hrs',type:'num',step:'0.5'},
-  {id:'sleepScore',label:'Sleep Score',unit:'/100',type:'num'},
-  {id:'bodyTemp',label:'Body Temp (overnight, Oura)',unit:'°F',type:'num',step:'0.1'},
-  {id:'bp',label:'Blood Pressure (manual)',unit:'mmHg',type:'bp'},
-  {id:'vo2max',label:'VO2 Max (weekly, Oura)',unit:'ml/kg/min',type:'num',step:'0.1'},
-  {id:'weight',label:'Weight',unit:'lbs',type:'num',step:'0.1'},
-  {id:'exercise',label:'Exercise Time',unit:'min',type:'num'},
-];
+const TABS=[['daily','Daily'],['meals','Meals'],['stack','Stack'],['hardmax','Hardmax']];
 
 const STACK=[
   {label:'Morning',color:'#C8963C',rows:[
     ['Testosterone Enanthate','50mg → 75 → 100 → 125mg','Every 3 days — subQ','Hormone','Primary anabolic driver · body composition · libido · musk · confidence · facial masculinization · fat redistribution'],
     ['HCG','500IU','Every 3 days — subQ','Hormone','Maintains testicular function + LH activity during TRT · prevents atrophy · preserves fertility'],
+    ['Cardarine (GW501516)','10mg','Midday daily · 8 wks on / 8 wks off','Compound','Fat oxidation · endurance (PPARδ agonist) · muscle preservation · raises HDL (offsets TRT lipid impact) · anti-inflammatory. Do NOT run continuously.'],
+    ['L-Carnitine','1g','Morning — subQ daily','Peptide','Fatty acid transport into mitochondria · fat oxidation · androgen receptor upregulation (synergistic with TRT) · endurance · recovery'],
     ['NAD+','50mg','Morning — subQ daily','Peptide','Cellular energy production · DNA repair · mitochondrial function · recovery · longevity'],
     ['GH','4 IUs','Fasted, first','Peptide','Body composition · fat loss · skin quality · recovery · sleep depth'],
     ['Minocycline','50mg','With breakfast','Medication','Acne + folliculitis control — dermatologist prescribed'],
@@ -347,6 +317,7 @@ const STACK=[
     ['Fish Oil','3 softgels','Fattiest meal','Supplement','Omega-3 anti-inflammatory · cardiovascular · skin health · 2g+ EPA/DHA'],
     ['Magnesium Glycinate','240mg','With dinner','Supplement','Sleep quality · muscle relaxation · calm nervous system'],
     ['Ashwagandha','600mg','With dinner','Supplement','Cortisol ↓ · testosterone support · stress adaptation · sleep'],
+    ['Tadalafil (Cialis)','5mg','Evening with dinner','Medication','PDE5 inhibitor · vasodilation · cardiovascular benefit at low dose · monitor BP carefully given POTS + Clonidine + L-citrulline'],
     ['Glutathione','200mg','Every 2 days — subQ evening','Peptide','Skin brightening + evenness · systemic antioxidant · liver support given supplement load'],
     ['TB-500','2mg (loading) → 2mg maintenance','Fasted, pre-sleep — 2x/week loading x4-6 wks, then 1x/week','Peptide','Systemic connective tissue remodeling · joint resilience · whole-body repair — especially important with hEDS and increasing training load'],
     ['CJC-1295','0.5mg','Fasted, pre-sleep','Peptide','GHRH analog — stimulates + amplifies natural nocturnal GH pulse'],
@@ -354,7 +325,7 @@ const STACK=[
     ['GHK-Cu','2mg','Fasted, pre-sleep','Peptide','Skin regeneration · collagen remodeling · hair growth · anti-inflammatory'],
   ]},
   {label:'Weekly',color:'#D46464',rows:[
-    ['Retatrutide','2mg','Wednesday — same day weekly','Peptide','GLP-1/GIP/glucagon triple agonist — body composition + weight stability maintenance after 1.5yr protocol'],
+    ['Retatrutide','2mg','Friday — same day weekly','Peptide','GLP-1/GIP/glucagon triple agonist — body composition + weight stability maintenance after 1.5yr protocol'],
   ]},
   {label:'Mon / Wed / Fri',color:'#A98FE0',rows:[
     ['Kisspeptin','50-100mcg','Evening injection (M/W/F)','Peptide','LH stimulation → testosterone production · important since stopping dutasteride'],
@@ -387,7 +358,7 @@ function el(tag,cls,html){
 
 const TODAY_DOW = new Date(Date.now()-4*60*60*1000).getDay();
 
-let S={tab:'daily',checked:{},expanded:{},choices:{},sections:{},dayType:'none',liftTime:'midday',swimTime:'evening',metSubTab:'log',chartMetric:'hr',chartRange:'week',rtab:'Skin AM',injStart:{},activeCompounds:{},trtLog:[]};
+let S={tab:'daily',checked:{},expanded:{},choices:{},sections:{},dayType:'none',liftTime:'midday',swimTime:'evening',injStart:{},activeCompounds:{},trtLog:[],procStatus:{}};
 
 function load(){
   try{
@@ -400,13 +371,10 @@ function load(){
     if(d.expanded) S.expanded=d.expanded;
     if(d.sections) S.sections=d.sections;
     if(d.tab) S.tab=d.tab;
-    if(d.rtab) S.rtab=d.rtab;
-    if(d.metSubTab) S.metSubTab=d.metSubTab;
-    if(d.chartMetric) S.chartMetric=d.chartMetric;
-    if(d.chartRange) S.chartRange=d.chartRange;
     if(d.injStart) S.injStart=d.injStart;
     if(d.activeCompounds) S.activeCompounds=d.activeCompounds;
     if(d.trtLog) S.trtLog=d.trtLog;
+    if(d.procStatus) S.procStatus=d.procStatus;
   }catch(e){}
 }
 
@@ -450,6 +418,7 @@ const INJ_COMPOUNDS=[
   {key:'hcg',label:'HCG',every:3,dose:'500IU',color:'#5B9FC8'},
   {key:'glut',label:'Glutathione',every:2,dose:'200mg',color:'#9B7FD4'},
   {key:'tb500',label:'TB-500',every:3,dose:'2mg loading → 2mg maintenance',color:'#6ABCBC'},
+  {key:'lcarnitine',label:'L-Carnitine',every:1,dose:'1g daily',color:'#88C870'},
 ];
 
 function renderInjectionSchedule(){
@@ -516,6 +485,9 @@ const TOGGLEABLE_COMPOUNDS=[
   {key:'hcg',label:'HCG',defaultActive:false},
   {key:'tb500',label:'TB-500',defaultActive:false},
   {key:'glut',label:'Glutathione',defaultActive:false},
+  {key:'lcarnitine',label:'L-Carnitine',defaultActive:false},
+  {key:'card',label:'Cardarine (GW501516)',defaultActive:false,note:'8 weeks on / 8 weeks off — do not run continuously'},
+  {key:'tadalafil',label:'Tadalafil (Cialis)',defaultActive:false},
   {key:'nad',label:'NAD+',defaultActive:false},
 ];
 
@@ -749,163 +721,6 @@ function makeCollapsSection(secId,title,color,items){
 
 // ── METRICS ───────────────────────────────────────────────────────────────────
 
-function getMetricHistory(metricId,days){
-  const result=[];
-  for(let i=days-1;i>=0;i--){
-    const d=new Date();d.setDate(d.getDate()-i);
-    const key='metrics_'+d.toISOString().split('T')[0];
-    let val=null;
-    try{const st=JSON.parse(localStorage.getItem(key)||'{}');if(st[metricId]!==undefined)val=st[metricId];}catch(e){}
-    const lbl=d.toLocaleDateString('en-US',days<=7?{weekday:'short'}:{month:'short',day:'numeric'});
-    result.push({date:d,value:val,label:lbl});
-  }
-  return result;
-}
-
-function getMetricHistoryMonthly(metricId,months){
-  const result=[];
-  for(let i=months-1;i>=0;i--){
-    const ref=new Date();ref.setMonth(ref.getMonth()-i);
-    const yr=ref.getFullYear(),mo=ref.getMonth();
-    const daysIn=new Date(yr,mo+1,0).getDate();
-    let sum=0,cnt=0;
-    for(let d=1;d<=daysIn;d++){
-      const key=`metrics_${yr}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      try{const st=JSON.parse(localStorage.getItem(key)||'{}');if(st[metricId]!==undefined){sum+=st[metricId];cnt++;}}catch(e){}
-    }
-    result.push({date:ref,value:cnt>0?Math.round(sum/cnt*10)/10:null,label:ref.toLocaleDateString('en-US',{month:'short'})});
-  }
-  return result;
-}
-
-function renderMetricChart(metricId,range){
-  const W=320,H=150,PL=36,PR=12,PT=12,PB=28;
-  const data=range==='year'?getMetricHistoryMonthly(metricId,12):getMetricHistory(metricId,range==='week'?7:30);
-  const hasData=data.some(d=>d.value!==null);
-  if(!hasData) return el('div','chart-empty','No data yet — start logging in the Log tab');
-  const vals=data.filter(d=>d.value!==null).map(d=>d.value);
-  const minV=Math.min(...vals),maxV=Math.max(...vals),rng=maxV-minV||1;
-  const n=data.length,cW=W-PL-PR,cH=H-PT-PB;
-  const tx=i=>PL+i/(n-1)*cW,ty=v=>PT+cH-(v-minV)/rng*cH;
-  let svg=`<svg viewBox="0 0 ${W} ${H}" class="chart-svg">`;
-  [0,0.5,1].forEach(f=>{
-    const y=PT+cH*(1-f),v=minV+rng*f;
-    svg+=`<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="#1A1A22" stroke-width="1"/>`;
-    svg+=`<text x="${PL-3}" y="${y+3.5}" text-anchor="end" fill="#3A3A48" font-size="8">${Math.round(v)}</text>`;
-  });
-  let pts=data.filter(d=>d.value!==null).map((d,_,arr)=>{
-    const i=data.indexOf(d);return{x:tx(i),y:ty(d.value)};
-  });
-  // Draw connected line segments for non-null points
-  let pathD='';let prev=null;
-  data.forEach((d,i)=>{
-    if(d.value===null){prev=null;return;}
-    const x=tx(i),y=ty(d.value);
-    if(prev===null) pathD+=`M${x} ${y}`;else pathD+=` L${x} ${y}`;
-    prev={x,y};
-  });
-  if(pathD) svg+=`<path d="${pathD}" stroke="#5B9FC8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
-  data.forEach((d,i)=>{
-    if(d.value===null) return;
-    svg+=`<circle cx="${tx(i)}" cy="${ty(d.value)}" r="3" fill="#5B9FC8"><title>${d.label}: ${d.value}</title></circle>`;
-  });
-  const labelEvery=n<=7?1:n<=30?7:1;
-  data.forEach((d,i)=>{
-    if(i%labelEvery!==0&&i!==n-1) return;
-    svg+=`<text x="${tx(i)}" y="${H-5}" text-anchor="middle" fill="#3A3A48" font-size="7.5">${d.label}</text>`;
-  });
-  svg+='</svg>';
-  const wrap=el('div');wrap.innerHTML=svg;return wrap;
-}
-
-function renderMetricsLog(){
-  const todayKey='metrics_'+new Date().toISOString().split('T')[0];
-  let saved={};try{saved=JSON.parse(localStorage.getItem(todayKey)||'{}');}catch(e){}
-  const form=el('div','met-form');
-  const dateEl=el('div','met-date',new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}));
-  form.appendChild(dateEl);
-  const inputs={};
-  METRICS_DEF.forEach(m=>{
-    const row=el('div','met-row');
-    const lbl=el('div');
-    lbl.innerHTML=`<div class="met-name">${m.label}</div><div class="met-unit">${m.unit}</div>`;
-    lbl.style.flex='1';
-    row.appendChild(lbl);
-    if(m.type==='bp'){
-      const bpW=el('div','met-bp');
-      const sys=el('input','met-inp');sys.type='number';sys.placeholder='120';sys.style.width='48px';
-      if(saved.bpSys) sys.value=saved.bpSys;
-      const sep=el('span','met-sep','/');
-      const dia=el('input','met-inp');dia.type='number';dia.placeholder='80';dia.style.width='48px';
-      if(saved.bpDia) dia.value=saved.bpDia;
-      bpW.appendChild(sys);bpW.appendChild(sep);bpW.appendChild(dia);
-      row.appendChild(bpW);inputs['bpSys']=sys;inputs['bpDia']=dia;
-    } else {
-      const inp=el('input','met-inp');
-      inp.type='number';if(m.step)inp.step=m.step;
-      if(saved[m.id]!==undefined) inp.value=saved[m.id];
-      row.appendChild(inp);inputs[m.id]=inp;
-    }
-    form.appendChild(row);
-  });
-  const btn=el('button','met-save','Save Today\'s Log');
-  btn.onclick=()=>{
-    const data={};
-    METRICS_DEF.forEach(m=>{
-      if(m.type==='bp'){
-        const sv=inputs['bpSys']?.value,dv=inputs['bpDia']?.value;
-        if(sv) data.bpSys=parseFloat(sv);if(dv) data.bpDia=parseFloat(dv);
-      } else {
-        const v=inputs[m.id]?.value;
-        if(v!==''&&v!==undefined&&v!==null) data[m.id]=parseFloat(v);
-      }
-    });
-    try{localStorage.setItem(todayKey,JSON.stringify(data));}catch(e){}
-    btn.textContent='Saved ✓';btn.style.background='#4A7A50';
-    setTimeout(()=>{btn.textContent='Save Today\'s Log';btn.style.background='';},2000);
-  };
-  form.appendChild(btn);
-  return form;
-}
-
-function renderMetricsTrends(){
-  const selM=S.chartMetric||'hr',selR=S.chartRange||'week';
-  const wrap=el('div');
-  const pills=el('div','chart-sel');
-  METRICS_DEF.filter(m=>m.type!=='bp').forEach(m=>{
-    const b=el('button','chart-pill'+(selM===m.id?' on':''),m.label);
-    b.onclick=()=>{S.chartMetric=m.id;save();renderContent();};
-    pills.appendChild(b);
-  });
-  wrap.appendChild(pills);
-  const rng=el('div','chart-range');
-  [['week','7 Days'],['month','30 Days'],['year','12 Mo']].forEach(([v,lbl])=>{
-    const b=el('button','chart-rbtn'+(selR===v?' on':''),lbl);
-    b.onclick=()=>{S.chartRange=v;save();renderContent();};
-    rng.appendChild(b);
-  });
-  wrap.appendChild(rng);
-  const cw=el('div','chart-wrap');
-  const metDef=METRICS_DEF.find(m=>m.id===selM);
-  cw.appendChild(el('div','chart-ttl',(metDef?.label||'')+(metDef?.unit?' ('+metDef.unit+')':'')));
-  cw.appendChild(renderMetricChart(selM,selR));
-  wrap.appendChild(cw);
-  return wrap;
-}
-
-function renderMetrics(){
-  const f=document.createDocumentFragment();
-  const subBar=el('div','met-sub');
-  [['log','Log'],['trends','Trends']].forEach(([id,lbl])=>{
-    const b=el('button','met-stab'+(S.metSubTab===id?' on':''),lbl);
-    b.onclick=()=>{S.metSubTab=id;save();renderContent();};
-    subBar.appendChild(b);
-  });
-  f.appendChild(subBar);
-  f.appendChild(S.metSubTab==='trends'?renderMetricsTrends():renderMetricsLog());
-  return f;
-}
-
 // ── RENDER HELPERS ────────────────────────────────────────────────────────────
 
 function makeGrpHd(text){
@@ -1066,7 +881,61 @@ function updateProgress(){
 
 // ── RENDER TABS ───────────────────────────────────────────────────────────────
 
-const TABS=[['daily','Daily'],['meals','Meals'],['stack','Stack']];
+const PROCEDURES=[
+  {id:'rhino',name:'Rhinoplasty',sub:'Dorsal Hump Reduction',color:'#C8963C',
+    what:'Reduces the dorsal hump on the nasal bridge while preserving masculine character and Middle Eastern features. Can refine tip projection and overall nasal harmony.',
+    notes:'Seek specialist in masculine and Middle Eastern rhinoplasty specifically. Istanbul is a strong option for cost and surgical volume. Non-surgical rhinoplasty with filler available as a reversible preview first. Disclose hEDS to any surgeon.',
+    timing:'No prerequisite procedures — can be done independently whenever ready.'},
+  {id:'sarpe',name:'SARPE',sub:'Surgically Assisted Rapid Palatal Expansion',color:'#5B9FC8',
+    what:'Surgical release of the midpalatal suture allowing skeletal expansion of the upper jaw. Widens the palate, midface, and nasal base. Addresses the narrow high-arched palate directly at the bone level rather than just tooth position.',
+    notes:'Often done before orthognathic surgery to establish adequate palatal width first. Expander worn for months post-surgery. EDS affects healing and retention — full disclosure required. Your palate shape makes you a strong candidate.',
+    timing:'Ideally before or concurrent with orthognathic surgery planning. Can be done during or after Invisalign.'},
+  {id:'ortho',name:'Bimaxillary Orthognathic Surgery',sub:'Le Fort I Osteotomy + BSSO',color:'#9B7FD4',
+    what:'Repositions both upper jaw (Le Fort I) and lower jaw (BSSO) to correct jaw retrusion and bite relationship at the skeletal level. Addresses profile, jaw projection, facial balance, and reduces sleep apnea and TMJ risk long term.',
+    notes:'Major surgery — 6-12 week recovery. Requires OMFS consult and orthodontic coordination. Typically staged after Invisalign establishes dental alignment. Full hEDS disclosure mandatory — affects bone healing, remodeling, and retention. Significant profile transformation.',
+    timing:'Post-Invisalign completion. Consider SARPE first to establish palatal width.'},
+  {id:'fatgraft',name:'Periorbital Fat Grafting',sub:'Sub-brow Fat Transfer',color:'#6ABCBC',
+    what:'Transfers fat from a donor site to the sub-brow and periorbital area creating volume, heaviness, and the deep-set hooded appearance associated with hunter eyes. More permanent than filler with natural feel.',
+    notes:'HA filler available as a reversible lower-commitment test before committing to fat grafting. Variable fat retention — some resorption expected and may need touch-up. EDS may affect fat survival and tissue response. Seek surgeon experienced specifically in periorbital fat grafting.',
+    timing:'Test with HA sub-brow filler first to preview result before committing to fat grafting.'},
+  {id:'cantho',name:'Lateral Canthoplasty',sub:'Outer Canthal Repositioning',color:'#A98FE0',
+    what:'Surgically repositions the outer corner of the eye to create a neutral to slightly downward tilt. Directly contributes to the hunter eye aesthetic alongside sub-brow volume.',
+    notes:'Irreversible — approach carefully and only after previewing fat grafting results since volume change affects how canthal position reads. Seek oculoplastic surgeon with specific canthoplasty experience. Not all patients are good candidates.',
+    timing:'After periorbital fat grafting results are fully established.'},
+];
+
+function renderHardmax(){
+  const f=document.createDocumentFragment();
+  const hd=el('div');
+  hd.style.cssText='padding:16px 16px 4px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#5A5A68';
+  hd.textContent='Theoretical Procedure Reference';
+  f.appendChild(hd);
+  const statuses=[['theoretical','Theoretical'],['considering','Considering'],['planned','Planned']];
+  const statusColors={theoretical:'#3A3A48',considering:'#C8963C',planned:'#4A7A50'};
+  PROCEDURES.forEach(p=>{
+    const cur=S.procStatus[p.id]||'theoretical';
+    const card=el('div','proc-card');
+    const hd2=el('div','proc-hd');
+    hd2.style.borderLeft=`3px solid ${p.color}`;
+    hd2.innerHTML=`<div class="proc-name">${p.name}</div><div class="proc-sub" style="color:${p.color}">${p.sub}</div>`;
+    card.appendChild(hd2);
+    const body=el('div','proc-body');
+    body.innerHTML=`<div class="proc-lbl">What it does</div><div class="proc-txt">${p.what}</div><div class="proc-lbl">Notes</div><div class="proc-txt">${p.notes}</div><div class="proc-lbl">Timing</div><div class="proc-timing">${p.timing}</div>`;
+    card.appendChild(body);
+    const statusRow=el('div','proc-status');
+    statuses.forEach(([val,lbl])=>{
+      const on=cur===val;
+      const btn=el('button','proc-sbtn'+(on?' on':''),lbl);
+      if(on){btn.style.background=statusColors[val];btn.style.borderColor=statusColors[val];}
+      btn.onclick=()=>{S.procStatus[p.id]=val;save();renderContent();};
+      statusRow.appendChild(btn);
+    });
+    card.appendChild(statusRow);
+    f.appendChild(card);
+  });
+  const pad=el('div');pad.style.height='24px';f.appendChild(pad);
+  return f;
+}
 
 function renderTabs(){
   const bar=document.getElementById('tabs');
@@ -1122,8 +991,8 @@ function renderContent(){
     sections.sort((a,b)=>a.priority-b.priority);
     sections.forEach(s=>f.appendChild(makeCollapsSection(s.id,s.label,s.color,s.items)));
   }
-  else if(S.tab==='metrics'){
-    f.appendChild(renderMetrics());
+  else if(S.tab==='hardmax'){
+    f.appendChild(renderHardmax());
   }
   else if(S.tab==='meals'){
     const w=el('div','g-wrap');
@@ -1202,8 +1071,12 @@ function renderContent(){
 // ── INIT ──────────────────────────────────────────────────────────────────────
 
 load();
-renderTabs();
-renderContent();
+try {
+  renderTabs();
+  renderContent();
+} catch(e) {
+  document.getElementById('content').innerHTML = '<div style="padding:20px;color:#ff6b6b;font-family:monospace;font-size:12px;white-space:pre-wrap">ERROR: ' + e.message + '\n\n' + e.stack + '</div>';
+}
 </script>
 </body>
 </html>
