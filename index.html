@@ -172,11 +172,16 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
   <div class="scroll" id="content"></div>
 </div>
 <script>
+window.onerror=function(msg,src,line,col,err){
+  const c=document.getElementById('content');
+  if(c) c.innerHTML='<div style="padding:20px;color:#ff6b6b;font-family:monospace;font-size:11px;white-space:pre-wrap">JS ERROR:\n'+msg+'\nLine: '+line+'\n'+(err&&err.stack?err.stack:'')+'</div>';
+  return true;
+};
 // ── DATA ─────────────────────────────────────────────────────────────────────
 
 const MORNING=[
   {id:'m1',text:'GH 4IUs injection',compoundKey:'gh',note:'Fasted — very first thing before eating. Subcutaneous injection.',tag:'peptide'},
-  {id:'m_testE',text:'Testosterone Enanthate — current dose',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. Start 75mg (0.3ml). Step up whenever ready — no rush.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
+  {id:'m_testE',text:'Testosterone Enanthate — current dose',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. Starting dose 100mg = 0.4ml. Step down to 75mg (0.3ml) if estrogen symptoms appear.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
   {id:'m_hcg',text:'HCG — 500IU',compoundKey:'hcg',note:'SubQ. Maintains testicular function and LH activity while on TRT.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
   {id:'m_lcar',text:'L-Carnitine — 1g',note:'SubQ morning with other peptides. Pre-workout timing ideal on training days. Improves fat oxidation and androgen receptor sensitivity.',tag:'peptide',compoundKey:'lcarnitine'},
   {id:'m_nad',text:'NAD+ — 50mg',compoundKey:'nad',note:'SubQ. Morning timing for cellular energy and metabolism. Increase to 100mg if well tolerated.',tag:'peptide'},
@@ -220,6 +225,7 @@ const MORNING=[
     ]
   },
   {id:'sa2',text:'Timeless Vitamin C serum',note:'Apply to clean dry skin. Let absorb 1-2 min.',tag:'skin'},
+  {id:'sa_az',text:'Azelaic acid cream — face and neck',note:'The Ordinary. Morning only. After Vitamin C — brightening, tone, redness reduction.',tag:'skin'},
   {id:'sa4',text:'LRP matte moisturizer',note:'Both are LRP Toleriane Matte. SPF version when going outside · non-SPF on stay-in days.',tag:'skin'},
   {id:'sa5',text:'Aquaphor — lips',note:'Apply after skincare. Reapply throughout the day as needed.',tag:'skin'},
   {id:'om0',type:'header',text:'Oral Care AM'},
@@ -247,11 +253,9 @@ const EVENING=[
     groupNote:'See Meals tab for options',
     children:[
       {id:'e2',text:'Eat dinner',tag:'nutrition'},
-      {id:'e_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Clonidine 0.1mg',tag:'med'},
-      {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg',tag:'supp'},
-    ]
+      {id:'e_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Clonidine 0.1mg · Tadalafil 10mg',tag:'med'},
+      {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg',tag:'supp'},    ]
   },
-  {id:'e_tadalafil',text:'Tadalafil (Cialis) — 10mg',note:'Evening with dinner. Half a 20mg tablet. 36hr half-life — levels stay consistent all day after 2-3 days. Monitor BP given POTS + Clonidine + L-citrulline.',tag:'med',compoundKey:'tadalafil'},
   {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Friday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[5]},
   {id:'sp_shower',type:'group',text:'Shower',tag:'grooming',showIf:'pms_shower',
     children:[
@@ -276,7 +280,9 @@ const EVENING=[
       {id:'pms_pad',label:'Cetaphil SA pad',note:'SA cleanse on no-shower days.',hideIfChoiceActive:'sa_pad'},
     ]
   },
-  {id:'pms_az',text:'Azelaic acid cream — face and neck',note:'The Ordinary. PM only. Apply before moisturizer.',tag:'skin'},
+  {id:'pms_wait1',text:'Wait 10 min — face fully dry',note:'Completely dry before tretinoin. Damp skin = more irritation.',tag:'skin'},
+  {id:'pms_tret',text:'Tretinoin 0.05% — face / 0.1% — body',note:'Face: pea-sized 0.05%, full face, avoid eye area. Body: 0.1% on chest and back on shower nights. Daily consistency is everything.',tag:'skin'},
+  {id:'pms_wait2',text:'Wait 20 min',note:'Let tretinoin fully absorb before moisturizer.',tag:'skin'},
   {id:'pms_moist',text:'LRP Double Repair moisturizer',note:'Full face including around eyes.',tag:'skin'},
   {id:'pms_vol',text:'Volufiline',note:'Under brow, under eyes, lips.',tag:'skin'},
   {id:'pms_lash',text:'The Ordinary lash serum',note:'Lash line only.',tag:'skin'},
@@ -320,7 +326,7 @@ const TABS=[['daily','Daily'],['meals','Meals'],['stack','Stack'],['hardmax','Ha
 
 const STACK=[
   {label:'Morning',color:'#C8963C',rows:[
-    ['Testosterone Enanthate','75mg → 100 → 125 → 150 → 200mg','Every 3 days — subQ','Hormone','Primary anabolic driver · body composition · libido · musk · confidence · facial masculinization · fat redistribution'],
+    ['Testosterone Enanthate','100mg start → 125mg if tolerated (step down to 75mg if symptoms)','Every 3 days — subQ','Hormone','Primary anabolic driver · body composition · libido · musk · confidence · facial masculinization · fat redistribution'],
     ['HCG','500IU','Every 3 days — subQ','Hormone','Maintains testicular function + LH activity during TRT · prevents atrophy · preserves fertility'],
     ['Cardarine (GW501516)','10mg','Midday daily · 8 wks on / 8 wks off','Compound','Fat oxidation · endurance (PPARδ agonist) · muscle preservation · raises HDL (offsets TRT lipid impact) · anti-inflammatory. Do NOT run continuously.'],
     ['L-Carnitine','1g','Morning — subQ daily','Peptide','Fatty acid transport into mitochondria · fat oxidation · androgen receptor upregulation (synergistic with TRT) · endurance · recovery'],
@@ -459,7 +465,7 @@ function daysUntilNext(startDateStr,n){
 }
 
 const INJ_COMPOUNDS=[
-  {key:'testE',label:'Testosterone E',every:3,dose:'75mg → 100 → 125 → 150mg',color:'#C8963C'},
+  {key:'testE',label:'Testosterone E',every:3,dose:'100mg start (0.4ml) → step down to 75mg if needed',color:'#C8963C'},
   {key:'hcg',label:'HCG',every:3,dose:'500IU',color:'#5B9FC8'},
   {key:'glut',label:'Glutathione',every:2,dose:'200mg',color:'#9B7FD4'},
   {key:'tb500',label:'TB-500',every:3,dose:'2mg loading → 2mg maintenance',color:'#6ABCBC'},
@@ -473,7 +479,9 @@ function renderInjectionSchedule(){
   hd.style.cssText='padding:9px 14px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#5A5A68;border-bottom:1px solid #1A1A20';
   hd.textContent='Injection Schedule';
   wrap.appendChild(hd);
-  INJ_COMPOUNDS.forEach(c=>{
+  const activeCompounds=INJ_COMPOUNDS.filter(c=>compoundActive(c.key));
+  if(!activeCompounds.length) return wrap;
+  activeCompounds.forEach(c=>{
     const row=el('div');
     row.style.cssText='display:flex;align-items:center;padding:9px 14px;border-bottom:1px solid #111116;gap:10px';
     const dot=el('div');
@@ -526,19 +534,58 @@ const TOGGLEABLE_COMPOUNDS=[
   {key:'reta',label:'Retatrutide',defaultActive:true},
   {key:'selank',label:'Selank',defaultActive:true},
   {key:'kisspeptin',label:'Kisspeptin',defaultActive:true,note:'Pause when TRT starts — HCG replaces this'},
-  {key:'testE',label:'Testosterone Enanthate',defaultActive:false},
-  {key:'hcg',label:'HCG',defaultActive:false},
+  {key:'testE',label:'Testosterone Enanthate',defaultActive:true},
+  {key:'hcg',label:'HCG',defaultActive:true},
   {key:'tb500',label:'TB-500',defaultActive:false},
-  {key:'glut',label:'Glutathione',defaultActive:false},
+  {key:'glut',label:'Glutathione',defaultActive:true},
   {key:'lcarnitine',label:'L-Carnitine',defaultActive:false},
   {key:'card',label:'Cardarine (GW501516)',defaultActive:false,note:'8 weeks on / 8 weeks off — do not run continuously'},
-  {key:'tadalafil',label:'Tadalafil (Cialis) 10mg',defaultActive:false},
+  {key:'tadalafil',label:'Tadalafil (Cialis) 10mg',defaultActive:true},
   {key:'nad',label:'NAD+',defaultActive:false},
 ];
 
 function compoundActive(key){
   const c=TOGGLEABLE_COMPOUNDS.find(x=>x.key===key);
   return key in S.activeCompounds?S.activeCompounds[key]:(c?c.defaultActive:true);
+}
+
+const RECON=[
+  {name:'GH',vial:'24 IU',bac:'1.2ml',conc:'20 IU/ml',dose:'4 IU',draw:'20 units',timing:'Morning fasted'},
+  {name:'Testosterone E',vial:'250mg/ml (pre-mixed oil)',bac:'n/a',conc:'250mg/ml',dose:'100mg start (75mg if symptoms)',draw:'40 units (0.4ml)',timing:'Every 3 days — subQ morning or evening'},
+  {name:'CJC-1295 + Ipamorelin',vial:'10mg combined',bac:'1ml',conc:'10mg/ml',dose:'0.5mg each',draw:'10 units',timing:'Evening fasted'},
+  {name:'GHK-Cu',vial:'50mg',bac:'2.5ml',conc:'20mg/ml',dose:'2mg',draw:'10 units',timing:'Evening fasted'},
+  {name:'MT-2',vial:'10mg',bac:'1ml',conc:'10mg/ml',dose:'0.5mg',draw:'5 units',timing:'Morning daily'},
+  {name:'Selank',vial:'10mg',bac:'1ml',conc:'10mg/ml',dose:'250-500mcg',draw:'2.5-5 units',timing:'Morning M/W/F'},
+  {name:'HCG',vial:'5,000 IU',bac:'1ml',conc:'5,000 IU/ml',dose:'500 IU',draw:'10 units',timing:'Every 3 days'},
+  {name:'Glutathione',vial:'750mg',bac:'0.75ml',conc:'1,000mg/ml',dose:'200mg',draw:'20 units',timing:'Every 2 days'},
+];
+
+function renderRecon(){
+  const wrap=el('div');
+  wrap.style.cssText='margin:14px 16px 0;background:#0E0E14;border-radius:14px;overflow:hidden;border:1px solid #1C1C24';
+  const hd=el('div');
+  hd.style.cssText='padding:10px 14px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#5A5A68;border-bottom:1px solid #1A1A20;display:flex;justify-content:space-between;align-items:center';
+  hd.innerHTML='<span>Reconstitution Reference</span><span style="color:#3A3A48;font-weight:400;font-size:9px;letter-spacing:0">Insulin syringe · 100 units = 1ml</span>';
+  wrap.appendChild(hd);
+  RECON.forEach(r=>{
+    const row=el('div');
+    row.style.cssText='padding:10px 14px;border-bottom:1px solid #111118';
+    row.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+        <span style="font-size:13px;font-weight:600;color:#EFEFEF">${r.name}</span>
+        <span style="font-size:12px;font-weight:700;color:#C8963C">${r.draw}</span>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <span style="font-size:10px;color:#5A5A68">Vial: <span style="color:#8A8A98">${r.vial}</span></span>
+        <span style="font-size:10px;color:#5A5A68">BAC: <span style="color:#8A8A98">${r.bac}</span></span>
+        <span style="font-size:10px;color:#5A5A68">Conc: <span style="color:#8A8A98">${r.conc}</span></span>
+        <span style="font-size:10px;color:#5A5A68">Dose: <span style="color:#8A8A98">${r.dose}</span></span>
+      </div>
+      <div style="margin-top:3px;font-size:10px;color:#3A3A48">${r.timing}</div>
+    `;
+    wrap.appendChild(row);
+  });
+  return wrap;
 }
 
 function renderCompoundToggles(){
@@ -570,7 +617,7 @@ function renderCompoundToggles(){
 }
 
 function renderTRTTracker(){
-  const LADDER=[{dose:75,vol:'0.30'},{dose:100,vol:'0.40'},{dose:125,vol:'0.50'},{dose:150,vol:'0.60'},{dose:200,vol:'0.80'}];
+  const LADDER=[{dose:100,vol:'0.40'},{dose:125,vol:'0.50'}];
   const log=S.trtLog||[];
   const wrap=el('div');
   wrap.style.cssText='margin:16px 16px 0;background:#0E0E14;border-radius:12px;overflow:hidden;border:1px solid #1C1C24';
@@ -583,13 +630,13 @@ function renderTRTTracker(){
     ns.innerHTML='<div style="font-size:12px;color:#3A3A48;margin-bottom:12px">Not started — tap when you begin your first injection</div>';
     const btn=el('button');
     btn.style.cssText='padding:9px 18px;background:#C8963C;border:none;border-radius:10px;color:#09090B;font-size:12px;font-weight:700;cursor:pointer';
-    btn.textContent='Start at 75mg';
+    btn.textContent='Log first injection date';
     btn.onclick=()=>{
       const inp=document.createElement('input');inp.type='date';
       inp.value=new Date().toISOString().split('T')[0];
       inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:6px 10px;color:#EFEFEF;font-size:12px;display:block;margin:10px auto;width:160px';
-      inp.onchange=()=>{if(inp.value){S.trtLog=[{dose:75,vol:'0.30',date:inp.value}];save();renderContent();}};
-      ns.innerHTML='<div style="font-size:11px;color:#5A5A68;margin-bottom:8px">Select start date:</div>';
+      inp.onchange=()=>{if(inp.value){S.trtLog=[{dose:100,vol:'0.40',date:inp.value}];save();renderContent();}};
+      ns.innerHTML='<div style="font-size:11px;color:#5A5A68;margin-bottom:8px">Select your first injection date:</div>';
       ns.appendChild(inp);inp.focus();
     };
     ns.appendChild(btn);wrap.appendChild(ns);return wrap;
@@ -943,10 +990,18 @@ const PROCEDURES=[
     what:'Transfers fat from a donor site to the sub-brow and periorbital area creating volume, heaviness, and the deep-set hooded appearance associated with hunter eyes. More permanent than filler with natural feel.',
     notes:'HA filler available as a reversible lower-commitment test before committing to fat grafting. Variable fat retention — some resorption expected and may need touch-up. EDS may affect fat survival and tissue response. Seek surgeon experienced specifically in periorbital fat grafting.',
     timing:'Test with HA sub-brow filler first to preview result before committing to fat grafting.'},
-  {id:'cantho',name:'Lateral Canthoplasty',sub:'Outer Canthal Repositioning',color:'#A98FE0',
-    what:'Surgically repositions the outer corner of the eye to create a neutral to slightly downward tilt. Directly contributes to the hunter eye aesthetic alongside sub-brow volume.',
-    notes:'Irreversible — approach carefully and only after previewing fat grafting results since volume change affects how canthal position reads. Seek oculoplastic surgeon with specific canthoplasty experience. Not all patients are good candidates.',
+  {id:'cantho',name:'Lateral Canthopexy / Canthoplasty',sub:'Outer Canthal Repositioning — Upward',color:'#A98FE0',
+    what:'Repositions or supports the outer corner of the eye upward, creating the outer-higher-than-inner diagonal that defines the hunter eye appearance. Canthopexy is less invasive (supports without cutting tendon). Canthoplasty is more involved. Goal is upward tilt from neutral baseline.',
+    notes:'You are already roughly neutral — a subtle upward repositioning is the target, not downturned. Evaluate after periorbital fat grafting results since volume change affects how canthal position reads. Seek oculoplastic surgeon with specific canthoplasty experience. Irreversible — approach carefully.',
     timing:'After periorbital fat grafting results are fully established.'},
+  {id:'liplift',name:'Subnasal Lip Lift',sub:'Bullhorn Lip Lift',color:'#D4A84A',
+    what:'Shortens the philtrum (distance between nose and upper lip) by removing a small strip of skin under the nose. Increases upper lip tooth show at rest, creates the slightly elevated upper lip curl that reads as confident and masculine. No added volume — purely structural.',
+    notes:'One of the most naturally masculine lip procedures available. Conservative technique is key — over-resection creates an unnatural appearance. Seek surgeon with specific lip lift experience and a portfolio of male patients. Scar sits in the natural crease under the nose and becomes nearly invisible.',
+    timing:'Standalone — no prerequisite procedures.'},
+  {id:'cornerlift',name:'Corner of Mouth Lift',sub:'Commissuroplasty',color:'#C8963C',
+    what:'Small incisions at the corners of the mouth lift a neutral or downturned resting expression upward, creating the subtle natural slight smirk at rest. Reads as confident and sharp rather than done. No volume added.',
+    notes:'Technique-sensitive — conservative lift is undetectable, over-correction looks surgical. Often combined with lip lift for cohesive result. Complements the aesthetic goal of a naturally confident resting expression.',
+    timing:'Can be done alongside or after lip lift.'},
 ];
 
 function renderHardmax(){
@@ -1125,9 +1180,25 @@ function renderContent(){
   c.innerHTML='';
   const f=document.createDocumentFragment();
 
+  // Show import reminder if no saved data exists
+  const hasData=!!localStorage.getItem('lmx3');
+  if(!hasData){
+    const banner=el('div');
+    banner.style.cssText='margin:10px 16px;background:rgba(200,150,60,0.12);border:1px solid rgba(200,150,60,0.3);border-radius:10px;padding:10px 14px;font-size:11px;color:#C8963C;cursor:pointer';
+    banner.innerHTML='⚙ Have a previous version? <strong>Tap here to import your data</strong> — start dates, TRT log, and settings all transfer.';
+    banner.onclick=()=>openDataModal();
+    f.appendChild(banner);
+  }
+
   if(S.tab==='daily'){
     f.appendChild(renderDaySelector());
-    f.appendChild(renderInjectionSchedule());
+    // Only show injection schedule on injection days
+    const hasTodayInjection=INJ_COMPOUNDS.filter(c=>compoundActive(c.key)).some(c=>{
+      const startDate=S.injStart[c.key];
+      if(!startDate) return false;
+      return isNthDay(startDate,c.every);
+    });
+    if(hasTodayInjection) f.appendChild(renderInjectionSchedule());
 
     const liftMorning=(S.dayType==='lift'||S.dayType==='both')&&(S.liftTime||'midday')==='morning';
     const swimMorning=(S.dayType==='swim'||S.dayType==='both')&&(S.swimTime||'evening')==='morning';
@@ -1217,8 +1288,10 @@ function renderContent(){
   }
   else if(S.tab==='stack'){
     const w=el('div','stk-wrap');
+    f.appendChild(renderRecon());
     f.appendChild(renderCompoundToggles());
     f.appendChild(renderTRTTracker());
+    f.appendChild(renderInjectionSchedule());
     const pad=el('div');pad.style.height='12px';f.appendChild(pad);
     STACK.forEach(sec=>{
       const s=el('div','stk-sec');
