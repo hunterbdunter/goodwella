@@ -181,7 +181,7 @@ window.onerror=function(msg,src,line,col,err){
 
 const MORNING=[
   {id:'m1',text:'GH 4IUs injection',compoundKey:'gh',note:'Fasted — very first thing before eating. Subcutaneous injection.',tag:'peptide'},
-  {id:'m_testE',text:'Testosterone Enanthate — current dose',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. Starting dose 100mg = 0.4ml. Step down to 75mg (0.3ml) if estrogen symptoms appear.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
+  {id:'m_testE',text:'Testosterone Enanthate — 100mg',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. 40 units (0.4ml). Set start date in Stack tab after first injection.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
   {id:'m_hcg',text:'HCG — 500IU',compoundKey:'hcg',note:'SubQ. Maintains testicular function and LH activity while on TRT.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
   {id:'m_lcar',text:'L-Carnitine — 1g',note:'SubQ morning with other peptides. Pre-workout timing ideal on training days. Improves fat oxidation and androgen receptor sensitivity.',tag:'peptide',compoundKey:'lcarnitine'},
   {id:'m_nad',text:'NAD+ — 50mg',compoundKey:'nad',note:'SubQ. Morning timing for cellular energy and metabolism. Increase to 100mg if well tolerated.',tag:'peptide'},
@@ -239,7 +239,7 @@ const MIDDAY=[
   {id:'midday_grp',type:'group',text:'Smoothie',tag:'nutrition',showOnDays:[1,2,3,4,5,6],
     children:[
       {id:'d0',text:'Make smoothie',note:'See Meals tab for full recipe.',tag:'nutrition'},
-      {id:'d_supps',text:'Supplements',note:'Zinc 30mg · Daily Multi · Montelukast 10mg · Vitamin C 1,000mg · NAC 600mg · Astaxanthin 12mg · Lycopene 20mg · Quercetin Phytosome 2 caps · Lutein+Zeaxanthin 20mg/4mg · Boron 10mg',tag:'supp'},
+      {id:'d_supps',text:'Supplements',note:'Zinc 30mg · Daily Multi · Montelukast 10mg · Vitamin C 1,000mg · NAC 1,200mg (2 caps) · Astaxanthin 12mg · Lycopene 20mg · Quercetin Phytosome 2 caps · Lutein+Zeaxanthin 20mg/4mg · Boron 10mg',tag:'supp'},
     ]
   },
   {id:'d_sun',text:'Sunday — supplements with food instead',note:'Skip smoothie today. Take midday supplements with lunch or snacks. Hit protein another way — extra bacon, Premier Protein, eggs.',tag:'nutrition',showOnDays:[0]},
@@ -352,7 +352,7 @@ const STACK=[
     ['Daily Multi','As directed','With smoothie','Supplement','General micronutrient coverage and baseline support'],
     ['Montelukast','10mg','With smoothie','Medication','Leukotriene blocker — allergy + MCAS control'],
     ['Vitamin C','1,000mg','With smoothie','Supplement','Antioxidant · collagen synthesis · skin brightening · synergizes with quercetin'],
-    ['NAC','600mg','With smoothie','Supplement','Glutathione precursor · antioxidant · MCAS support · liver protection'],
+    ['NAC','1,200mg (2 caps)','With smoothie','Supplement','Glutathione precursor · antioxidant · MCAS support · liver protection · increased from 600mg to partially replace injectable glutathione'],
     ['Astaxanthin','12mg','With smoothie','Supplement','Potent antioxidant · skin photoprotection · anti-inflammatory'],
     ['Lycopene','20mg','With smoothie','Supplement','Skin photoprotection · cardiovascular · antioxidant'],
     ['Quercetin Phytosome','2 caps','With smoothie','Supplement','Mast cell stabilizer · anti-inflammatory · skin health · synergizes with Vitamin C'],
@@ -449,7 +449,9 @@ function chevSVG(up){ const d=up?'M2 8L6 4L10 8':'M2 4L6 8L10 4'; return `<svg w
 
 function isNthDay(startDateStr,n){
   if(!startDateStr) return false;
-  const start=new Date(startDateStr);const today=new Date();
+  const parts=startDateStr.split('-').map(Number);
+  const start=new Date(parts[0],parts[1]-1,parts[2]);
+  const today=new Date();
   start.setHours(0,0,0,0);today.setHours(0,0,0,0);
   const diff=Math.round((today-start)/86400000);
   return diff>=0&&diff%n===0;
@@ -457,7 +459,9 @@ function isNthDay(startDateStr,n){
 
 function daysUntilNext(startDateStr,n){
   if(!startDateStr) return null;
-  const start=new Date(startDateStr);const today=new Date();
+  const parts=startDateStr.split('-').map(Number);
+  const start=new Date(parts[0],parts[1]-1,parts[2]);
+  const today=new Date();
   start.setHours(0,0,0,0);today.setHours(0,0,0,0);
   const diff=Math.round((today-start)/86400000);
   if(diff<0) return Math.abs(diff);
@@ -497,11 +501,18 @@ function renderInjectionSchedule(){
       btn.style.cssText='padding:5px 10px;background:#111118;border:1px solid #282836;border-radius:8px;color:#5B9FC8;font-size:10px;cursor:pointer;white-space:nowrap';
       btn.textContent='Set start date';
       btn.onclick=()=>{
+        const wrap=document.createElement('div');
+        wrap.style.cssText='display:flex;align-items:center;gap:6px;flex-wrap:wrap';
         const inp=document.createElement('input');inp.type='date';
-        inp.value=new Date().toISOString().split('T')[0];
+        const now=new Date();
+        inp.value=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
         inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:5px 8px;color:#EFEFEF;font-size:11px;width:130px';
-        inp.onchange=()=>{if(inp.value){S.injStart[c.key]=inp.value;save();renderContent();}};
-        btn.replaceWith(inp);inp.focus();
+        const conf=document.createElement('button');
+        conf.textContent='Save';
+        conf.style.cssText='padding:5px 10px;background:#4A7A50;border:none;border-radius:8px;color:#fff;font-size:11px;cursor:pointer';
+        conf.onclick=()=>{if(inp.value){S.injStart[c.key]=inp.value;save();renderContent();}};
+        wrap.appendChild(inp);wrap.appendChild(conf);
+        btn.replaceWith(wrap);inp.focus();
       };
       row.appendChild(btn);
     } else {
@@ -513,11 +524,17 @@ function renderInjectionSchedule(){
       reset.style.cssText='padding:3px 7px;background:none;border:1px solid #1C1C24;border-radius:6px;color:#3A3A48;font-size:9px;cursor:pointer';
       reset.textContent='↺';
       reset.onclick=()=>{
+        const wrap=document.createElement('div');
+        wrap.style.cssText='display:flex;align-items:center;gap:6px';
         const inp=document.createElement('input');inp.type='date';
-        inp.value=S.injStart[c.key]||new Date().toISOString().split('T')[0];
-        inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:5px 8px;color:#EFEFEF;font-size:11px;width:130px';
-        inp.onchange=()=>{if(inp.value){S.injStart[c.key]=inp.value;save();renderContent();}};
-        reset.replaceWith(inp);inp.focus();
+        inp.value=S.injStart[c.key]||'';
+        inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:5px 8px;color:#EFEFEF;font-size:11px;width:120px';
+        const conf=document.createElement('button');
+        conf.textContent='Save';
+        conf.style.cssText='padding:5px 8px;background:#4A7A50;border:none;border-radius:8px;color:#fff;font-size:11px;cursor:pointer';
+        conf.onclick=()=>{if(inp.value){S.injStart[c.key]=inp.value;save();renderContent();}};
+        wrap.appendChild(inp);wrap.appendChild(conf);
+        reset.replaceWith(wrap);inp.focus();
       };
       status.appendChild(badge);status.appendChild(reset);row.appendChild(status);
     }
@@ -537,7 +554,7 @@ const TOGGLEABLE_COMPOUNDS=[
   {key:'testE',label:'Testosterone Enanthate',defaultActive:true},
   {key:'hcg',label:'HCG',defaultActive:true},
   {key:'tb500',label:'TB-500',defaultActive:false},
-  {key:'glut',label:'Glutathione',defaultActive:true},
+  {key:'glut',label:'Glutathione',defaultActive:false},
   {key:'lcarnitine',label:'L-Carnitine',defaultActive:false},
   {key:'card',label:'Cardarine (GW501516)',defaultActive:false,note:'8 weeks on / 8 weeks off — do not run continuously'},
   {key:'tadalafil',label:'Tadalafil (Cialis) 10mg',defaultActive:true},
@@ -635,9 +652,12 @@ function renderTRTTracker(){
       const inp=document.createElement('input');inp.type='date';
       inp.value=new Date().toISOString().split('T')[0];
       inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:6px 10px;color:#EFEFEF;font-size:12px;display:block;margin:10px auto;width:160px';
-      inp.onchange=()=>{if(inp.value){S.trtLog=[{dose:100,vol:'0.40',date:inp.value}];save();renderContent();}};
+      const trtConf=document.createElement('button');
+      trtConf.textContent='Confirm Start Date';
+      trtConf.style.cssText='padding:8px 14px;background:#C8963C;border:none;border-radius:10px;color:#09090B;font-size:12px;font-weight:700;cursor:pointer;margin-top:8px;display:block';
+      trtConf.onclick=()=>{if(inp.value){S.trtLog=[{dose:100,vol:'0.40',date:inp.value}];save();renderContent();}};
       ns.innerHTML='<div style="font-size:11px;color:#5A5A68;margin-bottom:8px">Select your first injection date:</div>';
-      ns.appendChild(inp);inp.focus();
+      ns.appendChild(inp);ns.appendChild(trtConf);inp.focus();
     };
     ns.appendChild(btn);wrap.appendChild(ns);return wrap;
   }
@@ -670,8 +690,13 @@ function renderTRTTracker(){
       const inp=document.createElement('input');inp.type='date';
       inp.value=new Date().toISOString().split('T')[0];
       inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:6px 10px;color:#EFEFEF;font-size:12px;width:100%;box-sizing:border-box;margin-top:8px';
-      inp.onchange=()=>{if(inp.value){S.trtLog=[...(S.trtLog||[]),{dose:next.dose,vol:next.vol,date:inp.value}];save();renderContent();}};
-      stepBtn.replaceWith(inp);inp.focus();
+      const stepConf=document.createElement('button');
+      stepConf.textContent='Confirm Step Up';
+      stepConf.style.cssText='padding:8px 14px;background:#C8963C;border:none;border-radius:10px;color:#09090B;font-size:12px;font-weight:700;cursor:pointer;margin-top:8px;display:block;width:100%';
+      stepConf.onclick=()=>{if(inp.value){S.trtLog=[...(S.trtLog||[]),{dose:next.dose,vol:next.vol,date:inp.value}];save();renderContent();}};
+      const stepWrap=document.createElement('div');
+      stepWrap.appendChild(inp);stepWrap.appendChild(stepConf);
+      stepBtn.replaceWith(stepWrap);inp.focus();
     };
     body.appendChild(stepBtn);
   } else {
@@ -696,7 +721,10 @@ function itemVisible(item){
   if(item.showOnDays&&!item.showOnDays.includes(TODAY_DOW)) return false;
   if(item.showIf&&!Object.values(S.choices).includes(item.showIf)) return false;
   if(item.showIfDayType&&!item.showIfDayType.includes(S.dayType)) return false;
-  if(item.showEveryNDays&&item.startKey) return isNthDay(S.injStart[item.startKey],item.showEveryNDays);
+  if(item.showEveryNDays&&item.startKey){
+    if(!S.injStart[item.startKey]) return true; // show as reminder if no start date set yet
+    return isNthDay(S.injStart[item.startKey],item.showEveryNDays);
+  }
   if(item.compoundKey&&!compoundActive(item.compoundKey)) return false;
   return true;
 }
