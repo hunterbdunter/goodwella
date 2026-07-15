@@ -185,7 +185,6 @@ const MORNING=[
   {id:'m_hcg',text:'HCG — 500IU',compoundKey:'hcg',note:'SubQ. Maintains testicular function and LH activity while on TRT.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
   {id:'m_lcar',text:'L-Carnitine — 1g',note:'SubQ morning with other peptides. Pre-workout timing ideal on training days. Improves fat oxidation and androgen receptor sensitivity.',tag:'peptide',compoundKey:'lcarnitine'},
   {id:'m_nad',text:'NAD+ — 50mg',compoundKey:'nad',note:'SubQ. Morning timing for cellular energy and metabolism. Increase to 100mg if well tolerated.',tag:'peptide'},
-  {id:'m_sel',text:'Selank 250-500mcg',compoundKey:'selank',note:'Mon/Wed/Fri — intranasal or subcutaneous. Anxiolytic + cognitive support. Take it early so you feel the effect during your day.',tag:'peptide',showOnDays:[1,3,5]},
   {id:'m_mt2',text:'MT2 0.5mg',compoundKey:'mt2',note:'Daily — take 2-3 hrs before sun exposure on tan days. Take with morning peptides regardless.',tag:'peptide'},
   {id:'m_nail',text:'Nail care',note:'File · cuticle oil · matte top coat. Hands get noticed, especially wearing jewelry.',tag:'grooming',showOnDays:[0]},
   {id:'m_brow',text:'Eyebrow grooming',note:'Tweeze stray hairs, tidy the shape. Keep it clean — not over-plucked.',tag:'grooming',showOnDays:[1,4]},
@@ -196,9 +195,9 @@ const MORNING=[
   {id:'m_breakfast',type:'group',text:'Breakfast',tag:'nutrition',
     groupNote:'See Meals tab for options',
     children:[
-      {id:'m_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Bupropion 300XL · Minoxidil 0.25mg · Clonidine 0.1mg',tag:'med'},
-      {id:'m_supps',text:'Morning supplements',note:'D3+K2 5,000IU · Tongkat Ali 1,000mg · Oral HA 100mg',tag:'supp'},
-      {id:'m5',text:'Liquid IV',note:'Drink within first 1-2 hrs of waking.',tag:'supp'},
+      {id:'m_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Bupropion 300mg XL · Minoxidil 0.25mg · Clonidine 0.1mg',tag:'med'},
+      {id:'m_supps',text:'Supplements',note:'D3+K2 5,000IU · Tongkat Ali 1,000mg · Oral HA 100-120mg · Epicatechin 500mg',tag:'supp'},
+      {id:'m5',text:'Liquid IV',note:'Electrolytes for POTS.',tag:'supp'},
     ]
   },
   {id:'am_shower',type:'group',text:'Shower',tag:'grooming',showIf:'sa_shower',
@@ -207,6 +206,7 @@ const MORNING=[
       {id:'am_sh1',text:'Shampoo',note:'ABBA Gentle on most days · clarifying shampoo 1-2x/week on swim days to remove chlorine.',tag:'hair'},
       {id:'am_sh2',text:'Ouai Curl Conditioner Thick',note:'Ends and mid-lengths only — never roots. Leave some in.',tag:'hair'},
       {id:'am_sh3',text:'Native citrus body wash',tag:'grooming'},
+      {id:'am_sh3b',text:'Naturium niacinamide wash — chest and back',note:'Leave on 30-60 sec before rinsing. Regulates sebum, reduces body acne. Especially important on TRT as DHT rises.',tag:'skin'},
       {id:'am_sh4',type:'header',text:'Out of Shower'},
       {id:'am_sh5',text:'Scrunch hair with microfiber towel',note:'Mostly dry, not completely.',tag:'hair'},
       {id:'am_sh6',text:'BB cream — scrunch in',note:'Small amount. Scrunch upward from ends.',tag:'hair'},
@@ -239,7 +239,7 @@ const MIDDAY=[
   {id:'midday_grp',type:'group',text:'Smoothie',tag:'nutrition',showOnDays:[1,2,3,4,5,6],
     children:[
       {id:'d0',text:'Make smoothie',note:'See Meals tab for full recipe.',tag:'nutrition'},
-      {id:'d_supps',text:'Supplements',note:'Zinc 30mg · Daily Multi · Montelukast 10mg · Vitamin C 1,000mg · NAC 1,200mg (2 caps) · Astaxanthin 12mg · Lycopene 20mg · Quercetin Phytosome 2 caps · Lutein+Zeaxanthin 20mg/4mg · Boron 10mg',tag:'supp'},
+      {id:'d_supps',text:'Supplements',note:'Zinc 30mg · Daily Multi · Montelukast 10mg · Vitamin C 1,000mg · NAC 1,200mg · Astaxanthin 12mg · Lycopene 20mg · Quercetin 2 caps · Lutein+Zeaxanthin · Boron 10mg · CDG 500mg · Epicatechin 500mg · Turkesterone 500mg · Beta-Ecdysterone 500mg',tag:'supp'},
     ]
   },
   {id:'d_sun',text:'Sunday — supplements with food instead',note:'Skip smoothie today. Take midday supplements with lunch or snacks. Hit protein another way — extra bacon, Premier Protein, eggs.',tag:'nutrition',showOnDays:[0]},
@@ -254,7 +254,7 @@ const EVENING=[
     children:[
       {id:'e2',text:'Eat dinner',tag:'nutrition'},
       {id:'e_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Clonidine 0.1mg · Tadalafil 10mg',tag:'med'},
-      {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg',tag:'supp'},    ]
+      {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg · DIM 200mg',tag:'supp'},    ]
   },
   {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Friday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[5]},
   {id:'sp_shower',type:'group',text:'Shower',tag:'grooming',showIf:'pms_shower',
@@ -263,6 +263,7 @@ const EVENING=[
       {id:'sp_s1',text:'Shampoo',note:'ABBA Gentle on most days · clarifying shampoo 1-2x/week on swim days to remove chlorine.',tag:'hair'},
       {id:'sp_s2',text:'Ouai Curl Conditioner Thick',note:'Ends and mid-lengths only. Leave some in.',tag:'hair'},
       {id:'sp_s3',text:'Native citrus body wash',tag:'grooming'},
+      {id:'sp_s3b',text:'Naturium niacinamide wash — chest and back',note:'Leave on 30-60 sec before rinsing. Regulates sebum, reduces body acne.',tag:'skin'},
       {id:'sp_s6',type:'header',text:'Out of Shower'},
       {id:'sp_s7',text:'Scrunch hair with microfiber towel',note:'Mostly dry, not completely.',tag:'hair'},
       {id:'sp_s8',text:'BB cream — scrunch in',note:'Small amount. Scrunch upward from ends.',tag:'hair'},
@@ -297,7 +298,7 @@ const EVENING=[
   {id:'e6b',text:'Remove trays → rinse mouth → brush gel off teeth',note:'Per Opalescence instructions: remove tray, rinse, then gently brush the gel off. Clean trays with cleaning tablets, rinse, put back in.',tag:'oral'},
   {id:'e_pm0',type:'header',text:'PM Injections (fasted, 2+ hrs after last meal)'},
   {id:'e_cjc',text:'CJC-1295 + Ipamorelin — 0.5mg each',compoundKey:'cjcipa',note:'Blended in same injection. SubQ pre-sleep. CJC amplifies nocturnal GH pulse · Ipamorelin adds selective GH release without cortisol spike.',tag:'peptide'},
-  {id:'e_ghkcu',text:'GHK-Cu — 2mg',compoundKey:'ghkcu',note:'SubQ pre-sleep. Skin regeneration · collagen remodeling · hair growth · anti-inflammatory.',tag:'peptide'},
+  {id:'e_ghkcu',text:'GHK-Cu — 4mg',compoundKey:'ghkcu',note:'SubQ. No fasting required — any time works. Typically with evening injections for convenience.',tag:'peptide'},
   {id:'e_tb500',text:'TB-500 — 2mg',compoundKey:'tb500',note:'Draw with 21g → inject with 27-29g subQ. Loading: every 3 days x4-6 weeks. Then once weekly maintenance.',tag:'peptide',showEveryNDays:3,startKey:'tb500'},
   {id:'e_glut',text:'Glutathione — 200mg',compoundKey:'glut',note:'SubQ. Skin brightening + systemic antioxidant. Can increase to 400mg.',tag:'peptide',showEveryNDays:2,startKey:'glut'},
   {id:'e_kisp',text:'Kisspeptin — 50-100mcg',compoundKey:'kisspeptin',note:'Mon/Wed/Fri — subcutaneous. LH + testosterone support.',tag:'peptide',showOnDays:[1,3,5]},
@@ -358,12 +359,17 @@ const STACK=[
     ['Quercetin Phytosome','2 caps','With smoothie','Supplement','Mast cell stabilizer · anti-inflammatory · skin health · synergizes with Vitamin C'],
     ['Lutein + Zeaxanthin','20mg / 4mg','With smoothie','Supplement','Eye health · visual acuity · macular protection'],
     ['Boron','10mg','With smoothie','Supplement','Free testosterone ↑ · SHBG ↓ · estrogen balance'],
+    ['Epicatechin','500mg x2 daily','Morning + midday with food','Supplement','Myostatin inhibitor · nitric oxide enhancement via eNOS · insulin sensitivity · faster recovery · fat-soluble take with food'],
+    ['Turkesterone','500mg','With smoothie','Supplement','Anabolic via estrogen receptor beta · separate pathway from TRT · lean mass · muscle hardness · no hormonal suppression'],
+    ['Beta-Ecdysterone','500mg','With smoothie','Supplement','Ecdysteroid · complements turkesterone via similar ERb pathway · muscle protein synthesis · no suppression'],
+    ['Calcium D-Glucarate','500mg','With smoothie midday','Supplement','Estrogen clearance via liver glucuronidation · prevents estrogen reabsorption · liver support on TRT'],
     ['MT2','0.5mg','Daily — 2-3 hrs before sun','Peptide','Melanin production + tanning · libido + arousal via melanocortin receptors'],
   ]},
   {label:'Evening',color:'#9B7FD4',rows:[
     ['Minocycline','50mg','With dinner','Medication','Acne + folliculitis control — second daily dose'],
     ['Allegra','180mg','With dinner','Medication','H1 antihistamine — second dose for 24hr coverage'],
     ['Clonidine','0.1mg','With dinner','Medication','Evening anxiety · sleep onset · blood pressure'],
+    ['DIM','200mg','Evening with dinner','Supplement','Promotes conversion of potent estrogens to weaker metabolites · estrogen management on TRT · fat-soluble take with food'],
     ['Fish Oil','3 softgels','Fattiest meal','Supplement','Omega-3 anti-inflammatory · cardiovascular · skin health · 2g+ EPA/DHA'],
     ['Magnesium Glycinate','240mg','With dinner','Supplement','Sleep quality · muscle relaxation · calm nervous system'],
     ['Ashwagandha','600mg','With dinner','Supplement','Cortisol ↓ · testosterone support · stress adaptation · sleep'],
@@ -372,7 +378,7 @@ const STACK=[
     ['TB-500','2mg (loading) → 2mg maintenance','Fasted, pre-sleep — 2x/week loading x4-6 wks, then 1x/week','Peptide','Systemic connective tissue remodeling · joint resilience · whole-body repair — especially important with hEDS and increasing training load'],
     ['CJC-1295','0.5mg','Fasted, pre-sleep','Peptide','GHRH analog — stimulates + amplifies natural nocturnal GH pulse'],
     ['Ipamorelin','0.5mg','Fasted, pre-sleep','Peptide','Selective GH release — pairs with CJC without cortisol or prolactin spike'],
-    ['GHK-Cu','2mg','Fasted, pre-sleep','Peptide','Skin regeneration · collagen remodeling · hair growth · anti-inflammatory'],
+    ['GHK-Cu','4mg','Evening (flexible — any time works)','Peptide','Skin regeneration · collagen remodeling · hair growth · anti-inflammatory'],
   ]},
   {label:'Weekly',color:'#D46464',rows:[
     ['Retatrutide','2mg','Friday — same day weekly','Peptide','GLP-1/GIP/glucagon triple agonist — body composition + weight stability maintenance after 1.5yr protocol'],
@@ -544,21 +550,48 @@ function renderInjectionSchedule(){
 }
 
 const TOGGLEABLE_COMPOUNDS=[
-  {key:'gh',label:'Growth Hormone (GH)',defaultActive:true},
-  {key:'cjcipa',label:'CJC-1295 + Ipamorelin',defaultActive:true},
-  {key:'ghkcu',label:'GHK-Cu',defaultActive:true},
-  {key:'mt2',label:'MT-2 (Melanotan)',defaultActive:true},
-  {key:'reta',label:'Retatrutide',defaultActive:true},
-  {key:'selank',label:'Selank',defaultActive:true},
-  {key:'kisspeptin',label:'Kisspeptin',defaultActive:true,note:'Pause when TRT starts — HCG replaces this'},
-  {key:'testE',label:'Testosterone Enanthate',defaultActive:true},
-  {key:'hcg',label:'HCG',defaultActive:true},
-  {key:'tb500',label:'TB-500',defaultActive:false},
-  {key:'glut',label:'Glutathione',defaultActive:false},
-  {key:'lcarnitine',label:'L-Carnitine',defaultActive:false},
-  {key:'card',label:'Cardarine (GW501516)',defaultActive:false,note:'8 weeks on / 8 weeks off — do not run continuously'},
-  {key:'tadalafil',label:'Tadalafil (Cialis) 10mg',defaultActive:true},
-  {key:'nad',label:'NAD+',defaultActive:false},
+  {key:'minocycline',label:'Minocycline 50mg',defaultActive:true,cat:'Medications'},
+  {key:'allegra',label:'Allegra 180mg',defaultActive:true,cat:'Medications'},
+  {key:'bupropion',label:'Bupropion 300mg XL',defaultActive:true,cat:'Medications'},
+  {key:'minoxidil',label:'Minoxidil 0.25mg (oral)',defaultActive:true,cat:'Medications'},
+  {key:'clonidine',label:'Clonidine 0.1mg',defaultActive:true,cat:'Medications'},
+  {key:'montelukast',label:'Montelukast 10mg',defaultActive:true,cat:'Medications'},
+  {key:'tadalafil',label:'Tadalafil 10mg',defaultActive:true,cat:'Medications'},
+  {key:'d3k2',label:'D3 + K2 5,000 IU',defaultActive:true,cat:'Morning Supps'},
+  {key:'tongkat',label:'Tongkat Ali 1,000mg',defaultActive:true,cat:'Morning Supps'},
+  {key:'oralha',label:'Oral HA 100-120mg',defaultActive:true,cat:'Morning Supps'},
+  {key:'liquidiv',label:'Liquid IV',defaultActive:true,cat:'Morning Supps'},
+  {key:'zinc',label:'Zinc 30mg',defaultActive:true,cat:'Midday Supps'},
+  {key:'multi',label:'Daily Multi',defaultActive:true,cat:'Midday Supps'},
+  {key:'vitc',label:'Vitamin C 1,000mg',defaultActive:true,cat:'Midday Supps'},
+  {key:'nac',label:'NAC 1,200mg',defaultActive:true,cat:'Midday Supps'},
+  {key:'astaxanthin',label:'Astaxanthin 12mg',defaultActive:true,cat:'Midday Supps'},
+  {key:'lycopene',label:'Lycopene 20mg',defaultActive:true,cat:'Midday Supps'},
+  {key:'quercetin',label:'Quercetin Phytosome',defaultActive:true,cat:'Midday Supps'},
+  {key:'lutein',label:'Lutein + Zeaxanthin',defaultActive:true,cat:'Midday Supps'},
+  {key:'boron',label:'Boron 10mg',defaultActive:true,cat:'Midday Supps'},
+  {key:'epicatechin',label:'Epicatechin 500mg x2',defaultActive:true,cat:'Morning Supps'},
+  {key:'turkesterone',label:'Turkesterone 500mg',defaultActive:true,cat:'Midday Supps'},
+  {key:'ecdysterone',label:'Beta-Ecdysterone 500mg',defaultActive:true,cat:'Midday Supps'},
+  {key:'cdg',label:'Calcium D-Glucarate 500mg',defaultActive:true,cat:'Midday Supps'},
+  {key:'dim',label:'DIM 200mg',defaultActive:true,cat:'Evening Supps'},
+  {key:'fishoil',label:'Fish Oil 3 softgels',defaultActive:true,cat:'Evening Supps'},
+  {key:'magnesium',label:'Magnesium Glycinate 240mg',defaultActive:true,cat:'Evening Supps'},
+  {key:'ashwagandha',label:'Ashwagandha 600mg',defaultActive:true,cat:'Evening Supps'},
+  {key:'gh',label:'Growth Hormone (GH)',defaultActive:true,cat:'Peptides & Injectables'},
+  {key:'mt2',label:'MT-2 (Melanotan)',defaultActive:true,cat:'Peptides & Injectables'},
+  {key:'cjcipa',label:'CJC-1295 + Ipamorelin',defaultActive:true,cat:'Peptides & Injectables'},
+  {key:'ghkcu',label:'GHK-Cu',defaultActive:true,cat:'Peptides & Injectables'},
+  {key:'testE',label:'Testosterone Enanthate',defaultActive:true,cat:'Peptides & Injectables'},
+  {key:'hcg',label:'HCG',defaultActive:true,cat:'Peptides & Injectables'},
+  {key:'kisspeptin',label:'Kisspeptin',defaultActive:true,note:'Pause when TRT starts',cat:'Peptides & Injectables'},
+  {key:'reta',label:'Retatrutide',defaultActive:true,cat:'Peptides & Injectables'},
+  {key:'selank',label:'Selank',defaultActive:false,cat:'Peptides & Injectables'},
+  {key:'tb500',label:'TB-500',defaultActive:false,cat:'Peptides & Injectables'},
+  {key:'lcarnitine',label:'L-Carnitine',defaultActive:false,cat:'Peptides & Injectables'},
+  {key:'card',label:'Cardarine (GW501516)',defaultActive:false,note:'8 wks on / 8 wks off',cat:'Peptides & Injectables'},
+  {key:'glut',label:'Glutathione',defaultActive:false,cat:'Peptides & Injectables'},
+  {key:'nad',label:'NAD+',defaultActive:false,cat:'Peptides & Injectables'},
 ];
 
 function compoundActive(key){
@@ -569,8 +602,8 @@ function compoundActive(key){
 const RECON=[
   {name:'GH',vial:'24 IU',bac:'1.2ml',conc:'20 IU/ml',dose:'4 IU',draw:'20 units',timing:'Morning fasted'},
   {name:'Testosterone E',vial:'250mg/ml (pre-mixed oil)',bac:'n/a',conc:'250mg/ml',dose:'100mg start (75mg if symptoms)',draw:'40 units (0.4ml)',timing:'Every 3 days — subQ morning or evening'},
-  {name:'CJC-1295 + Ipamorelin',vial:'10mg combined',bac:'1ml',conc:'10mg/ml',dose:'0.5mg each',draw:'10 units',timing:'Evening fasted'},
-  {name:'GHK-Cu',vial:'50mg',bac:'2.5ml',conc:'20mg/ml',dose:'2mg',draw:'10 units',timing:'Evening fasted'},
+  {name:'CJC-1295 + Ipamorelin',vial:'10mg combined',bac:'1ml',conc:'10mg/ml',dose:'0.5mg each',draw:'10 units',timing:'Evening (flexible — any time works)'},
+  {name:'GHK-Cu',vial:'50mg',bac:'2.5ml',conc:'20mg/ml',dose:'4mg',draw:'20 units',timing:'Evening fasted'},
   {name:'MT-2',vial:'10mg',bac:'1ml',conc:'10mg/ml',dose:'0.5mg',draw:'5 units',timing:'Morning daily'},
   {name:'Selank',vial:'10mg',bac:'1ml',conc:'10mg/ml',dose:'250-500mcg',draw:'2.5-5 units',timing:'Morning M/W/F'},
   {name:'HCG',vial:'5,000 IU',bac:'1ml',conc:'5,000 IU/ml',dose:'500 IU',draw:'10 units',timing:'Every 3 days'},
@@ -610,25 +643,33 @@ function renderCompoundToggles(){
   wrap.style.cssText='padding:14px 16px 4px';
   const hd=el('div');
   hd.style.cssText='font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#5A5A68;margin-bottom:10px';
-  hd.textContent='Protocol Status — toggles affect daily checklist';
+  hd.textContent='Protocol Status — tap to toggle on/off in daily checklist';
   wrap.appendChild(hd);
-  TOGGLEABLE_COMPOUNDS.forEach(c=>{
-    const isActive=compoundActive(c.key);
-    const row=el('div');
-    row.style.cssText='display:flex;align-items:center;padding:9px 0;border-bottom:1px solid #111118;gap:12px;cursor:pointer';
-    row.onclick=()=>{S.activeCompounds[c.key]=!isActive;save();renderContent();};
-    const tog=el('div');
-    tog.style.cssText=`width:38px;height:22px;border-radius:99px;background:${isActive?'#C8963C':'#1C1C24'};border:1px solid ${isActive?'#C8963C':'#282836'};position:relative;flex-shrink:0;transition:all .2s`;
-    const thumb=el('div');
-    thumb.style.cssText=`width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;${isActive?'right:2px':'left:2px'};transition:all .2s`;
-    tog.appendChild(thumb);
-    const info=el('div');info.style.flex='1';
-    info.innerHTML=`<div style="font-size:13px;color:${isActive?'#EFEFEF':'#3A3A48'}">${c.label}</div>${c.note?`<div style="font-size:10px;color:#3A3A48;margin-top:1px">${c.note}</div>`:''}`;
-    const badge=el('div');
-    badge.style.cssText=`font-size:10px;font-weight:600;color:${isActive?'#4A7A50':'#3A3A48'}`;
-    badge.textContent=isActive?'Active':'Inactive';
-    row.appendChild(tog);row.appendChild(info);row.appendChild(badge);
-    wrap.appendChild(row);
+  const cats={};
+  TOGGLEABLE_COMPOUNDS.forEach(c=>{const cat=c.cat||'Other';if(!cats[cat])cats[cat]=[];cats[cat].push(c);});
+  Object.entries(cats).forEach(([catName,compounds])=>{
+    const catHd=el('div');
+    catHd.style.cssText='font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#3A3A48;margin-top:14px;margin-bottom:4px;padding-bottom:4px;border-bottom:1px solid #1A1A20';
+    catHd.textContent=catName;
+    wrap.appendChild(catHd);
+    compounds.forEach(c=>{
+      const isActive=compoundActive(c.key);
+      const row=el('div');
+      row.style.cssText='display:flex;align-items:center;padding:8px 0;border-bottom:1px solid #111118;gap:12px;cursor:pointer';
+      row.onclick=()=>{S.activeCompounds[c.key]=!isActive;save();renderContent();};
+      const tog=el('div');
+      tog.style.cssText=`width:38px;height:22px;border-radius:99px;background:${isActive?'#C8963C':'#1C1C24'};border:1px solid ${isActive?'#C8963C':'#282836'};position:relative;flex-shrink:0;transition:all .2s`;
+      const thumb=el('div');
+      thumb.style.cssText=`width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;${isActive?'right:2px':'left:2px'};transition:all .2s`;
+      tog.appendChild(thumb);
+      const info=el('div');info.style.flex='1';
+      info.innerHTML=`<div style="font-size:12px;color:${isActive?'#EFEFEF':'#3A3A48'}">${c.label}</div>${c.note?`<div style="font-size:10px;color:#3A3A48;margin-top:1px">${c.note}</div>`:''}`;
+      const badge=el('div');
+      badge.style.cssText=`font-size:10px;font-weight:600;color:${isActive?'#4A7A50':'#3A3A48'}`;
+      badge.textContent=isActive?'On':'Off';
+      row.appendChild(tog);row.appendChild(info);row.appendChild(badge);
+      wrap.appendChild(row);
+    });
   });
   return wrap;
 }
@@ -721,11 +762,11 @@ function itemVisible(item){
   if(item.showOnDays&&!item.showOnDays.includes(TODAY_DOW)) return false;
   if(item.showIf&&!Object.values(S.choices).includes(item.showIf)) return false;
   if(item.showIfDayType&&!item.showIfDayType.includes(S.dayType)) return false;
+  if(item.compoundKey&&!compoundActive(item.compoundKey)) return false;
   if(item.showEveryNDays&&item.startKey){
-    if(!S.injStart[item.startKey]) return true; // show as reminder if no start date set yet
+    if(!S.injStart[item.startKey]) return true;
     return isNthDay(S.injStart[item.startKey],item.showEveryNDays);
   }
-  if(item.compoundKey&&!compoundActive(item.compoundKey)) return false;
   return true;
 }
 
@@ -922,7 +963,7 @@ function makeGroup(item){
         sh.style.cssText='padding:7px 12px 3px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#3A3A48;border-top:1px solid #131318;margin-top:2px';
         sh.textContent=child.text;
         cw.appendChild(sh);
-      } else cw.appendChild(makeCheckRow(child));
+      } else if(itemVisible(child)) cw.appendChild(makeCheckRow(child));
     });
     wrap.appendChild(cw);
   }
