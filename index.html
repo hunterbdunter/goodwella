@@ -191,11 +191,11 @@ const MORNING=[
   {id:'m_tint',text:'Eyebrow + lash tint check',note:'Check if color is fading. Redye if getting too light — maintaining contrast is the whole point.',tag:'grooming',showOnDays:[0]},
   {id:'m6',text:'10 min bright light',note:'Step outside OR use the 10,000 lux lamp — both work equally well. Lamp may be better on overcast Washington mornings. First thing while still fasted.',tag:'sleep'},
   {id:'m_mastic',text:'Mastic gum — 10-20 min',note:'Builds masseter definition over time. Chew consistently for jaw masculinization. Hard resin — start slow if jaw gets sore.',tag:'grooming'},
-  {id:'m_water',text:'Drink full Hydro Flask #1 + ¼ tsp salt',note:'32oz — add ¼ tsp salt for sodium, plasma volume, and POTS management. Critical for vascularity.',tag:'supp'},
+  {id:'m_water',text:'Drink full Hydro Flask #1',note:'32oz — critical for POTS and hydration. Add Liquid IV.',tag:'supp'},
   {id:'m_breakfast',type:'group',text:'Breakfast',tag:'nutrition',
     groupNote:'See Meals tab for options',
     children:[
-      {id:'m_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Bupropion 300mg XL · Minoxidil 0.25mg · Clonidine 0.1mg',tag:'med'},
+      {id:'m_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Bupropion 300mg XL · Minoxidil 0.25mg · Clonidine 0.1mg · Tadalafil 20mg',tag:'med'},
       {id:'m_supps',text:'Supplements',note:'D3+K2 5,000IU · Tongkat Ali 1,000mg · Oral HA 100-120mg · Epicatechin 500mg',tag:'supp'},
       {id:'m5',text:'Liquid IV',note:'Electrolytes for POTS.',tag:'supp'},
     ]
@@ -253,7 +253,7 @@ const EVENING=[
     groupNote:'See Meals tab for options',
     children:[
       {id:'e2',text:'Eat dinner',tag:'nutrition'},
-      {id:'e_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Clonidine 0.1mg · Tadalafil 10mg',tag:'med'},
+      {id:'e_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Clonidine 0.1mg',tag:'med'},
       {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg · DIM 200mg',tag:'supp'},    ]
   },
   {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Friday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[5]},
@@ -329,15 +329,15 @@ const STACK=[
   {label:'Morning',color:'#C8963C',rows:[
     ['Testosterone Enanthate','100mg start → 125mg if tolerated (step down to 75mg if symptoms)','Every 3 days — subQ','Hormone','Primary anabolic driver · body composition · libido · musk · confidence · facial masculinization · fat redistribution'],
     ['HCG','500IU','Every 3 days — subQ','Hormone','Maintains testicular function + LH activity during TRT · prevents atrophy · preserves fertility'],
-    ['Cardarine (GW501516)','10mg','Midday daily · 8 wks on / 8 wks off','Compound','Fat oxidation · endurance (PPARδ agonist) · muscle preservation · raises HDL (offsets TRT lipid impact) · anti-inflammatory. Do NOT run continuously.'],
-    ['L-Carnitine','1g','Morning — subQ daily','Peptide','Fatty acid transport into mitochondria · fat oxidation · androgen receptor upregulation (synergistic with TRT) · endurance · recovery'],
-    ['NAD+','50mg','Morning — subQ daily','Peptide','Cellular energy production · DNA repair · mitochondrial function · recovery · longevity'],
     ['GH','4 IUs','Fasted, first','Peptide','Body composition · fat loss · skin quality · recovery · sleep depth'],
     ['Minocycline','50mg','With breakfast','Medication','Acne + folliculitis control — dermatologist prescribed'],
     ['Allegra','180mg','With breakfast','Medication','H1 antihistamine — allergies + MCAS histamine control'],
     ['Bupropion','300mg XL','With breakfast','Medication','ADHD · mood · energy via dopamine + norepinephrine'],
     ['Minoxidil','0.25mg','With breakfast','Medication','Hair growth — oral micro-dose protocol'],
+    ['Oxandrolone (Anavar)','10mg daily','Morning with breakfast','Medication','Mild anabolic · clean dry strength gains · lean mass · connective tissue collagen synthesis · no water retention · run with TUDCA · cycle 8-12 weeks'],
+    ['Low Dose Naltrexone (LDN)','1.5-4.5mg','Before bed — titrate up over 4-6 weeks','Medication','Neuroinflammation reduction · EDS pain · MCAS mast cell modulation · immune regulation · sleep quality · mood stability'],
     ['Clonidine','0.1mg','With breakfast','Medication','Anxiety reduction · blood pressure · calm nervous system'],
+    ['Tadalafil (Cialis)','20mg','With breakfast','Medication','PDE5 inhibitor · daytime vasodilation · cardiovascular endothelial benefit · peak vascularity during the day · monitor BP given POTS + Clonidine + L-citrulline'],
     ['D3 + K2','5,000 IU','With breakfast','Supplement','Testosterone support · immunity · bone health · mood'],
     ['Tongkat Ali','1,000mg','With breakfast','Supplement','Free testosterone ↑ · SHBG ↓ · libido · LH stimulation'],
     ['Oral HA','100-120mg','With breakfast','Supplement','Skin hydration + elasticity from the inside'],
@@ -359,8 +359,9 @@ const STACK=[
     ['Quercetin Phytosome','2 caps','With smoothie','Supplement','Mast cell stabilizer · anti-inflammatory · skin health · synergizes with Vitamin C'],
     ['Lutein + Zeaxanthin','20mg / 4mg','With smoothie','Supplement','Eye health · visual acuity · macular protection'],
     ['Boron','10mg','With smoothie','Supplement','Free testosterone ↑ · SHBG ↓ · estrogen balance'],
-    ['Epicatechin','500mg x2 daily','Morning + midday with food','Supplement','Myostatin inhibitor · nitric oxide enhancement via eNOS · insulin sensitivity · faster recovery · fat-soluble take with food'],
+    ['Epicatechin','500mg','Morning with breakfast — first dose','Supplement','Myostatin inhibitor · nitric oxide via eNOS · insulin sensitivity · faster recovery · fat-soluble take with food'],
     ['Turkesterone','500mg','With smoothie','Supplement','Anabolic via estrogen receptor beta · separate pathway from TRT · lean mass · muscle hardness · no hormonal suppression'],
+    ['Epicatechin','500mg','With smoothie — second dose','Supplement','Second daily dose. Myostatin inhibition maintained throughout day with split dosing.'],
     ['Beta-Ecdysterone','500mg','With smoothie','Supplement','Ecdysteroid · complements turkesterone via similar ERb pathway · muscle protein synthesis · no suppression'],
     ['Calcium D-Glucarate','500mg','With smoothie midday','Supplement','Estrogen clearance via liver glucuronidation · prevents estrogen reabsorption · liver support on TRT'],
     ['MT2','0.5mg','Daily — 2-3 hrs before sun','Peptide','Melanin production + tanning · libido + arousal via melanocortin receptors'],
@@ -373,9 +374,6 @@ const STACK=[
     ['Fish Oil','3 softgels','Fattiest meal','Supplement','Omega-3 anti-inflammatory · cardiovascular · skin health · 2g+ EPA/DHA'],
     ['Magnesium Glycinate','240mg','With dinner','Supplement','Sleep quality · muscle relaxation · calm nervous system'],
     ['Ashwagandha','600mg','With dinner','Supplement','Cortisol ↓ · testosterone support · stress adaptation · sleep'],
-    ['Tadalafil (Cialis)','10mg daily','Evening with dinner','Medication','PDE5 inhibitor · consistent baseline vasodilation · cardiovascular endothelial benefit · stable plasma levels within 2-3 days · monitor BP given POTS + Clonidine + L-citrulline'],
-    ['Glutathione','200mg','Every 2 days — subQ evening','Peptide','Skin brightening + evenness · systemic antioxidant · liver support given supplement load'],
-    ['TB-500','2mg (loading) → 2mg maintenance','Fasted, pre-sleep — 2x/week loading x4-6 wks, then 1x/week','Peptide','Systemic connective tissue remodeling · joint resilience · whole-body repair — especially important with hEDS and increasing training load'],
     ['CJC-1295','0.5mg','Fasted, pre-sleep','Peptide','GHRH analog — stimulates + amplifies natural nocturnal GH pulse'],
     ['Ipamorelin','0.5mg','Fasted, pre-sleep','Peptide','Selective GH release — pairs with CJC without cortisol or prolactin spike'],
     ['GHK-Cu','4mg','Evening (flexible — any time works)','Peptide','Skin regeneration · collagen remodeling · hair growth · anti-inflammatory'],
@@ -383,9 +381,14 @@ const STACK=[
   {label:'Weekly',color:'#D46464',rows:[
     ['Retatrutide','2mg','Friday — same day weekly','Peptide','GLP-1/GIP/glucagon triple agonist — body composition + weight stability maintenance after 1.5yr protocol'],
   ]},
-  {label:'Mon / Wed / Fri',color:'#A98FE0',rows:[
-    ['Kisspeptin','50-100mcg','Evening injection (M/W/F)','Peptide','LH stimulation → testosterone production · important since stopping dutasteride'],
-    ['Selank','250-500mcg','Morning injection (M/W/F)','Peptide','Anxiolytic + nootropic · ADHD cognitive support · complements Clonidine'],
+  {label:'Not Currently Using',color:'#282836',rows:[
+    ['Kisspeptin','\u2014','Paused','Peptide','Paused on TRT — HCG replaces LH stimulation'],
+    ['Selank','\u2014','Removed','Peptide','Removed — insufficient benefit to justify injection'],
+    ['TB-500','\u2014','Pending','Peptide','Toggle on when ready — systemic connective tissue remodeling'],
+    ['Glutathione','\u2014','Inactive','Peptide','Replaced by NAC 1,200mg — toggle on if reconsidering'],
+    ['NAD+','\u2014','Inactive','Peptide','Too many injections at current load — revisit later'],
+    ['Cardarine','\u2014','Inactive — 8 wks on/off','Compound','Toggle on when starting a cycle — do not run continuously'],
+    ['L-Carnitine','\u2014','Pending source','Peptide','Toggle on when sourced — 3g oral or 1g injectable'],
   ]},
 ];
 
@@ -433,6 +436,9 @@ function load(){
     if(d.procStatus) S.procStatus=d.procStatus;
     if(d.metrics) S.metrics=d.metrics;
   }catch(e){}
+  // Hardcode TRT and HCG start dates - July 4, 2026
+  if(!S.injStart['testE']) S.injStart['testE']='2026-07-04';
+  if(!S.injStart['hcg']) S.injStart['hcg']='2026-07-04';
 }
 
 function save(){
@@ -605,7 +611,6 @@ const RECON=[
   {name:'CJC-1295 + Ipamorelin',vial:'10mg combined',bac:'1ml',conc:'10mg/ml',dose:'0.5mg each',draw:'10 units',timing:'Evening (flexible — any time works)'},
   {name:'GHK-Cu',vial:'50mg',bac:'2.5ml',conc:'20mg/ml',dose:'4mg',draw:'20 units',timing:'Evening fasted'},
   {name:'MT-2',vial:'10mg',bac:'1ml',conc:'10mg/ml',dose:'0.5mg',draw:'5 units',timing:'Morning daily'},
-  {name:'Selank',vial:'10mg',bac:'1ml',conc:'10mg/ml',dose:'250-500mcg',draw:'2.5-5 units',timing:'Morning M/W/F'},
   {name:'HCG',vial:'5,000 IU',bac:'1ml',conc:'5,000 IU/ml',dose:'500 IU',draw:'10 units',timing:'Every 3 days'},
   {name:'Glutathione',vial:'750mg',bac:'0.75ml',conc:'1,000mg/ml',dose:'200mg',draw:'20 units',timing:'Every 2 days'},
 ];
@@ -675,88 +680,28 @@ function renderCompoundToggles(){
 }
 
 function renderTRTTracker(){
-  const LADDER=[{dose:100,vol:'0.40'},{dose:125,vol:'0.50'}];
-  const log=S.trtLog||[];
   const wrap=el('div');
   wrap.style.cssText='margin:16px 16px 0;background:#0E0E14;border-radius:12px;overflow:hidden;border:1px solid #1C1C24';
   const hd=el('div');
   hd.style.cssText='padding:10px 14px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#C8963C;border-bottom:1px solid #1A1A20';
-  hd.textContent='TRT Titration Tracker';
+  hd.textContent='TRT — Days Active';
   wrap.appendChild(hd);
-  if(!log.length){
-    const ns=el('div');ns.style.cssText='padding:16px;text-align:center';
-    ns.innerHTML='<div style="font-size:12px;color:#3A3A48;margin-bottom:12px">Not started — tap when you begin your first injection</div>';
-    const btn=el('button');
-    btn.style.cssText='padding:9px 18px;background:#C8963C;border:none;border-radius:10px;color:#09090B;font-size:12px;font-weight:700;cursor:pointer';
-    btn.textContent='Log first injection date';
-    btn.onclick=()=>{
-      const inp=document.createElement('input');inp.type='date';
-      inp.value=new Date().toISOString().split('T')[0];
-      inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:6px 10px;color:#EFEFEF;font-size:12px;display:block;margin:10px auto;width:160px';
-      const trtConf=document.createElement('button');
-      trtConf.textContent='Confirm Start Date';
-      trtConf.style.cssText='padding:8px 14px;background:#C8963C;border:none;border-radius:10px;color:#09090B;font-size:12px;font-weight:700;cursor:pointer;margin-top:8px;display:block';
-      trtConf.onclick=()=>{if(inp.value){S.trtLog=[{dose:100,vol:'0.40',date:inp.value}];save();renderContent();}};
-      ns.innerHTML='<div style="font-size:11px;color:#5A5A68;margin-bottom:8px">Select your first injection date:</div>';
-      ns.appendChild(inp);ns.appendChild(trtConf);inp.focus();
-    };
-    ns.appendChild(btn);wrap.appendChild(ns);return wrap;
-  }
-  const cur=log[log.length-1];
-  const today=new Date();today.setHours(0,0,0,0);
-  const startD=new Date(cur.date);startD.setHours(0,0,0,0);
-  const daysAt=Math.max(0,Math.round((today-startD)/86400000));
-  const pct=Math.min(100,Math.round(daysAt/28*100));
-  const ready=daysAt>=28;
-  const curIdx=LADDER.findIndex(l=>l.dose===cur.dose);
-  const next=curIdx<LADDER.length-1?LADDER[curIdx+1]:null;
-  const body=el('div');body.style.cssText='padding:14px';
-  const dRow=el('div');
-  dRow.style.cssText='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px';
-  dRow.innerHTML=`<div><div style="font-size:22px;font-weight:700;color:#C8963C">${cur.dose}mg</div><div style="font-size:10px;color:#3A3A48">${cur.vol}ml · every 3 days · ~${Math.round(cur.dose/3*7)}mg/week</div></div><div style="text-align:right"><div style="font-size:16px;color:#EFEFEF;font-weight:600">Day ${daysAt}</div><div style="font-size:10px;color:#3A3A48">of 28 minimum</div></div>`;
-  body.appendChild(dRow);
-  const pbWrap=el('div');pbWrap.style.cssText='background:#111118;border-radius:99px;height:7px;margin-bottom:6px;overflow:hidden';
-  const pb=el('div');pb.style.cssText=`height:100%;border-radius:99px;background:${ready?'#4A7A50':'#C8963C'};width:${pct}%;transition:width .3s`;
-  pbWrap.appendChild(pb);body.appendChild(pbWrap);
-  const pbLbl=el('div');
-  pbLbl.style.cssText=`font-size:10px;color:${ready?'#4A7A50':'#5A5A68'};margin-bottom:14px`;
-  pbLbl.textContent=ready?'✓ Minimum window reached — step up when ready':`${28-daysAt} days until minimum window`;
-  body.appendChild(pbLbl);
-  if(next){
-    const stepBtn=el('button');
-    stepBtn.style.cssText=`width:100%;padding:11px;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;background:${ready?'#C8963C':'#1C1C24'};color:${ready?'#09090B':'#5A5A68'}`;
-    stepBtn.textContent=`Step up to ${next.dose}mg (${next.vol}ml)`;
-    stepBtn.onclick=()=>{
-      if(!ready){const ok=confirm(`Only ${daysAt}/28 days at current dose. Step up early?`);if(!ok)return;}
-      const inp=document.createElement('input');inp.type='date';
-      inp.value=new Date().toISOString().split('T')[0];
-      inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:6px 10px;color:#EFEFEF;font-size:12px;width:100%;box-sizing:border-box;margin-top:8px';
-      const stepConf=document.createElement('button');
-      stepConf.textContent='Confirm Step Up';
-      stepConf.style.cssText='padding:8px 14px;background:#C8963C;border:none;border-radius:10px;color:#09090B;font-size:12px;font-weight:700;cursor:pointer;margin-top:8px;display:block;width:100%';
-      stepConf.onclick=()=>{if(inp.value){S.trtLog=[...(S.trtLog||[]),{dose:next.dose,vol:next.vol,date:inp.value}];save();renderContent();}};
-      const stepWrap=document.createElement('div');
-      stepWrap.appendChild(inp);stepWrap.appendChild(stepConf);
-      stepBtn.replaceWith(stepWrap);inp.focus();
-    };
-    body.appendChild(stepBtn);
-  } else {
-    const mx=el('div');mx.style.cssText='text-align:center;font-size:12px;color:#4A7A50;padding:8px 0;font-weight:600';
-    mx.textContent='✓ At maximum dose (200mg)';body.appendChild(mx);
-  }
+  const body=el('div');body.style.cssText='padding:16px;text-align:center';
+  const startD=new Date(2026,6,4);
+  const today=new Date();today.setHours(0,0,0,0);startD.setHours(0,0,0,0);
+  const days=Math.max(0,Math.round((today-startD)/86400000));
+  const weeks=Math.floor(days/7);
+  const rem=days%7;
+  body.innerHTML=`
+    <div style="font-size:48px;font-weight:700;color:#C8963C;line-height:1">${days}</div>
+    <div style="font-size:12px;color:#5A5A68;margin-top:4px;margin-bottom:16px">days on TRT · started July 4, 2026</div>
+    <div style="font-size:13px;color:#8A8A98">${weeks} week${weeks!==1?'s':''} ${rem>0?`+ ${rem} day${rem!==1?'s':''}`:'exactly'}</div>
+    <div style="font-size:11px;color:#3A3A48;margin-top:12px">100mg Testosterone Enanthate · every 3 days · subQ or IM vastus lateralis</div>
+  `;
   wrap.appendChild(body);
-  if(log.length>1){
-    const hh=el('div');hh.style.cssText='padding:8px 14px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#3A3A48;border-top:1px solid #111118';
-    hh.textContent='History';wrap.appendChild(hh);
-    [...log].reverse().slice(1).forEach(e=>{
-      const r=el('div');r.style.cssText='padding:7px 14px;font-size:11px;color:#3A3A48;border-top:1px solid #0A0A10;display:flex;justify-content:space-between';
-      const d=new Date(e.date);
-      r.innerHTML=`<span>${e.dose}mg (${e.vol}ml)</span><span>${d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</span>`;
-      wrap.appendChild(r);
-    });
-  }
   return wrap;
 }
+
 
 function itemVisible(item){
   if(item.showOnDays&&!item.showOnDays.includes(TODAY_DOW)) return false;
