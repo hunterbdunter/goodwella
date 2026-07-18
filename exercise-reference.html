@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercise Reference</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --surface: #18181f;
+    --surface2: #22222c;
+    --border: #2e2e3a;
+    --accent: #a78bfa;
+    --green: #34d399;
+    --amber: #fbbf24;
+    --red: #f87171;
+    --blue: #60a5fa;
+    --pink: #f472b6;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --push: #f97316;
+    --pull: #60a5fa;
+    --legs: #34d399;
+    --cardio: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+  .subtitle { color: var(--muted); font-size: 12px; margin-bottom: 18px; }
+
+  /* ── ROTATION TRACKER ── */
+  .rotation-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 18px;
+  }
+  .rotation-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .rotation-slots {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .slot {
+    flex: 1;
+    min-width: 70px;
+    padding: 8px 4px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    transition: all 0.2s;
+    position: relative;
+  }
+  .slot .slot-icon { font-size: 16px; display: block; margin-bottom: 2px; }
+  .slot .slot-name { display: block; }
+  .slot.done {
+    border-color: var(--border);
+    opacity: 0.4;
+    text-decoration: line-through;
+  }
+  .slot.current {
+    border-color: currentColor;
+    background: var(--surface2);
+    transform: scale(1.04);
+  }
+  .slot.push-slot.current { color: var(--push); border-color: var(--push); }
+  .slot.pull-slot.current { color: var(--pull); border-color: var(--pull); }
+  .slot.legs-slot.current { color: var(--legs); border-color: var(--legs); }
+  .slot.cardio-slot.current { color: var(--cardio); border-color: var(--cardio); }
+  .slot.done.push-slot { border-color: var(--push); opacity: 0.3; }
+  .slot.done.pull-slot { border-color: var(--pull); opacity: 0.3; }
+  .slot.done.legs-slot { border-color: var(--legs); opacity: 0.3; }
+  .slot.done.cardio-slot { border-color: var(--cardio); opacity: 0.3; }
+
+  .rotation-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .next-label {
+    font-size: 12px;
+    color: var(--muted);
+    flex: 1;
+  }
+  .next-label strong { color: var(--text); }
+  .done-btn {
+    padding: 7px 16px;
+    border-radius: 8px;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .done-btn:hover { opacity: 0.85; }
+  .reset-rotation {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .reset-rotation:hover { border-color: var(--red); color: var(--red); }
+
+  /* cardio note */
+  .cardio-note {
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(167,139,250,0.07);
+    border: 1px solid rgba(167,139,250,0.15);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+  .cardio-note strong { color: var(--cardio); }
+
+  /* ── TABS ── */
+  .tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+  .tab {
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.15s;
+  }
+  .tab:hover { border-color: var(--accent); color: var(--text); }
+  .tab.push.active { background: var(--push); border-color: var(--push); color: #fff; }
+  .tab.pull.active { background: var(--pull); border-color: var(--pull); color: #fff; }
+  .tab.legs.active { background: var(--legs); border-color: var(--legs); color: #0f0f13; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── COUNTER ── */
+  .counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background: var(--surface2);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .counter-label { color: var(--muted); font-size: 12px; flex: 1; }
+  .counter-num { font-weight: 700; font-size: 18px; }
+  .counter-slash { color: var(--muted); }
+  .counter-max { color: var(--muted); font-size: 14px; }
+  .push-col { color: var(--push); }
+  .pull-col { color: var(--pull); }
+  .legs-col { color: var(--legs); }
+  .reset-btn {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .reset-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── NOTE BOX ── */
+  .note {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 10px 12px;
+    background: var(--surface);
+    border-radius: 8px;
+    border-left: 3px solid var(--border);
+    margin-bottom: 14px;
+  }
+
+  /* ── MUSCLE GROUP ── */
+  .muscle-group { margin-bottom: 18px; }
+  .muscle-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .exercise-grid { display: flex; flex-direction: column; gap: 4px; }
+
+  /* ── EXERCISE CARD ── */
+  .exercise {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .exercise:hover { border-color: var(--accent); }
+  .check {
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    transition: all 0.15s;
+  }
+  .ex-content { flex: 1; }
+  .ex-row { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+  .ex-name { font-weight: 600; font-size: 13px; }
+  .ex-detail { font-size: 11px; color: var(--muted); }
+  .star-tag {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 700;
+    background: rgba(251,191,36,0.13);
+    color: var(--amber);
+    white-space: nowrap;
+  }
+
+  /* selected states */
+  .push-ex.selected { background: rgba(249,115,22,0.08); border-color: var(--push); }
+  .push-ex.selected .check { background: var(--push); border-color: var(--push); color: #fff; }
+  .pull-ex.selected { background: rgba(96,165,250,0.08); border-color: var(--pull); }
+  .pull-ex.selected .check { background: var(--pull); border-color: var(--pull); color: #fff; }
+  .legs-ex.selected { background: rgba(52,211,153,0.08); border-color: var(--legs); }
+  .legs-ex.selected .check { background: var(--legs); border-color: var(--legs); color: #0f0f13; }
+
+  /* ── FINISHER ── */
+  .finisher {
+    margin-top: 24px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  .finisher-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--pink);
+    margin-bottom: 4px;
+  }
+  .finisher-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .finisher-grid { display: flex; flex-direction: column; gap: 4px; }
+  .fin-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .fin-check {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--pink);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .fin-item.fin-done .fin-check {
+    background: var(--pink);
+    color: #fff;
+  }
+  .fin-item.fin-done .fin-name { opacity: 0.5; text-decoration: line-through; }
+  .fin-name { font-weight: 600; font-size: 12px; }
+  .fin-detail { font-size: 11px; color: var(--muted); }
+  .fin-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 10px 0 6px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Exercise Reference</h1>
+<div class="subtitle">Pick 6 per session · Rotate variety each time · Finisher every lift day</div>
+
+<!-- ═══════════════════════════════════
+     ROTATION TRACKER
+════════════════════════════════════ -->
+<div class="rotation-wrap">
+  <div class="rotation-label">Your Rotation</div>
+  <div class="rotation-slots" id="slots"></div>
+  <div class="rotation-bottom">
+    <div class="next-label" id="next-label">Loading…</div>
+    <button class="reset-rotation" onclick="resetRotation()">↺ Reset</button>
+    <button class="done-btn" onclick="markDone()">Mark Done →</button>
+  </div>
+  <div class="cardio-note" id="cardio-note" style="display:none;">
+    <strong>Cardio day.</strong> 20–30 min, moderate pace (you should be able to hold a conversation).
+    Best options: <strong>Pool</strong> or <strong>Stationary Bike</strong> — lowest joint stress, best for EDS.
+    Elliptical is good backup. Treadmill last resort (walk only, slight incline).
+    On GLP-1 your hunger is blunted — make sure you actually eat today.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     TABS
+════════════════════════════════════ -->
+<div class="tabs">
+  <div class="tab push active" onclick="switchTab('push')">💪 Push</div>
+  <div class="tab pull" onclick="switchTab('pull')">🔙 Pull</div>
+  <div class="tab legs" onclick="switchTab('legs')">🦵 Legs</div>
+</div>
+
+<!-- ═══════════════════════════════════
+     PUSH
+════════════════════════════════════ -->
+<div class="section active" id="tab-push">
+  <div class="note">Pick 6. ⭐ Start Here = highest aesthetic payoff for your goals — always include these when unsure. Slow eccentric (3–4 sec down). Never lock out elbows.</div>
+  <div class="counter">
+    <span class="counter-label">Selected for today</span>
+    <span class="counter-num push-col" id="push-count">0</span>
+    <span class="counter-slash">/</span>
+    <span class="counter-max">6</span>
+    <button class="reset-btn" onclick="resetSection('push')">Reset</button>
+  </div>
+
+  <div class="muscle-group">
+    <div class="muscle-label">Chest</div>
+    <div class="exercise-grid">
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Incline Press</span><span class="star-tag">⭐ Start Here</span></div>
+          <div class="ex-detail">3×10–12 · Prop on pillows/couch at ~30–45°. Upper chest is the biggest visual gap in your physique right now — prioritize this every push day.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Floor Press</span></div>
+          <div class="ex-detail">3×10–12 · Flat chest press from the floor. Eliminates shoulder hyperextension at the bottom — EDS safe. Good heavy chest volume.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Chest Fly (Floor)</span></div>
+          <div class="ex-detail">3×12–15 · Arms slightly bent, stop at 90° — don't let elbows drop below your torso. Squeeze hard at the top. Chest shape and inner detail.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Pullover</span></div>
+          <div class="ex-detail">3×12 · Lying on floor, single DB overhead arc. Hits chest + serratus + long head of lats in one — underrated multi-muscle aesthetic compound.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Wide Push-Up</span></div>
+          <div class="ex-detail">3×12–20 · Bodyweight or elevate hands on couch. Wide grip = outer chest. Can drape band across your back for added resistance.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Band Chest Fly</span></div>
+          <div class="ex-detail">3×15–20 · Anchor band behind you at chest height, fly arms together. Constant tension the whole rep — great chest pump and activation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="muscle-group">
+    <div class="muscle-label">Shoulders</div>
+    <div class="exercise-grid">
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Lateral Raise</span><span class="star-tag">⭐ Start Here</span></div>
+          <div class="ex-detail">3×15–20 · Most important shoulder exercise for aesthetics. Creates width and shoulder-to-waist ratio. Slight forward tilt, lead with elbows, don't shrug.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Seated DB Overhead Press</span></div>
+          <div class="ex-detail">3×10–12 · Seated on floor or firm surface. Stop just before lockout. Overall shoulder mass builder.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Arnold Press</span></div>
+          <div class="ex-detail">3×10–12 · Start palms facing you, rotate as you press overhead. Hits all three delt heads — good variety from standard OHP.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Pike Push-Up</span></div>
+          <div class="ex-detail">3×10–15 · Hips high, hands shoulder-width, lower head toward floor. Shoulder dominant. Good bodyweight OHP alternative.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Front Raise</span></div>
+          <div class="ex-detail">3×12–15 · Anterior delt. Rotate in occasionally — OHP already covers most of this, so don't do both on the same day.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="muscle-group">
+    <div class="muscle-label">Triceps</div>
+    <div class="exercise-grid">
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Band Tricep Pushdown</span></div>
+          <div class="ex-detail">3×20 · Anchor band at top of door, elbows pinned to sides. Low joint stress, great pump, easy to do anywhere.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Tricep Kickback</span></div>
+          <div class="ex-detail">3×12–15 · Elbow pinned, extend fully and squeeze at top. Slow negative. Best for that tricep "horseshoe" shape.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Overhead Tricep Extension</span></div>
+          <div class="ex-detail">3×12 · Single DB overhead, lower behind head. Long head emphasis — thickens the upper arm. Control the descent carefully.</div>
+        </div>
+      </div>
+      <div class="exercise push-ex" onclick="toggleEx(this,'push')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Floor Skull Crusher</span></div>
+          <div class="ex-detail">3×12 · Lying on floor, elbows over face, hinge to lower DBs toward temples. Floor limits range safely — EDS safe. Light weight.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINISHER -->
+  <div class="finisher">
+    <div class="finisher-title">✨ Finisher — Every Lift Day</div>
+    <div class="finisher-sub">Do this after every session regardless of which day. Check off as you go.</div>
+    <div id="finisher-push" class="finisher-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     PULL
+════════════════════════════════════ -->
+<div class="section" id="tab-pull">
+  <div class="note">Pick 6. ⭐ Start Here = highest payoff for V-taper and arm aesthetics. Always include at least one Face Pull or Pull-Apart — non-negotiable for shoulder health with EDS.</div>
+  <div class="counter">
+    <span class="counter-label">Selected for today</span>
+    <span class="counter-num pull-col" id="pull-count">0</span>
+    <span class="counter-slash">/</span>
+    <span class="counter-max">6</span>
+    <button class="reset-btn" onclick="resetSection('pull')">Reset</button>
+  </div>
+
+  <div class="muscle-group">
+    <div class="muscle-label">Back — V-Taper & Width</div>
+    <div class="exercise-grid">
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Supported Single-Arm DB Row</span><span class="star-tag">⭐ Start Here</span></div>
+          <div class="ex-detail">3×10–12 each side · Knee and hand on couch. Drive elbow back toward hip — lat focus. Primary V-taper builder.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Band Lat Pulldown</span></div>
+          <div class="ex-detail">3×15 · Anchor band overhead at door top. Kneel or sit, pull elbows down toward hips. Creates lat width and that V-taper silhouette.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Band Straight-Arm Pulldown</span></div>
+          <div class="ex-detail">3×15–20 · Arms straight, slight forward hinge, pull band from overhead to hips. Pure lat isolation — incredible for V-taper. Rotate in with lat pulldowns.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Chest-Supported DB Row</span></div>
+          <div class="ex-detail">3×10–12 · Chest on couch at an incline, both arms row. Mid-back thickness. Neutral spine — no rounding. Good for those who want more back "3D" depth.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Pullover</span></div>
+          <div class="ex-detail">3×12 · Floor, single DB in overhead arc. Lats in long stretched position + serratus + chest. Can rotate between push and pull days.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="muscle-group">
+    <div class="muscle-label">Rear Delts & Scapula — Posture + 3D Shoulders</div>
+    <div class="exercise-grid">
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Band Face Pull</span><span class="star-tag">⭐ Start Here</span></div>
+          <div class="ex-detail">3×20–25 · Anchor at face height, pull to forehead with elbows high and flared. Best exercise for posture, rear delts, and EDS shoulder health. Do every pull day without fail.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Band Pull-Apart</span></div>
+          <div class="ex-detail">3×20 · Band at chest, straight arms, pull apart until it touches your chest. Scapular retraction and rear delt. 60 seconds of work. Do these daily if possible.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Reverse Fly</span></div>
+          <div class="ex-detail">3×15–20 · Slight hinge, arms arc out and back. Rear delts make your shoulders look 3D from every angle — not just front-on.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Serratus Punch / Push-Up Plus</span></div>
+          <div class="ex-detail">3×15–20 · In push-up position at top, push scapulas apart (protract) then release. Builds the serratus "finger" muscles along the ribcage — an elite aesthetic marker that frames the abs.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Shrug</span></div>
+          <div class="ex-detail">3×15, 2 sec hold at top. Upper trap — adds the "athletic neck-to-shoulder" line. Don't roll the shoulders.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="muscle-group">
+    <div class="muscle-label">Biceps & Forearms</div>
+    <div class="exercise-grid">
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Bicep Curl</span></div>
+          <div class="ex-detail">3×12–15 · Supinate at the top (pinky up). Don't swing. Peak contraction squeeze.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Hammer Curl</span></div>
+          <div class="ex-detail">3×12–15 · Neutral grip. Hits brachialis — adds arm thickness that standard curls miss. Alternate with regular curls.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Zottman Curl</span></div>
+          <div class="ex-detail">3×10 · Curl up supinated, rotate to pronated, slow lower. Hits biceps up and forearms down. Time-efficient two-in-one.</div>
+        </div>
+      </div>
+      <div class="exercise pull-ex" onclick="toggleEx(this,'pull')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Reverse Curl</span></div>
+          <div class="ex-detail">3×12 · Palms facing down. Brachioradialis and forearm — forearm development reads well on an athletic lean build.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="finisher">
+    <div class="finisher-title">✨ Finisher — Every Lift Day</div>
+    <div class="finisher-sub">Do this after every session regardless of which day. Check off as you go.</div>
+    <div id="finisher-pull" class="finisher-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     LEGS
+════════════════════════════════════ -->
+<div class="section" id="tab-legs">
+  <div class="note">Pick 6. ⭐ Start Here = highest glute and aesthetic payoff. Hip thrusts are the most important exercise in this entire program for your physique goals. RDLs at 40lb are fine — go heavier as comfortable. Avoid deep hip flexion if your right hip flares.</div>
+  <div class="counter">
+    <span class="counter-label">Selected for today</span>
+    <span class="counter-num legs-col" id="legs-count">0</span>
+    <span class="counter-slash">/</span>
+    <span class="counter-max">6</span>
+    <button class="reset-btn" onclick="resetSection('legs')">Reset</button>
+  </div>
+
+  <div class="muscle-group">
+    <div class="muscle-label">Glutes — Highest Aesthetic Priority</div>
+    <div class="exercise-grid">
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Hip Thrust</span><span class="star-tag">⭐ Start Here</span></div>
+          <div class="ex-detail">3×15–20 · DB or KB on hips, back on couch or floor. Drive through heels, squeeze glutes at the top and hold 1 sec. Zero lumbar compression. This is your #1 glute shape exercise — the mind-muscle squeeze is more important than the weight.</div>
+        </div>
+      </div>
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Single-Leg Hip Thrust</span></div>
+          <div class="ex-detail">3×12 each side · Same setup, one leg extended. Isolates each glute independently — great for symmetry and higher intensity.</div>
+        </div>
+      </div>
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Band Clamshell</span></div>
+          <div class="ex-detail">3×20 each side · Side-lying, knees bent, open against the band. Glute medius — hip stability and that outer glute "pop." Essential for EDS joint stability too.</div>
+        </div>
+      </div>
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Lateral Band Walk</span></div>
+          <div class="ex-detail">3×15 steps each direction · Band at ankles or above knees. Glute medius activation — directly counters your pelvic unleveling pattern.</div>
+        </div>
+      </div>
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Standing Band Hip Abduction</span></div>
+          <div class="ex-detail">3×15–20 each side · Band at ankles, kick one leg out to the side. Glute medius isolation standing. Can superset with clamshells.</div>
+        </div>
+      </div>
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Band Glute Kickback</span></div>
+          <div class="ex-detail">3×15–20 each side · Band at ankles, kick one leg straight back. Gluteus maximus isolation. Good finisher for the glute pump.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="muscle-group">
+    <div class="muscle-label">Quads & Compound</div>
+    <div class="exercise-grid">
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">KB/DB Goblet Squat</span></div>
+          <div class="ex-detail">3×12–15 · Weight at chest, squat to parallel. Self-bracing for the spine — safest squat pattern. Can go heavier as back tolerance builds.</div>
+        </div>
+      </div>
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Sumo Squat</span></div>
+          <div class="ex-detail">3×12–15 · Wide stance, toes out, DB between legs. Adductor and glute focus, less knee stress. Good variation from goblet.</div>
+        </div>
+      </div>
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Reverse Lunge</span></div>
+          <div class="ex-detail">3×10–12 each side · Step back, not forward. Less hip flexion demand than forward lunge — easier on your right hip. Quad + glute together.</div>
+        </div>
+      </div>
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Step-Up</span></div>
+          <div class="ex-detail">3×10–12 each side · Sturdy step or stair. Drive through heel of top leg. Unilateral quad + glute — functional and effective.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="muscle-group">
+    <div class="muscle-label">Hamstrings</div>
+    <div class="exercise-grid">
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">DB Romanian Deadlift</span><span class="star-tag">⭐ Start Here</span></div>
+          <div class="ex-detail">3×12 · Hip hinge, neutral spine, feel the hamstring stretch — don't go past mid-shin. 40lb is solid. Progress when comfortable. Hamstrings frame the glutes from behind.</div>
+        </div>
+      </div>
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Single-Leg RDL</span></div>
+          <div class="ex-detail">3×10 each side · Light DB, balance and control matter more than weight here. Hamstring + glute + balance — progress slowly with EDS.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="muscle-group">
+    <div class="muscle-label">Calves</div>
+    <div class="exercise-grid">
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Standing Calf Raise</span></div>
+          <div class="ex-detail">3×20–25 · Off a stair edge for full range. Slow down, pause at the stretch. Hold DBs for resistance. Gastrocnemius.</div>
+        </div>
+      </div>
+      <div class="exercise legs-ex" onclick="toggleEx(this,'legs')">
+        <div class="check">✓</div>
+        <div class="ex-content">
+          <div class="ex-row"><span class="ex-name">Seated Calf Raise</span></div>
+          <div class="ex-detail">3×20 · Seated, DB on knees, raise up and hold. Hits soleus (deeper calf). Combine both for full calf development.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="finisher">
+    <div class="finisher-title">✨ Finisher — Every Lift Day</div>
+    <div class="finisher-sub">Do this after every session regardless of which day. Check off as you go.</div>
+    <div id="finisher-legs" class="finisher-grid"></div>
+  </div>
+</div>
+
+<script>
+/* ─────────────────────────────────
+   ROTATION TRACKER
+───────────────────────────────── */
+const CYCLE = [
+  { key: 'push',   label: 'Push',   icon: '💪', cls: 'push-slot' },
+  { key: 'cardio', label: 'Cardio', icon: '🚴', cls: 'cardio-slot' },
+  { key: 'pull',   label: 'Pull',   icon: '🔙', cls: 'pull-slot' },
+  { key: 'cardio2',label: 'Cardio', icon: '🚴', cls: 'cardio-slot' },
+  { key: 'legs',   label: 'Legs',   icon: '🦵', cls: 'legs-slot' },
+  { key: 'cardio3',label: 'Cardio', icon: '🚴', cls: 'cardio-slot' },
+];
+
+function getPos() { return parseInt(localStorage.getItem('rotPos') || '0'); }
+function setPos(n) { localStorage.setItem('rotPos', n); }
+
+function renderRotation() {
+  const pos = getPos();
+  const slots = document.getElementById('slots');
+  slots.innerHTML = '';
+  CYCLE.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = `slot ${s.cls}${i < pos ? ' done' : ''}${i === pos ? ' current' : ''}`;
+    div.innerHTML = `<span class="slot-icon">${s.icon}</span><span class="slot-name">${s.label}</span>`;
+    slots.appendChild(div);
+  });
+
+  const isCardio = CYCLE[pos].cls === 'cardio-slot';
+  const nextLabel = document.getElementById('next-label');
+  const cardioNote = document.getElementById('cardio-note');
+
+  if (isCardio) {
+    nextLabel.innerHTML = `<strong>Today: Cardio day</strong>`;
+    cardioNote.style.display = 'block';
+  } else {
+    nextLabel.innerHTML = `Up next: <strong>${CYCLE[pos].label} Day</strong>`;
+    cardioNote.style.display = 'none';
+  }
+
+  // auto-switch tab if it's a lift day
+  if (!isCardio && ['push','pull','legs'].includes(CYCLE[pos].key)) {
+    switchTab(CYCLE[pos].key);
+  }
+}
+
+function markDone() {
+  const pos = getPos();
+  const next = (pos + 1) % CYCLE.length;
+  setPos(next);
+  renderRotation();
+}
+
+function resetRotation() {
+  setPos(0);
+  renderRotation();
+}
+
+/* ─────────────────────────────────
+   EXERCISE SELECTION
+───────────────────────────────── */
+const maxPer = { push: 6, pull: 6, legs: 6 };
+
+function toggleEx(el, type) {
+  const count = document.querySelectorAll(`.${type}-ex.selected`).length;
+  if (!el.classList.contains('selected') && count >= maxPer[type]) {
+    el.style.borderColor = 'var(--red)';
+    setTimeout(() => { el.style.borderColor = ''; }, 700);
+    return;
+  }
+  el.classList.toggle('selected');
+  document.getElementById(`${type}-count`).textContent =
+    document.querySelectorAll(`.${type}-ex.selected`).length;
+}
+
+function resetSection(type) {
+  document.querySelectorAll(`.${type}-ex.selected`).forEach(e => e.classList.remove('selected'));
+  document.getElementById(`${type}-count`).textContent = 0;
+}
+
+/* ─────────────────────────────────
+   TAB SWITCHING
+───────────────────────────────── */
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const tabEl = document.querySelector(`.tab.${name}`);
+  if (tabEl) tabEl.classList.add('active');
+  const secEl = document.getElementById(`tab-${name}`);
+  if (secEl) secEl.classList.add('active');
+}
+
+/* ─────────────────────────────────
+   FINISHER ITEMS (shared across all tabs)
+───────────────────────────────── */
+const FINISHER_ITEMS = [
+  { section: 'Core & Waist', items: [
+    { name: 'Stomach Vacuums', detail: '3 holds × 20–30 sec · Fasted preferred. TVA compression — your primary waist-narrowing tool.' },
+    { name: 'Hollow Body Hold', detail: '3 × 20–30 sec · Press low back into floor, lift legs and shoulders, arms by ears. The athletic ab look comes from here, not crunches.' },
+    { name: 'Side Plank', detail: '30–45 sec each side · Obliques and QL define the side waist taper. Non-negotiable for the pinched-in look.' },
+    { name: 'Dead Bug', detail: '3 × 8 each side · Opposite arm and leg extend to floor while pressing low back down. Deep TVA + safe for your spine.' },
+    { name: 'Pallof Press (Band)', detail: '3 × 10 each side · Anti-rotation core. Compresses the waist without adding lateral width. Anchor band at waist height, press straight out and hold.' },
+  ]},
+  { section: 'Posture & Shoulders', items: [
+    { name: 'Band Face Pull (quick)', detail: '2 × 20 · Even on push/legs days. Posture changes how everything reads at rest — this is daily maintenance.' },
+    { name: 'Wall Slides', detail: '2 × 10 · Back against wall, arms in "field goal," slide up and down. Scapular mobility and shoulder posture. Takes 2 minutes.' },
+  ]},
+  { section: 'Head & Neck', items: [
+    { name: 'Chin Tucks', detail: '15 reps · Forward head posture affects how your jaw and neck present. PT standard.' },
+    { name: 'Neck Exercises (×3)', detail: 'Your three PT neck exercises.' },
+  ]},
+  { section: 'Glutes (Rest-Day Option Too)', items: [
+    { name: 'Glute Squeeze Holds', detail: '10 × 10 sec isometric holds · Clench both glutes hard, hold 10 sec, release. No equipment. Do this at any time of day — on the couch, standing, wherever. Builds the mind-muscle connection that makes your hip thrusts more effective and keeps blood flow going on rest days.' },
+  ]},
+  { section: 'Breathing & Recovery', items: [
+    { name: '3D Breathing', detail: '5–10 deep breaths · Breathe into ribcage laterally and posteriorly, not just chest. Over months expands rib cage width, which makes the waist contrast with stomach vacuums more dramatic.' },
+  ]},
+];
+
+function buildFinisher(containerId) {
+  const container = document.getElementById(containerId);
+  FINISHER_ITEMS.forEach(group => {
+    const label = document.createElement('div');
+    label.className = 'fin-section-label';
+    label.textContent = group.section;
+    container.appendChild(label);
+    group.items.forEach((item, idx) => {
+      const row = document.createElement('div');
+      row.className = 'fin-item';
+      row.id = `${containerId}-item-${group.section}-${idx}`;
+      row.innerHTML = `
+        <div class="fin-check" onclick="toggleFin(this.parentElement)">✓</div>
+        <div>
+          <div class="fin-name">${item.name}</div>
+          <div class="fin-detail">${item.detail}</div>
+        </div>`;
+      container.appendChild(row);
+    });
+  });
+}
+
+function toggleFin(el) { el.classList.toggle('fin-done'); }
+
+/* ─────────────────────────────────
+   INIT
+───────────────────────────────── */
+buildFinisher('finisher-push');
+buildFinisher('finisher-pull');
+buildFinisher('finisher-legs');
+renderRotation();
+</script>
+</body>
+</html>
