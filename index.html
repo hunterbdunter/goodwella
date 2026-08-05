@@ -183,7 +183,7 @@ const MORNING=[
   {id:'m1',text:'GH 4IUs injection',compoundKey:'gh',note:'Fasted — very first thing before eating. Subcutaneous injection.',tag:'peptide'},
   {id:'m_testE',text:'Testosterone Enanthate — 100mg',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. 40 units (0.4ml). Set start date in Stack tab after first injection.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
   {id:'m_hcg',text:'HCG — 500IU',compoundKey:'hcg',note:'SubQ. Maintains testicular function and LH activity while on TRT.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
-  {id:'m_lcar',text:'L-Carnitine — 1g',note:'SubQ morning with other peptides. Pre-workout timing ideal on training days. Improves fat oxidation and androgen receptor sensitivity.',tag:'peptide',compoundKey:'lcarnitine'},
+  {id:'m_lcar',text:'L-Carnitine — 2g (4 tabs)',note:'4x 500mg tablets with breakfast. Oral dose compensates for lower bioavailability. Take pre-workout on training days for best muscle uptake.',tag:'supp',compoundKey:'lcarnitine'},
   {id:'m_nad',text:'NAD+ — 50mg',compoundKey:'nad',note:'SubQ. Morning timing for cellular energy and metabolism. Increase to 100mg if well tolerated.',tag:'peptide'},
   {id:'m_mt2',text:'MT2 0.5mg',compoundKey:'mt2',note:'Daily — take 2-3 hrs before sun exposure on tan days. Take with morning peptides regardless.',tag:'peptide'},
   {id:'m_nail',text:'Nail care',note:'File · cuticle oil · matte top coat. Hands get noticed, especially wearing jewelry.',tag:'grooming',showOnDays:[0]},
@@ -195,7 +195,7 @@ const MORNING=[
   {id:'m_breakfast',type:'group',text:'Breakfast',tag:'nutrition',
     groupNote:'See Meals tab for options',
     children:[
-      {id:'m_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Bupropion 300mg XL · Minoxidil 0.25mg · Clonidine 0.1mg · Tadalafil 20mg',tag:'med'},
+      {id:'m_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Bupropion 300mg XL · Minoxidil 5mg · Clonidine 0.1mg · Tadalafil 20mg · Anavar 10mg · TUDCA 500mg',tag:'med'},
       {id:'m_supps',text:'Supplements',note:'D3+K2 5,000IU · Tongkat Ali 1,000mg · Oral HA 100-120mg · Epicatechin 500mg',tag:'supp'},
       {id:'m5',text:'Liquid IV',note:'Electrolytes for POTS.',tag:'supp'},
     ]
@@ -256,7 +256,7 @@ const EVENING=[
       {id:'e_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Clonidine 0.1mg',tag:'med'},
       {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg · DIM 200mg',tag:'supp'},    ]
   },
-  {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Friday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[5]},
+  {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Tuesday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[2]},
   {id:'sp_shower',type:'group',text:'Shower',tag:'grooming',showIf:'pms_shower',
     children:[
       {id:'sp_s0',type:'header',text:'In Shower'},
@@ -333,8 +333,11 @@ const STACK=[
     ['Minocycline','50mg','With breakfast','Medication','Acne + folliculitis control — dermatologist prescribed'],
     ['Allegra','180mg','With breakfast','Medication','H1 antihistamine — allergies + MCAS histamine control'],
     ['Bupropion','300mg XL','With breakfast','Medication','ADHD · mood · energy via dopamine + norepinephrine'],
-    ['Minoxidil','0.25mg','With breakfast','Medication','Hair growth — oral micro-dose protocol'],
-    ['Oxandrolone (Anavar)','10mg daily','Morning with breakfast','Medication','Mild anabolic · clean dry strength gains · lean mass · connective tissue collagen synthesis · no water retention · run with TUDCA · cycle 8-12 weeks'],
+    ['Minoxidil','5mg','With breakfast','Medication','Hair growth · scalp density · body hair stimulus · vasodilator · monitor BP given POTS + tadalafil + clonidine stack'],
+    ['L-Carnitine','2g (4x 500mg tabs)','With breakfast · pre-workout on training days','Supplement','Androgen receptor upregulation synergistic with TRT · fatty acid transport into mitochondria · fat oxidation · endurance support'],
+    ['Epicatechin','500mg','DOSE 1 — Morning with breakfast','Supplement','Myostatin inhibitor · nitric oxide via eNOS · insulin sensitivity · fat-soluble take with food · second dose at midday'],
+    ['Oxandrolone (Anavar)','10mg daily','Morning with breakfast · cycle 8-12 weeks','Medication','Mild anabolic · clean dry strength gains · lean mass · connective tissue collagen synthesis · no water retention · run with TUDCA throughout cycle'],
+    ['TUDCA','500mg daily','Morning with breakfast · run throughout Anavar cycle + 4 weeks after','Medication','Liver protection during oral steroid use · bile acid support · reduces hepatic stress from Anavar · essential companion to any oral anabolic'],
     ['Low Dose Naltrexone (LDN)','1.5-4.5mg','Before bed — titrate up over 4-6 weeks','Medication','Neuroinflammation reduction · EDS pain · MCAS mast cell modulation · immune regulation · sleep quality · mood stability'],
     ['Clonidine','0.1mg','With breakfast','Medication','Anxiety reduction · blood pressure · calm nervous system'],
     ['Tadalafil (Cialis)','20mg','With breakfast','Medication','PDE5 inhibitor · daytime vasodilation · cardiovascular endothelial benefit · peak vascularity during the day · monitor BP given POTS + Clonidine + L-citrulline'],
@@ -359,9 +362,8 @@ const STACK=[
     ['Quercetin Phytosome','2 caps','With smoothie','Supplement','Mast cell stabilizer · anti-inflammatory · skin health · synergizes with Vitamin C'],
     ['Lutein + Zeaxanthin','20mg / 4mg','With smoothie','Supplement','Eye health · visual acuity · macular protection'],
     ['Boron','10mg','With smoothie','Supplement','Free testosterone ↑ · SHBG ↓ · estrogen balance'],
-    ['Epicatechin','500mg','Morning with breakfast — first dose','Supplement','Myostatin inhibitor · nitric oxide via eNOS · insulin sensitivity · faster recovery · fat-soluble take with food'],
     ['Turkesterone','500mg','With smoothie','Supplement','Anabolic via estrogen receptor beta · separate pathway from TRT · lean mass · muscle hardness · no hormonal suppression'],
-    ['Epicatechin','500mg','With smoothie — second dose','Supplement','Second daily dose. Myostatin inhibition maintained throughout day with split dosing.'],
+    ['Epicatechin','500mg ×2 daily (split)','DOSE 2 — Midday with smoothie/food','Supplement','Second daily dose — maintains myostatin inhibition throughout the day.'],
     ['Beta-Ecdysterone','500mg','With smoothie','Supplement','Ecdysteroid · complements turkesterone via similar ERb pathway · muscle protein synthesis · no suppression'],
     ['Calcium D-Glucarate','500mg','With smoothie midday','Supplement','Estrogen clearance via liver glucuronidation · prevents estrogen reabsorption · liver support on TRT'],
     ['MT2','0.5mg','Daily — 2-3 hrs before sun','Peptide','Melanin production + tanning · libido + arousal via melanocortin receptors'],
@@ -379,7 +381,7 @@ const STACK=[
     ['GHK-Cu','4mg','Evening (flexible — any time works)','Peptide','Skin regeneration · collagen remodeling · hair growth · anti-inflammatory'],
   ]},
   {label:'Weekly',color:'#D46464',rows:[
-    ['Retatrutide','2mg','Friday — same day weekly','Peptide','GLP-1/GIP/glucagon triple agonist — body composition + weight stability maintenance after 1.5yr protocol'],
+    ['Retatrutide','2mg','Tuesday — same day weekly','Peptide','GLP-1/GIP/glucagon triple agonist — body composition + weight stability maintenance after 1.5yr protocol'],
   ]},
   {label:'Not Currently Using',color:'#282836',rows:[
     ['Kisspeptin','\u2014','Paused','Peptide','Paused on TRT — HCG replaces LH stimulation'],
@@ -388,7 +390,7 @@ const STACK=[
     ['Glutathione','\u2014','Inactive','Peptide','Replaced by NAC 1,200mg — toggle on if reconsidering'],
     ['NAD+','\u2014','Inactive','Peptide','Too many injections at current load — revisit later'],
     ['Cardarine','\u2014','Inactive — 8 wks on/off','Compound','Toggle on when starting a cycle — do not run continuously'],
-    ['L-Carnitine','\u2014','Pending source','Peptide','Toggle on when sourced — 3g oral or 1g injectable'],
+    ['Anastrozole','0.25-0.5mg twice weekly','Only if estrogen symptoms','Medication','Reserve AI · water retention, nipple sensitivity, mood instability are signals to use · do not take prophylactically'],
   ]},
 ];
 
@@ -437,8 +439,8 @@ function load(){
     if(d.metrics) S.metrics=d.metrics;
   }catch(e){}
   // Hardcode TRT and HCG start dates - July 4, 2026
-  if(!S.injStart['testE']) S.injStart['testE']='2026-07-04';
-  if(!S.injStart['hcg']) S.injStart['hcg']='2026-07-04';
+  S.injStart['testE']='2026-07-05'; // hardcoded — actual cycle start
+  S.injStart['hcg']='2026-07-05'; // hardcoded — same cycle as TRT
 }
 
 function save(){
@@ -485,7 +487,7 @@ const INJ_COMPOUNDS=[
   {key:'hcg',label:'HCG',every:3,dose:'500IU',color:'#5B9FC8'},
   {key:'glut',label:'Glutathione',every:2,dose:'200mg',color:'#9B7FD4'},
   {key:'tb500',label:'TB-500',every:3,dose:'2mg loading → 2mg maintenance',color:'#6ABCBC'},
-  {key:'lcarnitine',label:'L-Carnitine',every:1,dose:'1g daily',color:'#88C870'},
+  {key:'anavar',label:'Anavar (cycle tracker)',every:1,dose:'10mg daily — 8 week cycle',color:'#C8963C'},
 ];
 
 function renderInjectionSchedule(){
@@ -559,10 +561,13 @@ const TOGGLEABLE_COMPOUNDS=[
   {key:'minocycline',label:'Minocycline 50mg',defaultActive:true,cat:'Medications'},
   {key:'allegra',label:'Allegra 180mg',defaultActive:true,cat:'Medications'},
   {key:'bupropion',label:'Bupropion 300mg XL',defaultActive:true,cat:'Medications'},
-  {key:'minoxidil',label:'Minoxidil 0.25mg (oral)',defaultActive:true,cat:'Medications'},
+  {key:'minoxidil',label:'Minoxidil 5mg (oral)',defaultActive:true,cat:'Medications'},
   {key:'clonidine',label:'Clonidine 0.1mg',defaultActive:true,cat:'Medications'},
   {key:'montelukast',label:'Montelukast 10mg',defaultActive:true,cat:'Medications'},
   {key:'tadalafil',label:'Tadalafil 10mg',defaultActive:true,cat:'Medications'},
+  {key:'anavar',label:'Oxandrolone (Anavar) 10mg',defaultActive:true,cat:'Medications'},
+  {key:'tudca',label:'TUDCA 500mg',defaultActive:true,cat:'Medications'},
+  {key:'anastrozole',label:'Anastrozole (AI) — reserve only',defaultActive:false,cat:'Medications'},
   {key:'d3k2',label:'D3 + K2 5,000 IU',defaultActive:true,cat:'Morning Supps'},
   {key:'tongkat',label:'Tongkat Ali 1,000mg',defaultActive:true,cat:'Morning Supps'},
   {key:'oralha',label:'Oral HA 100-120mg',defaultActive:true,cat:'Morning Supps'},
