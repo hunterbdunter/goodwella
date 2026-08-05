@@ -183,7 +183,6 @@ const MORNING=[
   {id:'m1',text:'GH 4IUs injection',compoundKey:'gh',note:'Fasted — very first thing before eating. Subcutaneous injection.',tag:'peptide'},
   {id:'m_testE',text:'Testosterone Enanthate — 100mg',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. 40 units (0.4ml). Set start date in Stack tab after first injection.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
   {id:'m_hcg',text:'HCG — 500IU',compoundKey:'hcg',note:'SubQ. Maintains testicular function and LH activity while on TRT.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
-  {id:'m_lcar',text:'L-Carnitine — 2g (4 tabs)',note:'4x 500mg tablets with breakfast. Oral dose compensates for lower bioavailability. Take pre-workout on training days for best muscle uptake.',tag:'supp',compoundKey:'lcarnitine'},
   {id:'m_nad',text:'NAD+ — 50mg',compoundKey:'nad',note:'SubQ. Morning timing for cellular energy and metabolism. Increase to 100mg if well tolerated.',tag:'peptide'},
   {id:'m_mt2',text:'MT2 0.5mg',compoundKey:'mt2',note:'Daily — take 2-3 hrs before sun exposure on tan days. Take with morning peptides regardless.',tag:'peptide'},
   {id:'m_nail',text:'Nail care',note:'File · cuticle oil · matte top coat. Hands get noticed, especially wearing jewelry.',tag:'grooming',showOnDays:[0]},
@@ -191,12 +190,12 @@ const MORNING=[
   {id:'m_tint',text:'Eyebrow + lash tint check',note:'Check if color is fading. Redye if getting too light — maintaining contrast is the whole point.',tag:'grooming',showOnDays:[0]},
   {id:'m6',text:'10 min bright light',note:'Step outside OR use the 10,000 lux lamp — both work equally well. Lamp may be better on overcast Washington mornings. First thing while still fasted.',tag:'sleep'},
   {id:'m_mastic',text:'Mastic gum — 10-20 min',note:'Builds masseter definition over time. Chew consistently for jaw masculinization. Hard resin — start slow if jaw gets sore.',tag:'grooming'},
-  {id:'m_water',text:'Drink full Hydro Flask #1',note:'32oz — critical for POTS and hydration. Add Liquid IV.',tag:'supp'},
+  {id:'m_water',text:'Drink full Hydro Flask #1',note:'32oz — plain water only. Liquid IV goes in a separate small bottle so you don’t have to clean the Hydro Flask.',tag:'supp'},
   {id:'m_breakfast',type:'group',text:'Breakfast',tag:'nutrition',
     groupNote:'See Meals tab for options',
     children:[
       {id:'m_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Bupropion 300mg XL · Minoxidil 5mg · Clonidine 0.1mg · Tadalafil 20mg · Anavar 10mg · TUDCA 500mg',tag:'med'},
-      {id:'m_supps',text:'Supplements',note:'D3+K2 5,000IU · Tongkat Ali 1,000mg · Oral HA 100-120mg · Epicatechin 500mg',tag:'supp'},
+      {id:'m_supps',text:'Supplements',note:'D3+K2 5,000IU · Tongkat Ali 1,000mg · Oral HA 100-120mg · Epicatechin 500mg · L-Carnitine 2g (4 tabs)',tag:'supp'},
       {id:'m5',text:'Liquid IV',note:'Electrolytes for POTS.',tag:'supp'},
     ]
   },
@@ -256,7 +255,7 @@ const EVENING=[
       {id:'e_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Clonidine 0.1mg',tag:'med'},
       {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg · DIM 200mg',tag:'supp'},    ]
   },
-  {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Tuesday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[2]},
+  {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Wednesday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[3]},
   {id:'sp_shower',type:'group',text:'Shower',tag:'grooming',showIf:'pms_shower',
     children:[
       {id:'sp_s0',type:'header',text:'In Shower'},
@@ -381,7 +380,7 @@ const STACK=[
     ['GHK-Cu','4mg','Evening (flexible — any time works)','Peptide','Skin regeneration · collagen remodeling · hair growth · anti-inflammatory'],
   ]},
   {label:'Weekly',color:'#D46464',rows:[
-    ['Retatrutide','2mg','Tuesday — same day weekly','Peptide','GLP-1/GIP/glucagon triple agonist — body composition + weight stability maintenance after 1.5yr protocol'],
+    ['Retatrutide','2mg','Wednesday — same day weekly','Peptide','GLP-1/GIP/glucagon triple agonist — body composition + weight stability maintenance after 1.5yr protocol'],
   ]},
   {label:'Not Currently Using',color:'#282836',rows:[
     ['Kisspeptin','\u2014','Paused','Peptide','Paused on TRT — HCG replaces LH stimulation'],
@@ -439,8 +438,8 @@ function load(){
     if(d.metrics) S.metrics=d.metrics;
   }catch(e){}
   // Hardcode TRT and HCG start dates - July 4, 2026
-  S.injStart['testE']='2026-07-05'; // hardcoded — actual cycle start
-  S.injStart['hcg']='2026-07-05'; // hardcoded — same cycle as TRT
+  S.injStart['testE']='2026-07-06'; // hardcoded — shifted to align cycle with Aug 5 injection
+  S.injStart['hcg']='2026-07-06'; // hardcoded — same cycle as TRT
 }
 
 function save(){
