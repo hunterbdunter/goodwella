@@ -6,48 +6,48 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="Daily Protocol">
-<meta name="theme-color" content="#09090B">
+<meta name="theme-color" content="#070B14">
 <title>Looksmax Mission Control</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
-body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+body{background:#070B14;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
 #app{display:flex;flex-direction:column;height:100%;height:100dvh}
-.hdr{background:#09090B;padding:18px 16px 12px;border-bottom:1px solid #171720;flex-shrink:0}
-.hdr-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:11px}
-.hdr-eyebrow{font-size:9px;letter-spacing:.22em;font-weight:700;text-transform:uppercase;color:#C8963C;margin-bottom:2px}
-.hdr-title{font-size:20px;font-weight:700;letter-spacing:-.02em}
-.hdr-pct{font-size:24px;font-weight:700;text-align:right}
-.hdr-sub{font-size:10px;color:#3A3A48;text-align:right;margin-top:1px}
-.prog-bar{height:2px;background:#171720;border-radius:99px;overflow:hidden}
-.prog-fill{height:100%;border-radius:99px;transition:width .5s ease,background .5s ease}
-.tabs{display:flex;background:#09090B;border-bottom:1px solid #171720;flex-shrink:0}
-.tab{flex:1;padding:9px 2px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:#2E2E3C;cursor:pointer;transition:color .15s,border-color .15s}
-.tab.on{color:#C8963C;border-bottom-color:#C8963C}
+.hdr{background:linear-gradient(180deg,#0A0F1E 0%,#070B14 100%);padding:20px 16px 14px;border-bottom:1px solid #1A1A22;flex-shrink:0}
+.hdr-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.hdr-eyebrow{font-size:9px;letter-spacing:.25em;font-weight:800;text-transform:uppercase;color:#4A9EFF;margin-bottom:3px;opacity:.9}
+.hdr-title{font-size:21px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#FFFFFF 0%,#A8B8D8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdr-pct{font-size:26px;font-weight:800;text-align:right;color:#4A9EFF}
+.hdr-sub{font-size:10px;color:#2A3855;text-align:right;margin-top:2px}
+.prog-bar{height:3px;background:#0B1020;border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;transition:width .5s ease,background .5s ease;box-shadow:0 0 8px rgba(212,168,75,.4)}
+.tabs{display:flex;background:#070B14;border-bottom:1px solid #0F1525;flex-shrink:0;gap:0}
+.tab{flex:1;padding:10px 2px;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:#253050;cursor:pointer;transition:color .15s,border-color .15s}
+.tab.on{color:#4A9EFF;border-bottom-color:#4A9EFF}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:40px}
-.sec-hd{display:flex;justify-content:space-between;align-items:center;padding:18px 16px 7px}
-.sec-left{display:flex;align-items:center;gap:7px}
-.sec-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.sec-lbl{font-size:10px;font-weight:700;letter-spacing:.17em;text-transform:uppercase}
-.sec-ct{font-size:10px;color:#2A2A38}
-.grp-hd{display:flex;align-items:center;gap:8px;padding:12px 16px 5px}
-.grp-line{flex:1;height:1px;background:#1C1C24}
-.grp-txt{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#333340;white-space:nowrap}
-.crow{border-bottom:1px solid #111116;transition:opacity .2s}
-.crow.done{opacity:.38}
-.crow-in{display:flex;align-items:flex-start;gap:11px;padding:11px 16px}
-.cbox{width:20px;height:20px;min-width:20px;border-radius:4px;border:1px solid #282836;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;margin-top:1px;flex-shrink:0}
-.cbox.on{background:#4A7A50;border-color:#4A7A50}
+.sec-hd{display:flex;justify-content:space-between;align-items:center;padding:20px 16px 8px}
+.sec-left{display:flex;align-items:center;gap:8px}
+.sec-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px currentColor}
+.sec-lbl{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.sec-ct{font-size:10px;color:#2A3555}
+.grp-hd{display:flex;align-items:center;gap:8px;padding:14px 16px 6px}
+.grp-line{flex:1;height:1px;background:#111828}
+.grp-txt{font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#283050;white-space:nowrap}
+.crow{border-bottom:1px solid #0B1020;transition:opacity .2s}
+.crow.done{opacity:.35}
+.crow-in{display:flex;align-items:flex-start;gap:12px;padding:12px 16px}
+.cbox{width:21px;height:21px;min-width:21px;border-radius:5px;border:1.5px solid #1A2035;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;margin-top:1px;flex-shrink:0}
+.cbox.on{background:#1A3A6B;border-color:#4A9EFF;box-shadow:0 0 10px rgba(74,158,255,.35)}
 .cbody{flex:1;min-width:0;cursor:pointer;user-select:none}
 .ctxt-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.ctxt{font-size:13.5px;font-weight:500;line-height:1.3}
-.crow.done .ctxt{text-decoration:line-through;color:#36363E}
-.tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 6px;border-radius:4px;flex-shrink:0}
-.cnote{font-size:11.5px;color:#5A5A68;line-height:1.55;margin-top:6px;padding-right:6px}
-.chev{background:none;border:none;color:#282836;cursor:pointer;padding:1px;margin-top:1px;flex-shrink:0;line-height:0}
-.stk-wrap{padding:14px 16px 0}
-.stk-sec{margin-bottom:20px}
-.stk-tbl{border-radius:12px;overflow:hidden;border:1px solid #1C1C24}
+.ctxt{font-size:13.5px;font-weight:500;line-height:1.35}
+.crow.done .ctxt{text-decoration:line-through;color:#2E2E3E}
+.tag{font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;padding:2px 7px;border-radius:5px;flex-shrink:0}
+.cnote{font-size:11.5px;color:#555568;line-height:1.6;margin-top:7px;padding-right:6px}
+.chev{background:none;border:none;color:#242432;cursor:pointer;padding:1px;margin-top:1px;flex-shrink:0;line-height:0}
+.stk-wrap{padding:16px 16px 0}
+.stk-sec{margin-bottom:22px}
+.stk-tbl{border-radius:14px;overflow:hidden;border:1px solid #151E30;box-shadow:0 2px 12px rgba(0,0,0,.4)}
 .stk-row{display:flex;align-items:center;padding:10px 12px;border-bottom:1px solid #111116}
 .stk-row:last-child{border-bottom:none}
 .stk-name{flex:1;font-size:12.5px;color:#EFEFEF}
@@ -81,7 +81,7 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
 .g-extra{margin-bottom:32px}
 .grp-parent{border-bottom:1px solid #111116;background:#0D0D11}
 .grp-parent .crow-in{background:#0D0D11}
-.grp-badge{font-size:10px;font-weight:700;color:#C8963C;background:rgba(200,150,60,0.15);padding:2px 7px;border-radius:99px;flex-shrink:0}
+.grp-badge{font-size:10px;font-weight:700;color:#4A9EFF;background:rgba(200,150,60,0.15);padding:2px 7px;border-radius:99px;flex-shrink:0}
 .grp-badge.full{color:#5B9F6A;background:rgba(91,159,106,0.15)}
 .grp-children{border-left:2px solid #1C1C24;margin-left:12px}
 .choice-row{border-bottom:1px solid #111116}
@@ -93,7 +93,7 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
 .choice-extra{margin-top:6px;padding-top:6px;border-top:1px solid #1C1C24}
 .day-sel{display:flex;gap:6px;padding:12px 16px 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .day-btn{flex-shrink:0;padding:7px 14px;border-radius:99px;border:1px solid #282836;background:none;font-size:11px;font-weight:600;color:#5A5A68;cursor:pointer;transition:all .2s}
-.day-btn.on{background:#C8963C;border-color:#C8963C;color:#09090B}
+.day-btn.on{background:#4A9EFF;border-color:#4A9EFF;color:#09090B}
 .csec-hd{display:flex;justify-content:space-between;align-items:center;padding:16px 16px 7px;cursor:pointer;user-select:none}
 .proc-card{margin:12px 16px 0;background:#0E0E14;border-radius:14px;overflow:hidden;border:1px solid #1C1C24}
 .proc-hd{padding:12px 14px 10px;border-bottom:1px solid #1A1A20}
@@ -123,16 +123,16 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
 .mx-name{font-size:13px;color:#EFEFEF}
 .mx-hint{font-size:10px;color:#3A3A48;margin-top:1px}
 .mx-inp{width:72px;background:#111116;border:1px solid #282836;border-radius:8px;padding:6px 8px;color:#EFEFEF;font-size:13px;text-align:right;outline:none;-webkit-appearance:none}
-.mx-inp:focus{border-color:#C8963C}
+.mx-inp:focus{border-color:#4A9EFF}
 .mx-bp{display:flex;align-items:center;gap:4px}
 .mx-bp .mx-inp{width:50px}
 .mx-sep{font-size:12px;color:#3A3A48}
-.mx-save{width:100%;margin-top:18px;padding:13px;background:#C8963C;border:none;border-radius:12px;color:#09090B;font-size:14px;font-weight:700;cursor:pointer;transition:background .3s}
+.mx-save{width:100%;margin-top:18px;padding:13px;background:#4A9EFF;border:none;border-radius:12px;color:#09090B;font-size:14px;font-weight:700;cursor:pointer;transition:background .3s}
 .mx-hist{padding:12px 16px 24px}
 .mx-hist-hd{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#5A5A68;margin-bottom:12px;margin-top:4px}
 .mx-spark{margin-bottom:14px}
 .mx-spark-lbl{font-size:11px;color:#8A8A98;margin-bottom:3px;display:flex;justify-content:space-between;align-items:baseline}
-.mx-spark-val{font-size:12px;color:#C8963C;font-weight:600}
+.mx-spark-val{font-size:12px;color:#4A9EFF;font-weight:600}
 </style>
 </head>
 <body>
@@ -149,7 +149,7 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
         <div class="hdr-sub" id="sub">0/0 done</div>
       </div>
     </div>
-    <div class="prog-bar"><div class="prog-fill" id="fill" style="width:0%;background:#C8963C"></div></div>
+    <div class="prog-bar"><div class="prog-fill" id="fill" style="width:0%;background:#4A9EFF"></div></div>
   </div>
   <div id="data-modal" style="display:none" class="data-modal" onclick="if(event.target===this)closeDataModal()">
     <div class="data-box">
@@ -158,7 +158,7 @@ body{background:#09090B;color:#EFEFEF;font-family:system-ui,-apple-system,BlinkM
       <div class="data-title" style="margin-top:12px">Export</div>
       <textarea class="data-ta" id="export-ta" readonly placeholder="Your data will appear here..."></textarea>
       <div class="data-row">
-        <button class="data-act" style="background:#C8963C;color:#09090B" onclick="doExport()">Copy to Clipboard</button>
+        <button class="data-act" style="background:#4A9EFF;color:#09090B" onclick="doExport()">Copy to Clipboard</button>
       </div>
       <div class="data-title" style="margin-top:16px">Import</div>
       <textarea class="data-ta" id="import-ta" placeholder="Paste exported data here..."></textarea>
@@ -180,134 +180,135 @@ window.onerror=function(msg,src,line,col,err){
 // ── DATA ─────────────────────────────────────────────────────────────────────
 
 const MORNING=[
-  {id:'m1',text:'GH 4IUs injection',compoundKey:'gh',note:'Fasted — very first thing before eating. Subcutaneous injection.',tag:'peptide'},
-  {id:'m_testE',text:'Testosterone Enanthate — 100mg',compoundKey:'testE',note:'Draw with 21g → swap to 27-29g 5/8" for injection. SubQ belly or love handles. 40 units (0.4ml). Set start date in Stack tab after first injection.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
-  {id:'m_hcg',text:'HCG — 500IU',compoundKey:'hcg',note:'SubQ. Maintains testicular function and LH activity while on TRT.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
-  {id:'m_nad',text:'NAD+ — 50mg',compoundKey:'nad',note:'SubQ. Morning timing for cellular energy and metabolism. Increase to 100mg if well tolerated.',tag:'peptide'},
-  {id:'m_mt2',text:'MT2 0.5mg',compoundKey:'mt2',note:'Daily — take 2-3 hrs before sun exposure on tan days. Take with morning peptides regardless.',tag:'peptide'},
-  {id:'m_nail',text:'Nail care',note:'File · cuticle oil · matte top coat. Hands get noticed, especially wearing jewelry.',tag:'grooming',showOnDays:[0]},
-  {id:'m_brow',text:'Eyebrow grooming',note:'Tweeze stray hairs, tidy the shape. Keep it clean — not over-plucked.',tag:'grooming',showOnDays:[1,4]},
-  {id:'m_tint',text:'Eyebrow + lash tint check',note:'Check if color is fading. Redye if getting too light — maintaining contrast is the whole point.',tag:'grooming',showOnDays:[0]},
-  {id:'m6',text:'10 min bright light',note:'Step outside OR use the 10,000 lux lamp — both work equally well. Lamp may be better on overcast Washington mornings. First thing while still fasted.',tag:'sleep'},
-  {id:'m_mastic',text:'Mastic gum — 10-20 min',note:'Builds masseter definition over time. Chew consistently for jaw masculinization. Hard resin — start slow if jaw gets sore.',tag:'grooming'},
-  {id:'m_water',text:'Drink full Hydro Flask #1',note:'32oz — plain water only. Liquid IV goes in a separate small bottle so you don’t have to clean the Hydro Flask.',tag:'supp'},
+  {id:'m1',text:'GH — 5.4 IU injection',compoundKey:'gh',note:'Fasted — very first thing. 36 IU vial + 1ml BAC = 36 IU/ml → 15 units = 5.4 IU. SubQ belly or love handles.',tag:'peptide'},
+  {id:'m_testE',text:'Testosterone Enanthate — 150mg',compoundKey:'testE',note:'Draw with 21g → swap to 29g for injection. IM vastus lateralis (outer mid-thigh). 60 units (0.6ml) from 250mg/ml vial. Set start date in Stack tab.',tag:'peptide',showEveryNDays:3,startKey:'testE'},
+  {id:'m_hcg',text:'HCG — 500IU',compoundKey:'hcg',note:'SubQ. Same cycle as TRT. 10 units from reconstituted vial. Maintains testicular function + LH activity.',tag:'peptide',showEveryNDays:3,startKey:'hcg'},
+  {id:'m_motsc',text:'MOTS-C — 5mg',compoundKey:'motsc',note:'SubQ fasted. Monday / Wednesday / Friday only. AMPK activation · fat oxidation · insulin sensitivity · endurance.',tag:'peptide',showOnDays:[1,3,5]},
+  {id:'m_mt2',text:'MT2 — 0.5mg',compoundKey:'mt2',note:'Daily maintenance. Take 2-3 hrs before sun exposure on tan days. 5 units from 10mg/ml vial.',tag:'peptide'},
+  {id:'m6',text:'10 min bright light',note:'Outside or 10,000 lux lamp. Sets circadian rhythm · improves cortisol awakening response · better sleep tonight.',tag:'sleep'},
+  {id:'m_mastic',text:'Mastic gum — session 1 (15-20 min)',note:'Jaw masculinization via masseter development. Chew hard resin consistently · do while getting ready or watching something.',tag:'grooming'},
+  {id:'m_vac',text:'Stomach vacuums — 3 sets',note:'30-60 sec holds each. Stand upright, exhale fully, pull navel toward spine, hold. Daily consistency produces visible waist narrowing over weeks.',tag:'fitness'},
+  {id:'m_chin',text:'Chin tucks — 3 sets of 10',note:'Gently pull chin straight back (not down). Counters forward head position. Improves jawline profile and neck posture.',tag:'fitness'},
+  {id:'m_hum',text:'Chest resonance hum — 5 min',note:'Hum at lowest comfortable pitch with hand on sternum. Feel vibration in chest not throat. Trains speaking placement lower and more resonant.',tag:'grooming'},
+  {id:'m_water',text:'Drink full Hydro Flask — fill 1',note:'32oz · plain water · Liquid IV goes in a separate bottle.',tag:'supp'},
   {id:'m_breakfast',type:'group',text:'Breakfast',tag:'nutrition',
     groupNote:'See Meals tab for options',
     children:[
-      {id:'m_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Bupropion 300mg XL · Minoxidil 5mg · Clonidine 0.1mg · Tadalafil 20mg · Anavar 10mg · TUDCA 500mg',tag:'med'},
-      {id:'m_supps',text:'Supplements',note:'D3+K2 5,000IU · Tongkat Ali 1,000mg · Oral HA 100-120mg · Epicatechin 500mg · L-Carnitine 2g (4 tabs)',tag:'supp'},
-      {id:'m5',text:'Liquid IV',note:'Electrolytes for POTS.',tag:'supp'},
+      {id:'m_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Bupropion 300mg XL · Minoxidil 5mg · Clonidine 0.2mg · Tadalafil 20mg · Anavar 10mg · TUDCA 500mg · Nattokinase 2,000 FU · Dandelion Root 500mg',tag:'med'},
+      {id:'m_supps',text:'Supplements',note:'D3+K2 5,000IU · Tongkat Ali 1,000mg · Oral HA 100mg · Epicatechin 500mg · L-Carnitine 2g (4 tabs) · Selenium 200mcg · Maca Root 3,000mg',tag:'supp'},
+      {id:'m5',text:'Liquid IV',note:'Electrolytes for POTS management.',tag:'supp'},
     ]
   },
   {id:'am_shower',type:'group',text:'Shower',tag:'grooming',showIf:'sa_shower',
     children:[
       {id:'am_sh0',type:'header',text:'In Shower'},
-      {id:'am_sh1',text:'Shampoo',note:'ABBA Gentle on most days · clarifying shampoo 1-2x/week on swim days to remove chlorine.',tag:'hair'},
-      {id:'am_sh2',text:'Ouai Curl Conditioner Thick',note:'Ends and mid-lengths only — never roots. Leave some in.',tag:'hair'},
-      {id:'am_sh3',text:'Native citrus body wash',tag:'grooming'},
-      {id:'am_sh3b',text:'Naturium niacinamide wash — chest and back',note:'Leave on 30-60 sec before rinsing. Regulates sebum, reduces body acne. Especially important on TRT as DHT rises.',tag:'skin'},
-      {id:'am_sh4',type:'header',text:'Out of Shower'},
-      {id:'am_sh5',text:'Scrunch hair with microfiber towel',note:'Mostly dry, not completely.',tag:'hair'},
-      {id:'am_sh6',text:'BB cream — scrunch in',note:'Small amount. Scrunch upward from ends.',tag:'hair'},
-      {id:'am_sh7',text:'LRP Lipikar AP+ Max — full body',note:'While skin still slightly damp.',tag:'skin'},
-      {id:'am_sh8',text:'CeraVe SA lotion — arms',note:'KP treatment.',tag:'skin'},
-      {id:'am_sh9',text:'Air dry completely — hands off',tag:'hair'},
-      {id:'am_sh10',text:'Scrunch out crunch',note:'Only when 100% dry.',tag:'hair'},
+      {id:'am_keto',text:'Ketoconazole shampoo — 2-3x weekly',note:'Leave on scalp 3-5 min before rinsing. Treats dandruff · reduces scalp DHT · supports hair density. Not every shower.',tag:'grooming',showEveryNDays:2,startKey:'keto'},
+      {id:'am_sh1',text:'ABBA shampoo',note:'Gentle on most days · clarifying shampoo on swim days to remove chlorine.',tag:'hair'},
+      {id:'am_sh2',text:'Ouai Thick Curl Conditioner',note:'Ends and mid-lengths only · never roots · leave some in.',tag:'hair'},
+      {id:'am_sh3b',text:'Niacinamide body wash — chest and back',note:'Leave on 30-60 sec before rinsing. Controls sebum · reduces body acne from TRT DHT. Cetaphil or Naturium.',tag:'skin'},
+      {id:'am_sh3',text:'Native body wash — rest of body',tag:'grooming'},
+      {id:'am_sh4',text:'Cetaphil foam wash — face',note:'Last step in shower. Face only.',tag:'skin'},
+      {id:'am_sh4b',type:'header',text:'Out of Shower'},
+      {id:'am_sh5',text:'Scrunch hair with microfiber towel',note:'Mostly dry, not completely. No rubbing.',tag:'hair'},
+      {id:'am_sh6',text:'Baby curl or curl cream — scrunch in',note:'Small amount into damp hair. Scrunch upward from ends.',tag:'hair'},
+      {id:'am_sh7',text:'Air dry completely — hands off',note:'Do not touch until 100% dry. Touching while drying = frizz and lost curl definition.',tag:'hair'},
     ]
   },
   {id:'sa0',type:'header',text:'Skincare AM'},
   {id:'sa_cleanse',type:'choice',text:'AM Cleanse',
     opts:[
-      {id:'sa_pad',label:'Cetaphil SA Pad',note:'Cleanses + exfoliates with SA. Good default on non-shower mornings.'},
-      {id:'sa_water',label:'Micellar Water',note:'Gentler option on non-shower mornings.'},
-      {id:'sa_shower',label:'Showered',note:'Foam wash + CeraVe SA done in shower — nothing extra needed here.'}
+      {id:'sa_pad',label:'SA Pad — face + neck',note:'Cetaphil SA pad. Face and neck both. Good default on all non-shower mornings.'},
+      {id:'sa_shower',label:'Showered',note:'Foam wash done in shower — nothing extra needed here.'}
     ]
   },
-  {id:'sa2',text:'Timeless Vitamin C serum',note:'Apply to clean dry skin. Let absorb 1-2 min.',tag:'skin'},
-  {id:'sa_az',text:'Azelaic acid cream — face and neck',note:'The Ordinary. Morning only. After Vitamin C — brightening, tone, redness reduction.',tag:'skin'},
-  {id:'sa4',text:'LRP matte moisturizer',note:'Both are LRP Toleriane Matte. SPF version when going outside · non-SPF on stay-in days.',tag:'skin'},
-  {id:'sa5',text:'Aquaphor — lips',note:'Apply after skincare. Reapply throughout the day as needed.',tag:'skin'},
+  {id:'sa2',text:'Vitamin C serum',note:'Timeless or equivalent. Apply to clean dry skin. Let absorb 2-3 min before next step.',tag:'skin'},
+  {id:'sa_az',text:'Azelaic acid — face and neck',note:'The Ordinary azelaic acid suspension. After Vitamin C. Brightening · tone evening · redness reduction.',tag:'skin'},
+  {id:'sa4',text:'LRP Matte moisturizer',note:'Toleriane Matte. No SPF needed in Washington fall/winter — UV is 0-2. Use SPF version if going outside in significant sun.',tag:'skin'},
+  {id:'sa5',text:'Aquaphor — lips',note:'Apply after skincare. Reapply throughout day as needed.',tag:'skin'},
   {id:'om0',type:'header',text:'Oral Care AM'},
-  {id:'om1',text:'Oral-B electric + Colgate Optic White',note:'2 min, light pressure.',tag:'oral'},
-  {id:'om2',text:'Floss',note:'Can skip if doing in evening — twice daily is fine.',tag:'oral'},
-  {id:'om3',text:'TheraBreath AM formula',note:'Morning antibacterial rinse.',tag:'oral'},
+  {id:'om1',text:'Electric brush + Optic White toothpaste',note:'2 min light pressure. Oral-B preferred.',tag:'oral'},
+  {id:'om2',text:'Floss',note:'Can skip AM if doing PM — at minimum once daily.',tag:'oral'},
+  {id:'om3',text:'TheraBreath AM rinse',note:'Morning antibacterial formula.',tag:'oral'},
   {id:'om4',text:'Tongue scraper',note:'10 seconds.',tag:'oral'},
+  {id:'m_finish0',type:'header',text:'Finishing'},
+  {id:'m_hand',text:'Hand moisturizer — CeraVe',note:'10 seconds. Hands are visible and noticed especially with jewelry. Keeps skin smooth and healthy looking.',tag:'grooming'},
+  {id:'m_cologne',text:'Cologne — pulse points',note:'Wrist, neck, behind ears. One spray is usually enough given your natural androgenic musk baseline. Do not spray over sweat.',tag:'grooming'},
+  {id:'m_nail',text:'Nail care',note:'File · clean under nails · cuticle care. Hands get noticed especially with jewelry.',tag:'grooming',showOnDays:[0]},
+  {id:'m_brow',text:'Eyebrow grooming',note:'Tweeze stray hairs · keep shape clean. Not over-plucked.',tag:'grooming',showOnDays:[1,4]},
+  {id:'m_tint',text:'Eyebrow tint check',note:'Check if color is fading. Redye when getting too light — maintaining contrast against your tan is the whole point.',tag:'grooming',showOnDays:[0]},
 ];
+
 
 const MIDDAY=[
-  {id:'midday_grp',type:'group',text:'Smoothie',tag:'nutrition',showOnDays:[1,2,3,4,5,6],
+  {id:'midday_grp',type:'group',text:'Smoothie',tag:'nutrition',
     children:[
-      {id:'d0',text:'Make smoothie',note:'See Meals tab for full recipe.',tag:'nutrition'},
-      {id:'d_supps',text:'Supplements',note:'Zinc 30mg · Daily Multi · Montelukast 10mg · Vitamin C 1,000mg · NAC 1,200mg · Astaxanthin 12mg · Lycopene 20mg · Quercetin 2 caps · Lutein+Zeaxanthin · Boron 10mg · CDG 500mg · Epicatechin 500mg · Turkesterone 500mg · Beta-Ecdysterone 500mg',tag:'supp'},
+      {id:'d0',text:'Make smoothie',note:'Protein powder · collagen · creatine 5g · L-citrulline 6g · Greek yogurt · skim milk · PB2 · chia seeds · banana or fruit. See Meals tab.',tag:'nutrition'},
+      {id:'d_supps',text:'Midday supplements',note:'Zinc 30mg · Daily Multi · Montelukast 10mg · Vitamin C 1,000mg · NAC 1,200mg · Astaxanthin 12mg · Lycopene 20mg · Quercetin 1 cap · Lutein+Zeaxanthin · Boron 10mg · CDG 500mg · Epicatechin 500mg · Turkesterone 500mg · Beta-Ecdysterone 500mg',tag:'supp'},
     ]
   },
-  {id:'d_sun',text:'Sunday — supplements with food instead',note:'Skip smoothie today. Take midday supplements with lunch or snacks. Hit protein another way — extra bacon, Premier Protein, eggs.',tag:'nutrition',showOnDays:[0]},
-  {id:'d_card',text:'Cardarine — 10mg',note:'8 weeks on / 8 weeks off — do not run continuously. With midday supplements.',tag:'supp',compoundKey:'card'},
-  {id:'d_tan',text:'Tanning lotion (tan days only)',note:'Australian Gold or equivalent — apply before sun exposure. Optional but maximizes MT2 tanning effect.',tag:'grooming'},
-  {id:'d_water',text:'Drink full Hydro Flask #2',note:'32oz — midday fill.',tag:'supp'},
+  {id:'d_tan',text:'Tanning lotion — tan days only',note:'Australian Gold or equivalent. Apply before sun exposure. Maximizes MT2 tanning effect.',tag:'grooming'},
+  {id:'d_water',text:'Drink full Hydro Flask — fill 2',note:'32oz · midday fill.',tag:'supp'},
 ];
 
+
 const EVENING=[
-  {id:'eve_grp',type:'group',text:'Dinner + Supplements',tag:'nutrition',
+  {id:'eve_grp',type:'group',text:'Dinner',tag:'nutrition',
     groupNote:'See Meals tab for options',
     children:[
       {id:'e2',text:'Eat dinner',tag:'nutrition'},
-      {id:'e_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Clonidine 0.1mg',tag:'med'},
-      {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg · DIM 200mg',tag:'supp'},    ]
+      {id:'e_meds',text:'Medications',note:'Minocycline 50mg · Allegra 180mg · Clonidine 0.2mg',tag:'med'},
+      {id:'e_supps',text:'Supplements',note:'Fish Oil 3 softgels · Magnesium Glycinate 240mg · Ashwagandha 600mg · DIM 200mg · Phosphatidylserine 400mg',tag:'supp'},
+    ]
   },
-  {id:'e_reta',text:'Retatrutide 2mg — weekly dose',compoundKey:'reta',note:'Every Wednesday. Maintenance dose after 1.5 years. Subcutaneous.',tag:'peptide',showOnDays:[3]},
+  {id:'e_reta',text:'Retatrutide — 3mg weekly dose',compoundKey:'reta',note:'Every Wednesday. SubQ. 3mg current dose — building toward 3.5mg sweet spot. GLP-1/GIP/glucagon triple agonist.',tag:'peptide',showOnDays:[3]},
   {id:'sp_shower',type:'group',text:'Shower',tag:'grooming',showIf:'pms_shower',
     children:[
       {id:'sp_s0',type:'header',text:'In Shower'},
-      {id:'sp_s1',text:'Shampoo',note:'ABBA Gentle on most days · clarifying shampoo 1-2x/week on swim days to remove chlorine.',tag:'hair'},
-      {id:'sp_s2',text:'Ouai Curl Conditioner Thick',note:'Ends and mid-lengths only. Leave some in.',tag:'hair'},
-      {id:'sp_s3',text:'Native citrus body wash',tag:'grooming'},
-      {id:'sp_s3b',text:'Naturium niacinamide wash — chest and back',note:'Leave on 30-60 sec before rinsing. Regulates sebum, reduces body acne.',tag:'skin'},
+      {id:'sp_keto',text:'Ketoconazole shampoo — if hair wash day',note:'2-3x weekly. Leave on scalp 3-5 min. Not every shower.',tag:'grooming'},
+      {id:'sp_s1',text:'ABBA shampoo',note:'Gentle on most days · clarifying on swim days.',tag:'hair'},
+      {id:'sp_s2',text:'Ouai Thick Curl Conditioner',note:'Ends and mid-lengths · leave some in.',tag:'hair'},
+      {id:'sp_s3b',text:'Niacinamide body wash — chest and back',note:'Leave on 30-60 sec. Controls sebum · reduces body acne.',tag:'skin'},
+      {id:'sp_s3',text:'Native body wash — rest of body',tag:'grooming'},
+      {id:'sp_s4',text:'Cetaphil foam wash — face',note:'Last step.',tag:'skin'},
       {id:'sp_s6',type:'header',text:'Out of Shower'},
-      {id:'sp_s7',text:'Scrunch hair with microfiber towel',note:'Mostly dry, not completely.',tag:'hair'},
-      {id:'sp_s8',text:'BB cream — scrunch in',note:'Small amount. Scrunch upward from ends.',tag:'hair'},
-      {id:'sp_s9',text:'LRP Lipikar AP+ Max — full body',note:'While skin still slightly damp.',tag:'skin'},
-      {id:'sp_s10',text:'CeraVe SA lotion — arms',note:'KP treatment.',tag:'skin'},
-      {id:'sp_s17',text:'Air dry hair — hands off',tag:'hair'},
-      {id:'sp_s18',text:'Scrunch out crunch',note:'Only when 100% dry.',tag:'hair'},
+      {id:'sp_s7',text:'Scrunch hair with microfiber towel',tag:'hair'},
+      {id:'sp_s8',text:'Baby curl or curl cream — scrunch in',note:'Into damp hair. Scrunch upward.',tag:'hair'},
+      {id:'sp_s9',text:'Air dry — hands off until fully dry',tag:'hair'},
     ]
   },
   {id:'pms_hd',type:'header',text:'Skincare PM'},
   {id:'pms_cleanse',type:'choice',text:'Evening cleanse',
     opts:[
-      {id:'pms_shower',label:'Showered',note:'Foam wash + CeraVe SA done in shower — skip extra cleanse.'},
-      {id:'pms_water',label:'Micellar water',note:'Gentle cleanse on no-shower days.'},
-      {id:'pms_pad',label:'Cetaphil SA pad',note:'SA cleanse on no-shower days.',hideIfChoiceActive:'sa_pad'},
+      {id:'pms_shower',label:'Showered',note:'Foam wash done in shower — skip extra cleanse.'},
+      {id:'pms_pad',label:'SA Pad — face + neck',note:'Cetaphil SA pad on face and neck. No-shower default.'},
     ]
   },
-  {id:'pms_wait1',text:'Wait 10 min — face fully dry',note:'Completely dry before tretinoin. Damp skin = more irritation.',tag:'skin'},
-  {id:'pms_tret',text:'Tretinoin 0.05% — face / 0.1% — body',note:'Face: pea-sized 0.05%, full face, avoid eye area. Body: 0.1% on chest and back on shower nights. Daily consistency is everything.',tag:'skin'},
+  {id:'pms_wait1',text:'Wait 10 min — face fully dry',note:'Completely dry before tretinoin. Damp skin = more irritation and peeling.',tag:'skin'},
+  {id:'pms_tret',text:'Tretinoin 0.05% — face',note:'Pea-sized amount. Full face · avoid eye area. Daily consistency is everything for skin remodeling.',tag:'skin'},
   {id:'pms_wait2',text:'Wait 20 min',note:'Let tretinoin fully absorb before moisturizer.',tag:'skin'},
   {id:'pms_moist',text:'LRP Double Repair moisturizer',note:'Full face including around eyes.',tag:'skin'},
-  {id:'pms_vol',text:'Volufiline',note:'Under brow, under eyes, lips.',tag:'skin'},
-  {id:'pms_lash',text:'The Ordinary lash serum',note:'Lash line only.',tag:'skin'},
-  {id:'pms_laneige',text:'Laneige lip mask',note:'Overnight lip treatment — repairs and softens.',tag:'skin'},
-  {id:'pms_aqua',text:'Aquaphor — lips',note:'Seal everything in. Final step.',tag:'skin'},
-  {id:'op0',type:'header',text:'Oral Care PM'},
-  {id:'op1',text:'Oral-B electric + Colgate Optic White',note:'2 min, light pressure.',tag:'oral'},
+  {id:'pms_vol',text:'Volufiline',note:'Under brow · under eyes · lips. Volumizing effect over time.',tag:'skin'},
+  {id:'pms_lash',text:'The Ordinary Peptide Lash serum',note:'Lash line only. Consistent nightly use compounds over weeks.',tag:'skin'},
+  {id:'pms_laneige',text:'Laneige Lip Mask',note:'Overnight lip treatment.',tag:'skin'},
+  {id:'pms_aqua',text:'Aquaphor — lips',note:'Final step. Seals everything in.',tag:'skin'},
+  {id:'pms_facial',text:'Facial lymphatic massage — 2-3 min',note:'Upward strokes along jawline and cheekbones. Promotes drainage · reduces puffiness · sharpens facial definition. Do before moisturizer or after.',tag:'grooming'},
+  {id:'om_pm0',type:'header',text:'Oral Care PM'},
+  {id:'op1',text:'Electric brush + Optic White',note:'2 min light pressure.',tag:'oral'},
   {id:'op2',text:'Floss',note:'Daily — especially important with Invisalign.',tag:'oral'},
-  {id:'op3',text:'TheraBreath PM formula',note:'Evening antibacterial rinse.',tag:'oral'},
-  {id:'op4',text:'Tongue scraper',note:'10 seconds — daily.',tag:'oral'},
-  {id:'e6',text:'Invisalign whitening — 30-60 min (every other day)',note:'Opalescence 35% CP. Apply to inside front of each tray, wear 30-60 min. Every other day max — 3-4x per week. Do not do daily at this strength.',tag:'oral'},
-  {id:'e6b',text:'Remove trays → rinse mouth → brush gel off teeth',note:'Per Opalescence instructions: remove tray, rinse, then gently brush the gel off. Clean trays with cleaning tablets, rinse, put back in.',tag:'oral'},
-  {id:'e_pm0',type:'header',text:'PM Injections (fasted, 2+ hrs after last meal)'},
-  {id:'e_cjc',text:'CJC-1295 + Ipamorelin — 0.5mg each',compoundKey:'cjcipa',note:'Blended in same injection. SubQ pre-sleep. CJC amplifies nocturnal GH pulse · Ipamorelin adds selective GH release without cortisol spike.',tag:'peptide'},
-  {id:'e_ghkcu',text:'GHK-Cu — 4mg',compoundKey:'ghkcu',note:'SubQ. No fasting required — any time works. Typically with evening injections for convenience.',tag:'peptide'},
-  {id:'e_tb500',text:'TB-500 — 2mg',compoundKey:'tb500',note:'Draw with 21g → inject with 27-29g subQ. Loading: every 3 days x4-6 weeks. Then once weekly maintenance.',tag:'peptide',showEveryNDays:3,startKey:'tb500'},
-  {id:'e_glut',text:'Glutathione — 200mg',compoundKey:'glut',note:'SubQ. Skin brightening + systemic antioxidant. Can increase to 400mg.',tag:'peptide',showEveryNDays:2,startKey:'glut'},
-  {id:'e_kisp',text:'Kisspeptin — 50-100mcg',compoundKey:'kisspeptin',note:'Mon/Wed/Fri — subcutaneous. LH + testosterone support.',tag:'peptide',showOnDays:[1,3,5]},
-  {id:'e_bluelight',text:'Put on blue light glasses',note:'Prescription + blue light filter — wear for evening screen time. Easy to forget, makes a real difference for sleep onset.',tag:'sleep'},
-  {id:'e_mastic',text:'Mastic gum — 10-20 min',note:'Second session. Do while watching something or winding down.',tag:'grooming'},
-  {id:'e_thc',text:'THC — 20-40mg (optional)',note:'Tincture: take 30-45 min before target sleep time — hold under tongue. Edible: take 60-75 min before. Don\'t push past the peak window or sleep onset gets harder. Higher end (40mg) for pain/flare days only.',tag:'sleep'},
-  {id:'e_read',text:'20 min reading or wind-down gaming',note:'Physical book or low-stimulation gaming — occupies ADHD brain enough to slow thought spiral without ramping up.',tag:'sleep'},
-  {id:'e_mel',text:'Melatonin 2-2.5mg (optional)',note:'Only on late swim nights or when sleep onset is genuinely difficult. Not every night — reserve it so it stays effective.',tag:'sleep'},
-  {id:'e_linen',text:'Lavender linen spray on pillow',note:'A few spritzes right before getting into bed. Helps sleep onset.',tag:'sleep'},
-  {id:'e_water',text:'Drink full Hydro Flask #3',note:'32oz — aim for 3 fills daily.',tag:'supp'},
+  {id:'op3',text:'TheraBreath PM rinse',note:'Evening antibacterial formula.',tag:'oral'},
+  {id:'op4',text:'Tongue scraper',note:'10 seconds.',tag:'oral'},
+  {id:'e6',text:'Opalescence whitening — 30-60 min',note:'Every other day max · 3-4x per week. Apply to inside of front tray · wear 30-60 min · remove · rinse · gently brush gel off teeth · clean trays.',tag:'oral'},
+  {id:'e_pm0',type:'header',text:'PM Injections'},
+  {id:'e_ghkcu',text:'GHK-Cu — 5mg',compoundKey:'ghkcu',note:'SubQ. No fasting required — any time works. 50mg vial + 2.5ml BAC = 20mg/ml → 25 units = 5mg. Skin · hair · joints · collagen.',tag:'peptide'},
+  {id:'e_tb500',text:'TB-500 — 2mg',compoundKey:'tb500',note:'When active: draw 21g → inject 29g subQ. Loading every 3 days then weekly maintenance.',tag:'peptide',showEveryNDays:3,startKey:'tb500'},
+  {id:'e_mastic',text:'Mastic gum — session 2 (15-20 min)',note:'Second daily session. Do while watching something or winding down.',tag:'grooming'},
+  {id:'e_bluelight',text:'Blue light glasses on',note:'Prescription + blue light filter for evening screen time. Meaningful difference for sleep onset.',tag:'sleep'},
+  {id:'e_thc',text:'THC (optional)',note:'Tincture: 30-45 min before target sleep time. Edible: 60-75 min before. Do not push past the peak window.',tag:'sleep'},
+  {id:'e_read',text:'Wind-down — reading or low-stim gaming',note:'Physical book or low-stimulation game. Occupies ADHD brain enough to slow thought spiral without ramping up dopamine.',tag:'sleep'},
+  {id:'bed_ldn',text:'LDN — 3mg',compoundKey:'ldn',note:'Bedtime ONLY — transient opioid blockade during sleep triggers endorphin rebound. Morning dosing loses most benefit.',tag:'med'},
+
+  {id:'e_mel',text:'Melatonin — 2mg (optional)',note:'Only when sleep onset is genuinely difficult. Not nightly — reserve it so it stays effective.',tag:'sleep'},
+  {id:'e_water',text:'Drink full Hydro Flask — fill 3',note:'32oz · aim for 3 fills daily for POTS management.',tag:'supp'},
 ];
 
 const LIFT=[
@@ -322,35 +323,39 @@ const SWIM=[
   {id:'sw2',text:'King Aquatics practice',note:'2-2.5 hrs. Pre-pool: wet hair + light conditioner. Post-pool: rinse immediately.',tag:'fitness'},
 ];
 
-const TABS=[['daily','Daily'],['meals','Meals'],['stack','Stack'],['hardmax','Hardmax'],['metrics','Metrics']];
+const TABS=[['daily','Daily'],['meals','Meals'],['stack','Stack'],['hardmax','Hardmax']];
 
 const STACK=[
-  {label:'Morning',color:'#C8963C',rows:[
-    ['Testosterone Enanthate','100mg start → 125mg if tolerated (step down to 75mg if symptoms)','Every 3 days — subQ','Hormone','Primary anabolic driver · body composition · libido · musk · confidence · facial masculinization · fat redistribution'],
+  {label:'Morning',color:'#4A9EFF',rows:[
+    ['Testosterone Enanthate','150mg (0.6ml)','Every 3 days — subQ','Hormone','Primary anabolic driver · body composition · libido · musk · confidence · facial masculinization · fat redistribution'],
     ['HCG','500IU','Every 3 days — subQ','Hormone','Maintains testicular function + LH activity during TRT · prevents atrophy · preserves fertility'],
-    ['GH','4 IUs','Fasted, first','Peptide','Body composition · fat loss · skin quality · recovery · sleep depth'],
+    ['GH','5.4 IU fasted','Morning — 15 units from 36 IU vial','Peptide','Body composition · fat loss · skin quality · recovery · sleep depth'],
     ['Minocycline','50mg','With breakfast','Medication','Acne + folliculitis control — dermatologist prescribed'],
     ['Allegra','180mg','With breakfast','Medication','H1 antihistamine — allergies + MCAS histamine control'],
     ['Bupropion','300mg XL','With breakfast','Medication','ADHD · mood · energy via dopamine + norepinephrine'],
     ['Minoxidil','5mg','With breakfast','Medication','Hair growth · scalp density · body hair stimulus · vasodilator · monitor BP given POTS + tadalafil + clonidine stack'],
     ['L-Carnitine','2g (4x 500mg tabs)','With breakfast · pre-workout on training days','Supplement','Androgen receptor upregulation synergistic with TRT · fatty acid transport into mitochondria · fat oxidation · endurance support'],
     ['Epicatechin','500mg','DOSE 1 — Morning with breakfast','Supplement','Myostatin inhibitor · nitric oxide via eNOS · insulin sensitivity · fat-soluble take with food · second dose at midday'],
+    ['Nattokinase','2,000 FU','Morning with food','Supplement','Blood viscosity management · prevents hematocrit thickening from TRT without blood donation · anticoagulant properties · take on empty stomach if possible'],
+    ['Dandelion Root','500mg','Morning with food','Supplement','Natural diuretic · reduces water retention from GH and TRT estrogen · potassium-sparing unlike pharmaceutical diuretics'],
+    ['Maca Root','3,000mg (black maca preferred)','Morning with food','Supplement','Libido and sexual vitality via endocannabinoid system · energy and drive · seminal volume support · adaptogenic · different pathway from TRT · stackable'],
+    ['MOTS-C','5mg','Mon/Wed/Fri — morning fasted subQ','Peptide','Mitochondrial peptide · AMPK activation · insulin sensitivity · fat oxidation · endurance · swimming performance · reconstitute with BAC water'],
+    ['Selenium','200mcg','Morning with food','Supplement','Leydig cell protection via selenoproteins · T4 to T3 thyroid conversion · testosterone synthesis cofactor · antioxidant'],
     ['Oxandrolone (Anavar)','10mg daily','Morning with breakfast · cycle 8-12 weeks','Medication','Mild anabolic · clean dry strength gains · lean mass · connective tissue collagen synthesis · no water retention · run with TUDCA throughout cycle'],
     ['TUDCA','500mg daily','Morning with breakfast · run throughout Anavar cycle + 4 weeks after','Medication','Liver protection during oral steroid use · bile acid support · reduces hepatic stress from Anavar · essential companion to any oral anabolic'],
-    ['Low Dose Naltrexone (LDN)','1.5-4.5mg','Before bed — titrate up over 4-6 weeks','Medication','Neuroinflammation reduction · EDS pain · MCAS mast cell modulation · immune regulation · sleep quality · mood stability'],
-    ['Clonidine','0.1mg','With breakfast','Medication','Anxiety reduction · blood pressure · calm nervous system'],
+    ['Clonidine','0.2mg x3 daily','With breakfast, midday, evening','Medication','Anxiety reduction · blood pressure · POTS orthostatic stability · sympathetic tone reduction · monitor for lightheadedness with tadalafil stack'],
     ['Tadalafil (Cialis)','20mg','With breakfast','Medication','PDE5 inhibitor · daytime vasodilation · cardiovascular endothelial benefit · peak vascularity during the day · monitor BP given POTS + Clonidine + L-citrulline'],
     ['D3 + K2','5,000 IU','With breakfast','Supplement','Testosterone support · immunity · bone health · mood'],
     ['Tongkat Ali','1,000mg','With breakfast','Supplement','Free testosterone ↑ · SHBG ↓ · libido · LH stimulation'],
-    ['Oral HA','100-120mg','With breakfast','Supplement','Skin hydration + elasticity from the inside'],
+    ['Oral HA','100mg','With breakfast','Supplement','Skin hydration + elasticity from the inside'],
     ['Liquid IV','1 packet','Morning, within 1-2 hrs','Supplement','Electrolytes · POTS management · hydration foundation'],
   ]},
   {label:'Midday',color:'#5B9FC8',rows:[
     ['Protein Powder','1 scoop','In smoothie','Supplement','Muscle protein synthesis · recovery · daily protein target'],
-    ['Creatine','3-5g','In smoothie','Supplement','Strength · muscle fullness · cognitive function'],
+    ['Creatine','5g','In smoothie','Supplement','Strength · muscle fullness · cognitive function'],
     ['Collagen + Probiotics','10-15g','In smoothie','Supplement','Skin elasticity · joint support · gut health'],
     ['Beta Alanine','3-4g','In smoothie','Supplement','Muscle endurance · acid buffering — especially for swimming'],
-    ['L-Citrulline','3-6g','In smoothie','Supplement','Nitric oxide · blood flow · pumps · cardiovascular health'],
+    ['L-Citrulline','6g','In smoothie','Supplement','Nitric oxide · blood flow · pumps · cardiovascular health'],
     ['Zinc','30mg','With smoothie','Supplement','Testosterone support · skin healing · immune function'],
     ['Daily Multi','As directed','With smoothie','Supplement','General micronutrient coverage and baseline support'],
     ['Montelukast','10mg','With smoothie','Medication','Leukotriene blocker — allergy + MCAS control'],
@@ -358,7 +363,7 @@ const STACK=[
     ['NAC','1,200mg (2 caps)','With smoothie','Supplement','Glutathione precursor · antioxidant · MCAS support · liver protection · increased from 600mg to partially replace injectable glutathione'],
     ['Astaxanthin','12mg','With smoothie','Supplement','Potent antioxidant · skin photoprotection · anti-inflammatory'],
     ['Lycopene','20mg','With smoothie','Supplement','Skin photoprotection · cardiovascular · antioxidant'],
-    ['Quercetin Phytosome','2 caps','With smoothie','Supplement','Mast cell stabilizer · anti-inflammatory · skin health · synergizes with Vitamin C'],
+    ['Quercetin Phytosome','1 cap','With smoothie','Supplement','Mast cell stabilizer · anti-inflammatory · skin health · synergizes with Vitamin C'],
     ['Lutein + Zeaxanthin','20mg / 4mg','With smoothie','Supplement','Eye health · visual acuity · macular protection'],
     ['Boron','10mg','With smoothie','Supplement','Free testosterone ↑ · SHBG ↓ · estrogen balance'],
     ['Turkesterone','500mg','With smoothie','Supplement','Anabolic via estrogen receptor beta · separate pathway from TRT · lean mass · muscle hardness · no hormonal suppression'],
@@ -370,20 +375,23 @@ const STACK=[
   {label:'Evening',color:'#9B7FD4',rows:[
     ['Minocycline','50mg','With dinner','Medication','Acne + folliculitis control — second daily dose'],
     ['Allegra','180mg','With dinner','Medication','H1 antihistamine — second dose for 24hr coverage'],
-    ['Clonidine','0.1mg','With dinner','Medication','Evening anxiety · sleep onset · blood pressure'],
+    ['Clonidine','0.2mg','With dinner','Medication','Third daily dose · evening anxiety · blood pressure · sleep onset'],
     ['DIM','200mg','Evening with dinner','Supplement','Promotes conversion of potent estrogens to weaker metabolites · estrogen management on TRT · fat-soluble take with food'],
     ['Fish Oil','3 softgels','Fattiest meal','Supplement','Omega-3 anti-inflammatory · cardiovascular · skin health · 2g+ EPA/DHA'],
     ['Magnesium Glycinate','240mg','With dinner','Supplement','Sleep quality · muscle relaxation · calm nervous system'],
     ['Ashwagandha','600mg','With dinner','Supplement','Cortisol ↓ · testosterone support · stress adaptation · sleep'],
-    ['CJC-1295','0.5mg','Fasted, pre-sleep','Peptide','GHRH analog — stimulates + amplifies natural nocturnal GH pulse'],
-    ['Ipamorelin','0.5mg','Fasted, pre-sleep','Peptide','Selective GH release — pairs with CJC without cortisol or prolactin spike'],
-    ['GHK-Cu','4mg','Evening (flexible — any time works)','Peptide','Skin regeneration · collagen remodeling · hair growth · anti-inflammatory'],
+    ['GHK-Cu','5mg','Evening (flexible — any time works)','Peptide','Skin regeneration · collagen remodeling · hair growth · anti-inflammatory'],
+  ]},
+  {label:'Before Bed',color:'#6A6A9B',rows:[
+    ['LDN','3mg (titrating to 4.5mg)','Bedtime ONLY — timing critical','Medication','Transient opioid blockade during sleep triggers endorphin rebound · neuroinflammation reduction · MCAS mast cell modulation · EDS pain · sleep quality · morning dosing loses most benefit'],
+    ['Phosphatidylserine','400mg','Before bed','Supplement','Blunts cortisol awakening response · extends sleep past the 6-6.5 hr TRT-driven ceiling · better GH pulse overnight · cognitive support'],
   ]},
   {label:'Weekly',color:'#D46464',rows:[
-    ['Retatrutide','2mg','Wednesday — same day weekly','Peptide','GLP-1/GIP/glucagon triple agonist — body composition + weight stability maintenance after 1.5yr protocol'],
+    ['Retatrutide','3mg','Wednesday — same day weekly','Peptide','GLP-1/GIP/glucagon triple agonist — body composition + weight stability maintenance after 1.5yr protocol'],
   ]},
   {label:'Not Currently Using',color:'#282836',rows:[
-    ['Kisspeptin','\u2014','Paused','Peptide','Paused on TRT — HCG replaces LH stimulation'],
+    ['Kisspeptin','—','Paused','Peptide','Paused on TRT — HCG replaces LH stimulation'],
+    ['CJC-1295 + Ipamorelin','—','Dropped — causes morning puffiness','Peptide','Confirmed binary cause of daily facial puffiness regardless of dose — face measurably better without it — exogenous GH 5.4 IU covers the GH axis adequately'],
     ['Selank','\u2014','Removed','Peptide','Removed — insufficient benefit to justify injection'],
     ['TB-500','\u2014','Pending','Peptide','Toggle on when ready — systemic connective tissue remodeling'],
     ['Glutathione','\u2014','Inactive','Peptide','Replaced by NAC 1,200mg — toggle on if reconsidering'],
@@ -482,11 +490,11 @@ function daysUntilNext(startDateStr,n){
 }
 
 const INJ_COMPOUNDS=[
-  {key:'testE',label:'Testosterone E',every:3,dose:'100mg start (0.4ml) → step down to 75mg if needed',color:'#C8963C'},
+  {key:'testE',label:'Testosterone E',every:3,dose:'150mg (0.6ml)',color:'#4A9EFF'},
   {key:'hcg',label:'HCG',every:3,dose:'500IU',color:'#5B9FC8'},
   {key:'glut',label:'Glutathione',every:2,dose:'200mg',color:'#9B7FD4'},
   {key:'tb500',label:'TB-500',every:3,dose:'2mg loading → 2mg maintenance',color:'#6ABCBC'},
-  {key:'anavar',label:'Anavar (cycle tracker)',every:1,dose:'10mg daily — 8 week cycle',color:'#C8963C'},
+  {key:'anavar',label:'Anavar (cycle tracker)',every:1,dose:'10mg daily — 8 week cycle',color:'#4A9EFF'},
 ];
 
 function renderInjectionSchedule(){
@@ -519,7 +527,7 @@ function renderInjectionSchedule(){
         const inp=document.createElement('input');inp.type='date';
         const now=new Date();
         inp.value=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
-        inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:5px 8px;color:#EFEFEF;font-size:11px;width:130px';
+        inp.style.cssText='background:#111116;border:1px solid #4A9EFF;border-radius:8px;padding:5px 8px;color:#EFEFEF;font-size:11px;width:130px';
         const conf=document.createElement('button');
         conf.textContent='Save';
         conf.style.cssText='padding:5px 10px;background:#4A7A50;border:none;border-radius:8px;color:#fff;font-size:11px;cursor:pointer';
@@ -531,7 +539,7 @@ function renderInjectionSchedule(){
     } else {
       const status=el('div');status.style.cssText='display:flex;align-items:center;gap:8px';
       const badge=el('div');
-      badge.style.cssText=`padding:3px 8px;border-radius:99px;font-size:10px;font-weight:700;background:${d===0?'rgba(200,150,60,0.15)':'#111118'};color:${d===0?'#C8963C':'#3A3A48'};border:1px solid ${d===0?'rgba(200,150,60,0.3)':'#1C1C24'}`;
+      badge.style.cssText=`padding:3px 8px;border-radius:99px;font-size:10px;font-weight:700;background:${d===0?'rgba(200,150,60,0.15)':'#111118'};color:${d===0?'#4A9EFF':'#3A3A48'};border:1px solid ${d===0?'rgba(200,150,60,0.3)':'#1C1C24'}`;
       badge.textContent=d===0?'Today ✓':`In ${d}d`;
       const reset=el('button');
       reset.style.cssText='padding:3px 7px;background:none;border:1px solid #1C1C24;border-radius:6px;color:#3A3A48;font-size:9px;cursor:pointer';
@@ -541,7 +549,7 @@ function renderInjectionSchedule(){
         wrap.style.cssText='display:flex;align-items:center;gap:6px';
         const inp=document.createElement('input');inp.type='date';
         inp.value=S.injStart[c.key]||'';
-        inp.style.cssText='background:#111116;border:1px solid #C8963C;border-radius:8px;padding:5px 8px;color:#EFEFEF;font-size:11px;width:120px';
+        inp.style.cssText='background:#111116;border:1px solid #4A9EFF;border-radius:8px;padding:5px 8px;color:#EFEFEF;font-size:11px;width:120px';
         const conf=document.createElement('button');
         conf.textContent='Save';
         conf.style.cssText='padding:5px 8px;background:#4A7A50;border:none;border-radius:8px;color:#fff;font-size:11px;cursor:pointer';
@@ -561,15 +569,15 @@ const TOGGLEABLE_COMPOUNDS=[
   {key:'allegra',label:'Allegra 180mg',defaultActive:true,cat:'Medications'},
   {key:'bupropion',label:'Bupropion 300mg XL',defaultActive:true,cat:'Medications'},
   {key:'minoxidil',label:'Minoxidil 5mg (oral)',defaultActive:true,cat:'Medications'},
-  {key:'clonidine',label:'Clonidine 0.1mg',defaultActive:true,cat:'Medications'},
+  {key:'clonidine',label:'Clonidine 0.2mg x3 daily',defaultActive:true,cat:'Medications'},
   {key:'montelukast',label:'Montelukast 10mg',defaultActive:true,cat:'Medications'},
-  {key:'tadalafil',label:'Tadalafil 10mg',defaultActive:true,cat:'Medications'},
+  {key:'tadalafil',label:'Tadalafil 20mg',defaultActive:true,cat:'Medications'},
   {key:'anavar',label:'Oxandrolone (Anavar) 10mg',defaultActive:true,cat:'Medications'},
   {key:'tudca',label:'TUDCA 500mg',defaultActive:true,cat:'Medications'},
   {key:'anastrozole',label:'Anastrozole (AI) — reserve only',defaultActive:false,cat:'Medications'},
   {key:'d3k2',label:'D3 + K2 5,000 IU',defaultActive:true,cat:'Morning Supps'},
   {key:'tongkat',label:'Tongkat Ali 1,000mg',defaultActive:true,cat:'Morning Supps'},
-  {key:'oralha',label:'Oral HA 100-120mg',defaultActive:true,cat:'Morning Supps'},
+  {key:'oralha',label:'Oral HA 100mg',defaultActive:true,cat:'Morning Supps'},
   {key:'liquidiv',label:'Liquid IV',defaultActive:true,cat:'Morning Supps'},
   {key:'zinc',label:'Zinc 30mg',defaultActive:true,cat:'Midday Supps'},
   {key:'multi',label:'Daily Multi',defaultActive:true,cat:'Midday Supps'},
@@ -590,15 +598,23 @@ const TOGGLEABLE_COMPOUNDS=[
   {key:'ashwagandha',label:'Ashwagandha 600mg',defaultActive:true,cat:'Evening Supps'},
   {key:'gh',label:'Growth Hormone (GH)',defaultActive:true,cat:'Peptides & Injectables'},
   {key:'mt2',label:'MT-2 (Melanotan)',defaultActive:true,cat:'Peptides & Injectables'},
-  {key:'cjcipa',label:'CJC-1295 + Ipamorelin',defaultActive:true,cat:'Peptides & Injectables'},
+  {key:'cjcipa',label:'CJC-1295 + Ipamorelin',defaultActive:false,cat:'Peptides & Injectables'},
+  {key:'nattokinase',label:'Nattokinase 2,000 FU',defaultActive:true,cat:'Morning Supps'},
+  {key:'dandelion',label:'Dandelion Root 500mg',defaultActive:true,cat:'Morning Supps'},
+  {key:'maca',label:'Maca Root 3,000mg',defaultActive:true,cat:'Morning Supps'},
+  {key:'selenium',label:'Selenium 200mcg',defaultActive:true,cat:'Morning Supps'},
+  {key:'ps',label:'Phosphatidylserine 400mg',defaultActive:true,cat:'Evening Supps'},
+  {key:'ldn',label:'LDN 3mg',defaultActive:true,cat:'Medications'},
+  {key:'keto',label:'Ketoconazole Shampoo (2-3x/wk)',defaultActive:true,cat:'Medications'},
+  {key:'motsc',label:'MOTS-C 5mg (M/W/F)',defaultActive:true,cat:'Peptides & Injectables'},
   {key:'ghkcu',label:'GHK-Cu',defaultActive:true,cat:'Peptides & Injectables'},
   {key:'testE',label:'Testosterone Enanthate',defaultActive:true,cat:'Peptides & Injectables'},
   {key:'hcg',label:'HCG',defaultActive:true,cat:'Peptides & Injectables'},
-  {key:'kisspeptin',label:'Kisspeptin',defaultActive:true,note:'Pause when TRT starts',cat:'Peptides & Injectables'},
+  {key:'kisspeptin',label:'Kisspeptin',defaultActive:false,cat:'Peptides & Injectables'},
   {key:'reta',label:'Retatrutide',defaultActive:true,cat:'Peptides & Injectables'},
   {key:'selank',label:'Selank',defaultActive:false,cat:'Peptides & Injectables'},
   {key:'tb500',label:'TB-500',defaultActive:false,cat:'Peptides & Injectables'},
-  {key:'lcarnitine',label:'L-Carnitine',defaultActive:false,cat:'Peptides & Injectables'},
+  {key:'lcarnitine',label:'L-Carnitine 2g oral daily',defaultActive:true,cat:'Peptides & Injectables'},
   {key:'card',label:'Cardarine (GW501516)',defaultActive:false,note:'8 wks on / 8 wks off',cat:'Peptides & Injectables'},
   {key:'glut',label:'Glutathione',defaultActive:false,cat:'Peptides & Injectables'},
   {key:'nad',label:'NAD+',defaultActive:false,cat:'Peptides & Injectables'},
@@ -610,10 +626,10 @@ function compoundActive(key){
 }
 
 const RECON=[
-  {name:'GH',vial:'24 IU',bac:'1.2ml',conc:'20 IU/ml',dose:'4 IU',draw:'20 units',timing:'Morning fasted'},
-  {name:'Testosterone E',vial:'250mg/ml (pre-mixed oil)',bac:'n/a',conc:'250mg/ml',dose:'100mg start (75mg if symptoms)',draw:'40 units (0.4ml)',timing:'Every 3 days — subQ morning or evening'},
+  {name:'GH',vial:'36 IU',bac:'1ml',conc:'36 IU/ml',dose:'5.4 IU',draw:'15 units',timing:'Morning fasted'},
+  {name:'Testosterone E',vial:'250mg/ml (pre-mixed oil)',bac:'n/a',conc:'250mg/ml',dose:'150mg (0.6ml) — 60 units (75mg if symptoms)',draw:'60 units (0.6ml)',timing:'Every 3 days — subQ morning or evening'},
   {name:'CJC-1295 + Ipamorelin',vial:'10mg combined',bac:'1ml',conc:'10mg/ml',dose:'0.5mg each',draw:'10 units',timing:'Evening (flexible — any time works)'},
-  {name:'GHK-Cu',vial:'50mg',bac:'2.5ml',conc:'20mg/ml',dose:'4mg',draw:'20 units',timing:'Evening fasted'},
+  {name:'GHK-Cu',vial:'50mg',bac:'2.5ml',conc:'20mg/ml',dose:'5mg',draw:'25 units',timing:'Evening fasted'},
   {name:'MT-2',vial:'10mg',bac:'1ml',conc:'10mg/ml',dose:'0.5mg',draw:'5 units',timing:'Morning daily'},
   {name:'HCG',vial:'5,000 IU',bac:'1ml',conc:'5,000 IU/ml',dose:'500 IU',draw:'10 units',timing:'Every 3 days'},
   {name:'Glutathione',vial:'750mg',bac:'0.75ml',conc:'1,000mg/ml',dose:'200mg',draw:'20 units',timing:'Every 2 days'},
@@ -632,7 +648,7 @@ function renderRecon(){
     row.innerHTML=`
       <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
         <span style="font-size:13px;font-weight:600;color:#EFEFEF">${r.name}</span>
-        <span style="font-size:12px;font-weight:700;color:#C8963C">${r.draw}</span>
+        <span style="font-size:12px;font-weight:700;color:#4A9EFF">${r.draw}</span>
       </div>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <span style="font-size:10px;color:#5A5A68">Vial: <span style="color:#8A8A98">${r.vial}</span></span>
@@ -667,7 +683,7 @@ function renderCompoundToggles(){
       row.style.cssText='display:flex;align-items:center;padding:8px 0;border-bottom:1px solid #111118;gap:12px;cursor:pointer';
       row.onclick=()=>{S.activeCompounds[c.key]=!isActive;save();renderContent();};
       const tog=el('div');
-      tog.style.cssText=`width:38px;height:22px;border-radius:99px;background:${isActive?'#C8963C':'#1C1C24'};border:1px solid ${isActive?'#C8963C':'#282836'};position:relative;flex-shrink:0;transition:all .2s`;
+      tog.style.cssText=`width:38px;height:22px;border-radius:99px;background:${isActive?'#4A9EFF':'#1C1C24'};border:1px solid ${isActive?'#4A9EFF':'#282836'};position:relative;flex-shrink:0;transition:all .2s`;
       const thumb=el('div');
       thumb.style.cssText=`width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;${isActive?'right:2px':'left:2px'};transition:all .2s`;
       tog.appendChild(thumb);
@@ -687,7 +703,7 @@ function renderTRTTracker(){
   const wrap=el('div');
   wrap.style.cssText='margin:16px 16px 0;background:#0E0E14;border-radius:12px;overflow:hidden;border:1px solid #1C1C24';
   const hd=el('div');
-  hd.style.cssText='padding:10px 14px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#C8963C;border-bottom:1px solid #1A1A20';
+  hd.style.cssText='padding:10px 14px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#4A9EFF;border-bottom:1px solid #1A1A20';
   hd.textContent='TRT — Days Active';
   wrap.appendChild(hd);
   const body=el('div');body.style.cssText='padding:16px;text-align:center';
@@ -697,10 +713,10 @@ function renderTRTTracker(){
   const weeks=Math.floor(days/7);
   const rem=days%7;
   body.innerHTML=`
-    <div style="font-size:48px;font-weight:700;color:#C8963C;line-height:1">${days}</div>
+    <div style="font-size:48px;font-weight:700;color:#4A9EFF;line-height:1">${days}</div>
     <div style="font-size:12px;color:#5A5A68;margin-top:4px;margin-bottom:16px">days on TRT · started July 4, 2026</div>
     <div style="font-size:13px;color:#8A8A98">${weeks} week${weeks!==1?'s':''} ${rem>0?`+ ${rem} day${rem!==1?'s':''}`:'exactly'}</div>
-    <div style="font-size:11px;color:#3A3A48;margin-top:12px">100mg Testosterone Enanthate · every 3 days · subQ or IM vastus lateralis</div>
+    <div style="font-size:11px;color:#3A3A48;margin-top:12px">150mg Testosterone Enanthate · every 3 days · IM vastus lateralis</div>
   `;
   wrap.appendChild(body);
   return wrap;
@@ -980,7 +996,7 @@ function updateProgress(){
     return !!S.checked[i.id];
   }).length;
   const pct=all.length>0?Math.round(done/all.length*100):0;
-  const color=pct===100?'#5B9F6A':'#C8963C';
+  const color=pct===100?'#5B9F6A':'#4A9EFF';
   document.getElementById('pct').textContent=pct+'%';
   document.getElementById('pct').style.color=color;
   document.getElementById('sub').textContent=`${done}/${all.length} done`;
@@ -992,7 +1008,7 @@ function updateProgress(){
 // ── RENDER TABS ───────────────────────────────────────────────────────────────
 
 const PROCEDURES=[
-  {id:'rhino',name:'Rhinoplasty',sub:'Dorsal Hump Reduction',color:'#C8963C',
+  {id:'rhino',name:'Rhinoplasty',sub:'Dorsal Hump Reduction',color:'#4A9EFF',
     what:'Reduces the dorsal hump on the nasal bridge while preserving masculine character and Middle Eastern features. Can refine tip projection and overall nasal harmony.',
     notes:'Seek specialist in masculine and Middle Eastern rhinoplasty specifically. Istanbul is a strong option for cost and surgical volume. Non-surgical rhinoplasty with filler available as a reversible preview first. Disclose hEDS to any surgeon.',
     timing:'No prerequisite procedures — can be done independently whenever ready.'},
@@ -1016,7 +1032,7 @@ const PROCEDURES=[
     what:'Shortens the philtrum (distance between nose and upper lip) by removing a small strip of skin under the nose. Increases upper lip tooth show at rest, creates the slightly elevated upper lip curl that reads as confident and masculine. No added volume — purely structural.',
     notes:'One of the most naturally masculine lip procedures available. Conservative technique is key — over-resection creates an unnatural appearance. Seek surgeon with specific lip lift experience and a portfolio of male patients. Scar sits in the natural crease under the nose and becomes nearly invisible.',
     timing:'Standalone — no prerequisite procedures.'},
-  {id:'cornerlift',name:'Corner of Mouth Lift',sub:'Commissuroplasty',color:'#C8963C',
+  {id:'cornerlift',name:'Corner of Mouth Lift',sub:'Commissuroplasty',color:'#4A9EFF',
     what:'Small incisions at the corners of the mouth lift a neutral or downturned resting expression upward, creating the subtle natural slight smirk at rest. Reads as confident and sharp rather than done. No volume added.',
     notes:'Technique-sensitive — conservative lift is undetectable, over-correction looks surgical. Often combined with lip lift for cohesive result. Complements the aesthetic goal of a naturally confident resting expression.',
     timing:'Can be done alongside or after lip lift.'},
@@ -1029,7 +1045,7 @@ function renderHardmax(){
   hd.textContent='Theoretical Procedure Reference';
   f.appendChild(hd);
   const statuses=[['theoretical','Theoretical'],['considering','Considering'],['planned','Planned']];
-  const statusColors={theoretical:'#3A3A48',considering:'#C8963C',planned:'#4A7A50'};
+  const statusColors={theoretical:'#3A3A48',considering:'#4A9EFF',planned:'#4A7A50'};
   PROCEDURES.forEach(p=>{
     const cur=S.procStatus[p.id]||'theoretical';
     const card=el('div','proc-card');
@@ -1055,131 +1071,7 @@ function renderHardmax(){
   return f;
 }
 
-const MX_FIELDS=[
-  {id:'hr',name:'Resting HR',hint:'From Oura — morning reading',unit:'bpm',type:'num'},
-  {id:'recovery',name:'Recovery Score',hint:'From Oura — morning reading',unit:'/100',type:'num'},
-  {id:'bp',name:'Blood Pressure',hint:'Morning before meds — sit quietly 5 min first',unit:'mmHg',type:'bp'},
-  {id:'weight',name:'Weight',hint:'Before bed, same time daily',unit:'lbs',type:'num',step:'0.1'},
-];
 
-function renderMetrics(){
-  const f=document.createDocumentFragment();
-  const todayKey=new Date(Date.now()-4*60*60*1000).toISOString().split('T')[0];
-  const saved=(S.metrics&&S.metrics[todayKey])||{};
-  const inputs={};
-
-  // Log form
-  const form=el('div','mx-form');
-  const dateEl=el('div','mx-date',new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}));
-  form.appendChild(dateEl);
-
-  MX_FIELDS.forEach(m=>{
-    const row=el('div','mx-row');
-    const lbl=el('div','mx-lbl');
-    lbl.innerHTML=`<div class="mx-name">${m.name}</div><div class="mx-hint">${m.hint} · ${m.unit}</div>`;
-    row.appendChild(lbl);
-    if(m.type==='bp'){
-      const bpW=el('div','mx-bp');
-      const sys=el('input','mx-inp');sys.type='number';sys.placeholder='120';if(saved.bpSys)sys.value=saved.bpSys;
-      const sep=el('span','mx-sep','/');
-      const dia=el('input','mx-inp');dia.type='number';dia.placeholder='80';if(saved.bpDia)dia.value=saved.bpDia;
-      bpW.appendChild(sys);bpW.appendChild(sep);bpW.appendChild(dia);
-      row.appendChild(bpW);inputs.bpSys=sys;inputs.bpDia=dia;
-    } else {
-      const inp=el('input','mx-inp');
-      inp.type='number';if(m.step)inp.step=m.step;
-      if(saved[m.id]!==undefined)inp.value=saved[m.id];
-      row.appendChild(inp);inputs[m.id]=inp;
-    }
-    form.appendChild(row);
-  });
-
-  const btn=el('button','mx-save','Save Today\'s Log');
-  btn.onclick=()=>{
-    const data={};
-    MX_FIELDS.forEach(m=>{
-      if(m.type==='bp'){
-        const sv=inputs.bpSys?.value,dv=inputs.bpDia?.value;
-        if(sv)data.bpSys=parseFloat(sv);if(dv)data.bpDia=parseFloat(dv);
-      } else {
-        const v=inputs[m.id]?.value;
-        if(v!==''&&v!==undefined)data[m.id]=parseFloat(v);
-      }
-    });
-    if(!S.metrics)S.metrics={};
-    S.metrics[todayKey]=data;
-    save();
-    btn.textContent='Saved ✓';btn.style.background='#4A7A50';
-    setTimeout(()=>{btn.textContent='Save Today\'s Log';btn.style.background='';},2000);
-  };
-  form.appendChild(btn);
-  f.appendChild(form);
-
-  // Sparkline history
-  const hist=el('div','mx-hist');
-  const histHd=el('div','mx-hist-hd','Recent Trends — 30 days');
-  hist.appendChild(histHd);
-
-  MX_FIELDS.filter(m=>m.type!=='bp').forEach(m=>{
-    const days=30;
-    const data=[];
-    for(let i=days-1;i>=0;i--){
-      const d=new Date(Date.now()-4*60*60*1000);d.setDate(d.getDate()-i);
-      const k=d.toISOString().split('T')[0];
-      const stored=(S.metrics&&S.metrics[k])||{};
-      data.push(stored[m.id]??null);
-    }
-    const vals=data.filter(v=>v!==null);
-    if(!vals.length) return;
-    const latest=vals[vals.length-1];
-    const minV=Math.min(...vals),maxV=Math.max(...vals),rng=maxV-minV||1;
-    const W=280,H=36;
-    const n=data.length;
-    const tx=i=>i/(n-1)*W;
-    const ty=v=>H-(v-minV)/rng*H*0.8-H*0.1;
-    let pathD='';let prev=null;
-    data.forEach((v,i)=>{
-      if(v===null){prev=null;return;}
-      if(prev===null)pathD+=`M${tx(i)} ${ty(v)}`;
-      else pathD+=` L${tx(i)} ${ty(v)}`;
-      prev=v;
-    });
-    const spark=el('div','mx-spark');
-    spark.innerHTML=`<div class="mx-spark-lbl"><span>${m.name}</span><span class="mx-spark-val">${latest}${m.unit}</span></div><svg viewBox="0 0 ${W} ${H}" style="width:100%;height:36px;display:block"><path d="${pathD}" stroke="#5B9FC8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    hist.appendChild(spark);
-  });
-
-  // BP separately
-  const bpData=[];
-  for(let i=29;i>=0;i--){
-    const d=new Date(Date.now()-4*60*60*1000);d.setDate(d.getDate()-i);
-    const k=d.toISOString().split('T')[0];
-    const stored=(S.metrics&&S.metrics[k])||{};
-    bpData.push({sys:stored.bpSys??null,dia:stored.bpDia??null});
-  }
-  const hasBP=bpData.some(d=>d.sys!==null);
-  if(hasBP){
-    const latestBP=bpData.filter(d=>d.sys!==null).pop();
-    const spark=el('div','mx-spark');
-    const W=280,H=36,n=bpData.length;
-    const sysVals=bpData.map(d=>d.sys).filter(v=>v!==null);
-    const minV=Math.min(...sysVals)-5,maxV=Math.max(...sysVals)+5,rng=maxV-minV||1;
-    const tx=i=>i/(n-1)*W;
-    const ty=v=>H-(v-minV)/rng*H*0.8-H*0.1;
-    let pathD='';let prev=null;
-    bpData.forEach((d,i)=>{
-      if(d.sys===null){prev=null;return;}
-      if(prev===null)pathD+=`M${tx(i)} ${ty(d.sys)}`;
-      else pathD+=` L${tx(i)} ${ty(d.sys)}`;
-      prev=d.sys;
-    });
-    spark.innerHTML=`<div class="mx-spark-lbl"><span>Blood Pressure</span><span class="mx-spark-val">${latestBP.sys}/${latestBP.dia} mmHg</span></div><svg viewBox="0 0 ${W} ${H}" style="width:100%;height:36px;display:block"><path d="${pathD}" stroke="#D46464" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    hist.appendChild(spark);
-  }
-
-  f.appendChild(hist);
-  return f;
-}
 
 function renderTabs(){
   const bar=document.getElementById('tabs');
@@ -1202,7 +1094,7 @@ function renderContent(){
   const hasData=!!localStorage.getItem('lmx3');
   if(!hasData){
     const banner=el('div');
-    banner.style.cssText='margin:10px 16px;background:rgba(200,150,60,0.12);border:1px solid rgba(200,150,60,0.3);border-radius:10px;padding:10px 14px;font-size:11px;color:#C8963C;cursor:pointer';
+    banner.style.cssText='margin:10px 16px;background:rgba(200,150,60,0.12);border:1px solid rgba(200,150,60,0.3);border-radius:10px;padding:10px 14px;font-size:11px;color:#4A9EFF;cursor:pointer';
     banner.innerHTML='⚙ Have a previous version? <strong>Tap here to import your data</strong> — start dates, TRT log, and settings all transfer.';
     banner.onclick=()=>openDataModal();
     f.appendChild(banner);
@@ -1228,10 +1120,10 @@ function renderContent(){
       const splitIdx=MORNING.findIndex(i=>i.id==='am_shower');
       const mPre=splitIdx>-1?MORNING.slice(0,splitIdx):MORNING;
       const mPost=splitIdx>-1?MORNING.slice(splitIdx):[];
-      sections.push({id:'morning',label:'Morning',color:'#C8963C',items:mPre,priority:0});
-      if(mPost.length) sections.push({id:'morning_post',label:'Skincare & Oral',color:'#C8963C',items:mPost,priority:8});
+      sections.push({id:'morning',label:'Morning',color:'#4A9EFF',items:mPre,priority:0});
+      if(mPost.length) sections.push({id:'morning_post',label:'Skincare & Oral',color:'#4A9EFF',items:mPost,priority:8});
     } else {
-      sections.push({id:'morning',label:'Morning',color:'#C8963C',items:MORNING,priority:0});
+      sections.push({id:'morning',label:'Morning',color:'#4A9EFF',items:MORNING,priority:0});
     }
 
     sections.push({id:'midday',label:'Midday',color:'#5B9FC8',items:MIDDAY,priority:20});
@@ -1254,9 +1146,6 @@ function renderContent(){
   else if(S.tab==='hardmax'){
     f.appendChild(renderHardmax());
   }
-  else if(S.tab==='metrics'){
-    f.appendChild(renderMetrics());
-  }
   else if(S.tab==='meals'){
     const w=el('div','g-wrap');
     function mslbl(color,text){
@@ -1271,7 +1160,7 @@ function renderContent(){
     }
 
     // BREAKFAST
-    w.appendChild(mslbl('#C8963C','Breakfast — Build Your Plate'));
+    w.appendChild(mslbl('#4A9EFF','Breakfast — Build Your Plate'));
     w.appendChild(mcard('Protein — pick 1 or 2','Microwave bacon (2 slices = 7g) · Scrambled eggs · Yoplait yogurt peach · Skim milk (drink alongside)'));
     w.appendChild(mcard('Grains — pick 1','Quaker protein oatmeal + skim milk (12g/serving) · Special K cereal · Kind Protein Granola'));
     w.appendChild(mcard('Fruit — add as much as you want','Blackberries · Blueberries · Raspberries · Grapes · Banana'));
